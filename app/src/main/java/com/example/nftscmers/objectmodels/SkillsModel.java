@@ -1,0 +1,4 @@
+package com.example.nftscmers.objectmodels;
+
+public class SkillsModel {
+}

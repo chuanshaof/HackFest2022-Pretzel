@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/chuanshaof/GitHub/50.001-StudyBuddy/app/src/main/res/drawable/ic_baseline_add_location_24.xml" value="0.1125" />
+        <entry key="..\:/Users/chuanshaof/GitHub/50.001-StudyBuddy/app/src/main/res/drawable/ic_baseline_email_24.xml" value="0.1" />
+        <entry key="..\:/Users/chuanshaof/GitHub/HackFest-nftscmers/app/src/main/res/drawable-v24/ic_baseline_add_24.xml" value="0.1" />
+        <entry key="..\:/Users/chuanshaof/GitHub/HackFest-nftscmers/app/src/main/res/drawable-v24/ic_baseline_filter_list_24.xml" value="0.1" />
+        <entry key="..\:/Users/chuanshaof/GitHub/HackFest-nftscmers/app/src/main/res/drawable-v24/ic_baseline_perm_identity_24.xml" value="0.1" />
+        <entry key="..\:/Users/chuanshaof/GitHub/HackFest-nftscmers/app/src/main/res/drawable-v24/white_bg.xml" value="0.1935" />
+        <entry key="..\:/Users/chuanshaof/GitHub/HackFest-nftscmers/app/src/main/res/font/andada.xml" value="0.215625" />
+        <entry key="..\:/Users/chuanshaof/GitHub/HackFest-nftscmers/app/src/main/res/layout/activity_login.xml" value="0.1757852077001013" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>

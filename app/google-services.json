@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "243162506293",
+    "project_id": "nftscmers",
+    "storage_bucket": "nftscmers.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:243162506293:android:c968d4c480bb9c0a277d7c",
+        "android_client_info": {
+          "package_name": "com.example.nftscmers"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "243162506293-9chas25a7bgnn4j2a0pc7vsqrsob7qep.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAO6iG0C0M8_0oPBmKoLl9_ffFFrZVGYE8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "243162506293-9chas25a7bgnn4j2a0pc7vsqrsob7qep.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
