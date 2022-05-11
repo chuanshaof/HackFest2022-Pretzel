@@ -3,6 +3,7 @@ package com.example.nftscmers.objectmodels;
 import com.google.firebase.firestore.DocumentId;
 import com.google.firebase.firestore.DocumentReference;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -17,20 +18,16 @@ public class ApplicantModel implements ObjectModel {
     private String image;
     private String about;
     private String linkedIn;
-    private ArrayList<HashMap<String, Integer>> experiences;
     private ArrayList<DocumentReference> tags;
-    private ArrayList<DocumentReference> courses;
     private ArrayList<DocumentReference> skills;
 
     public ApplicantModel(String name, String image, String about, String linkedIn,
-                          ArrayList<HashMap<String, Integer>> experiences, ArrayList<DocumentReference> tags,
-                          ArrayList<DocumentReference> courses, ArrayList<DocumentReference> skills) {
+                          ArrayList<DocumentReference> tags, ArrayList<DocumentReference> skills) {
         this.name = name;
+        this.image = image;
         this.about = about;
         this.linkedIn = linkedIn;
-        this.experiences = experiences;
         this.tags = tags;
-        this.courses = courses;
         this.skills = skills;
     }
 
@@ -58,14 +55,6 @@ public class ApplicantModel implements ObjectModel {
         return linkedIn;
     }
 
-    public ArrayList<HashMap<String, Integer>> getExperiences() {
-        return experiences;
-    }
-
-    public void setExperiences(ArrayList<HashMap<String, Integer>> experiences) {
-        this.experiences = experiences;
-    }
-
     public void setLinkedIn(String linkedIn) {
         this.linkedIn = linkedIn;
     }
@@ -78,12 +67,8 @@ public class ApplicantModel implements ObjectModel {
         this.tags = tags;
     }
 
-    public ArrayList<DocumentReference> getCourses() {
-        return courses;
-    }
-
-    public void setCourses(ArrayList<DocumentReference> courses) {
-        this.courses = courses;
+    public void addTag(DocumentReference tag) {
+        this.tags.add(tag);
     }
 
     public ArrayList<DocumentReference> getSkills() {
@@ -92,6 +77,10 @@ public class ApplicantModel implements ObjectModel {
 
     public void setSkills(ArrayList<DocumentReference> skills) {
         this.skills = skills;
+    }
+
+    public void addSkill(DocumentReference skill) {
+        this.skills.add(skill);
     }
 
     @Override

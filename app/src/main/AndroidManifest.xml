@@ -26,7 +26,7 @@
         android:theme="@style/Theme.Nftscmers">
 
         <activity
-            android:name=".commonactivity.LoginActivity"
+            android:name=".commonactivities.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,82 +35,62 @@
         </activity>
 
         <activity
-            android:name=".applicantactivity.RegisterActivity"
+            android:name=".commonactivities.SignUpActivity"
             android:exported="true">
         </activity>
 
         <activity
-            android:name=".applicantactivity.ForgetPasswordActivity"
+            android:name=".applicantactivities.MainActivity"
             android:exported="true">
         </activity>
 
         <activity
-            android:name=".applicantactivity.MainActivity"
+            android:name=".applicantactivities.ViewHistoryActivity"
             android:exported="true">
         </activity>
 
         <activity
-            android:name=".applicantactivity.ViewJobActivity"
+            android:name=".applicantactivities.SearchActivity"
             android:exported="true">
         </activity>
 
         <activity
-            android:name=".applicantactivity.ViewHistoryActivity"
+            android:name=".applicantactivities.ProfileActivity"
             android:exported="true">
         </activity>
 
         <activity
-            android:name=".applicantactivity.SearchActivity"
+            android:name=".applicantactivities.EditProfileActivity"
             android:exported="true">
         </activity>
 
         <activity
-            android:name=".applicantactivity.ProfileActivity"
+            android:name=".employeractivities.ProfileActivity"
             android:exported="true">
         </activity>
 
         <activity
-            android:name=".applicantactivity.EditProfileActivity"
+            android:name=".employeractivities.EditProfileActivity"
             android:exported="true">
         </activity>
 
         <activity
-            android:name=".employeractivity.LoginActivity"
+            android:name=".employeractivities.CreateJobActivity"
             android:exported="true">
         </activity>
 
         <activity
-            android:name=".employeractivity.RegisterActivity"
+            android:name=".employeractivities.EditJobActivity"
             android:exported="true">
         </activity>
 
         <activity
-            android:name=".employeractivity.ProfileActivity"
+            android:name=".employeractivities.ViewApplicationActivity"
             android:exported="true">
         </activity>
 
         <activity
-            android:name=".employeractivity.EditProfileActivity"
-            android:exported="true">
-        </activity>
-
-        <activity
-            android:name=".employeractivity.CreateJobActivity"
-            android:exported="true">
-        </activity>
-
-        <activity
-            android:name=".employeractivity.EditJobActivity"
-            android:exported="true">
-        </activity>
-
-        <activity
-            android:name=".employeractivity.ViewApplicationActivity"
-            android:exported="true">
-        </activity>
-
-        <activity
-            android:name=".employeractivity.FeedbackActivity"
+            android:name=".employeractivities.FeedbackActivity"
             android:exported="true">
         </activity>
 
