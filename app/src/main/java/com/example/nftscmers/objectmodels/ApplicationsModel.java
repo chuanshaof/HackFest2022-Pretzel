@@ -1,43 +1,50 @@
 package com.example.nftscmers.objectmodels;
 
+import android.os.Build;
+import android.util.Log;
+
+import androidx.annotation.RequiresApi;
+
 import com.google.firebase.firestore.DocumentId;
 import com.google.firebase.firestore.DocumentReference;
 
+import org.w3c.dom.Document;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+
+import javax.xml.validation.Validator;
 
 /*
  * Firebase Firestore Document Object Model for the ApplicationsModel Collection
  * @ID documentId: string
  *
- * @field dateCreated: timestamp
- * @field email: string
- * @field password: string
- * @field profile: DocumentReference from Profiles Collection
- * @field username: string
+ * @field applicant: DocumentReference from Applicants Collection
+ * @field feedback: String
+ * @field job: DocumentReference from Jobs Collection
+ * @field status: String
  */
 
 public class ApplicationsModel implements ObjectModel {
     public static final String TAG = "Applications Model";
     public static final String COLLECTION_ID = "Applications";
 
+    public static final String[] statuses = new String[]{"Accepted, Rejected, Applied, Pending"};
+
     @DocumentId
     private String documentId;
 
-    private Date dateCreated;
-    private String email;
-    private String password;
-    private DocumentReference profile;
-    private String username;
+    private DocumentReference applicant;
+    private String feedback;
+    private DocumentReference job;
+    private String status;
 
-    public ApplicationsModel() {
-    }
-
-    public ApplicationsModel(String email, String password, DocumentReference profile, String username) {
-        this.dateCreated = new Date();
-        this.email = email;
-        this.password = password;
-        this.profile = profile;
-        this.username = username;
+    public ApplicationsModel(DocumentReference applicant, String feedback, DocumentReference job, String status) {
+        this.applicant = applicant;
+        this.feedback = feedback;
+        this.job = job;
+        this.status = statuses[2];
     }
 
     public static String getTAG() {
@@ -46,6 +53,35 @@ public class ApplicationsModel implements ObjectModel {
 
     public static String getCollectionId() {
         return COLLECTION_ID;
+    }
+
+    public DocumentReference getApplicant() {
+        return applicant;
+    }
+
+    public DocumentReference getJob() {
+        return job;
+    }
+
+    public String getFeedback() {
+        return feedback;
+    }
+
+    public void setFeedback(String feedback) {
+        this.feedback = feedback;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public void setStatus(String status) {
+        if (Arrays.stream(statuses).anyMatch(status::equals)){
+            this.status = status;
+        } else {
+            Log.d(TAG, "setStatus: Invalid Status");
+        }
     }
 
     @Override
@@ -58,56 +94,11 @@ public class ApplicationsModel implements ObjectModel {
         this.documentId = documentId;
     }
 
-    public Date getDateCreated() {
-        return dateCreated;
-    }
-
-    public void setDateCreated(Date dateCreated) {
-        this.dateCreated = dateCreated;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public DocumentReference getProfile() {
-        return profile;
-    }
-
-    public void setProfile(DocumentReference profile) {
-        this.profile = profile;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
 
     @Override
     public String toString() {
         return "UserModel{" +
-                "documentId='" + documentId + '\'' +
-                ", dateCreated=" + dateCreated +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", profile=" + profile +
-                ", username='" + username + '\'' +
-                '}';
+                "documentId='" + documentId + '\'';
     }
 }
 
