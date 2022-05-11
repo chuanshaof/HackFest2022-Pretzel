@@ -1,6 +1,14 @@
 <resources>
     <string name="app_name">nftscmers</string>
 
+<!--    Login Strings -->
+    <string name="email_hint">Email</string>
     <string name="password">Password</string>
     <string name="forgot_password">Forgot password?</string>
+    <string name="sign_up">Sign Up</string>
+
+
+<!--    Access Strings -->
+    <string name="camera_access">Camera Access Required</string>
+    <string name="storage_access">Storage Access Required</string>
 </resources>

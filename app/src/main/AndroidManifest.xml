@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.nftscmers">
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <queries>
+        <intent>
+            <!-- Gallery -->
+            <action android:name="android.intent.action.GET_CONTENT" />
+        </intent>
+        <!-- Camera -->
+        <intent>
+            <action android:name="android.media.action.IMAGE_CAPTURE" />
+        </intent>
+    </queries>
+
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -10,6 +25,99 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Nftscmers">
 
+        <activity
+            android:name=".commonactivity.LoginActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".applicantactivity.RegisterActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".applicantactivity.ForgetPasswordActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".applicantactivity.MainActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".applicantactivity.ViewJobActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".applicantactivity.ViewHistoryActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".applicantactivity.SearchActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".applicantactivity.ProfileActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".applicantactivity.EditProfileActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".employeractivity.LoginActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".employeractivity.RegisterActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".employeractivity.ProfileActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".employeractivity.EditProfileActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".employeractivity.CreateJobActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".employeractivity.EditJobActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".employeractivity.ViewApplicationActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".employeractivity.FeedbackActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name="com.canhub.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat">
+        </activity>
 
     </application>
 

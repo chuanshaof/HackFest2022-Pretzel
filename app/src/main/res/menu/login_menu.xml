@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/register"
+        android:title="Register" />
+    <item
+        android:id="@+id/applicant_login"
+        android:title="Applicant's Portal" />
+
+    <item android:id="@+id/employer_login"
+        android:title="Employer's Portal" />
+</menu>
