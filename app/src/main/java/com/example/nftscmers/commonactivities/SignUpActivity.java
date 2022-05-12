@@ -16,64 +16,72 @@ import com.example.nftscmers.R;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
+public class SignUpActivity extends AppCompatActivity {
 
-    private EditText username, password, name, email;
+    private EditText email;
+    private EditText password;
+    private EditText confirmPassword;
+    private Button signUp;
+    private TextView signIn;
 
     static final String TAG = "CreateEvents";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_employer_profile);
+        setContentView(R.layout.activity_sign_up);
 
-        TextView haveAnAccount = (TextView) findViewById(R.id.alreadyhaveAccount);
-        haveAnAccount.setOnClickListener(this);
 
-        Button registerUser = (Button) findViewById(R.id.button);
-        registerUser.setOnClickListener(this);
-
-        password = (EditText) findViewById(R.id.inputPassword);
-        name = (EditText) findViewById(R.id.inputName);
-        email = (EditText) findViewById(R.id.inputEmail);
-
-        ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
-    }
-
-    @SuppressLint("NonConstantResourceId")
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.alreadyhaveAccount:
-                startActivity(new Intent(this, LoginActivity.class));
-                break;
-            case R.id.button:
-                registerUser();
-                break;
-        }
-
-    }
-
-    private void registerUser() {
-        String enteredEmail = email.getText().toString();
-        String enteredPassword = password.getText().toString();
-        String enteredName = name.getText().toString();
-
-        if (enteredPassword.isEmpty()) {
-            password.setError("Password is required");
-            password.requestFocus();
-        } else if (enteredName.isEmpty()) {
-            name.setError("Name is required");
-            name.requestFocus();
-        } else if (!Patterns.EMAIL_ADDRESS.matcher(enteredEmail).matches()) {
-            email.setError("Please provide valid email");
-            email.requestFocus();
-        }
-
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        DocumentReference docIdRef = db.collection("Users").document(enteredName);
     }
 }
+
+//        TextView haveAnAccount = (TextView) findViewById(R.id.alreadyhaveAccount);
+//        haveAnAccount.setOnClickListener(this);
+//
+//        Button registerUser = (Button) findViewById(R.id.button);
+//        registerUser.setOnClickListener(this);
+//
+//        password = (EditText) findViewById(R.id.inputPassword);
+//        name = (EditText) findViewById(R.id.inputName);
+//        email = (EditText) findViewById(R.id.inputEmail);
+//
+//        ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
+//    }
+//
+//    @SuppressLint("NonConstantResourceId")
+//    @Override
+//    public void onClick(View v) {
+//        switch (v.getId()) {
+//            case R.id.alreadyhaveAccount:
+//                startActivity(new Intent(this, LoginActivity.class));
+//                break;
+//            case R.id.button:
+//                registerUser();
+//                break;
+//        }
+//
+//    }
+//
+//    private void registerUser() {
+//        String enteredEmail = email.getText().toString();
+//        String enteredPassword = password.getText().toString();
+//        String enteredName = name.getText().toString();
+//
+//        if (enteredPassword.isEmpty()) {
+//            password.setError("Password is required");
+//            password.requestFocus();
+//        } else if (enteredName.isEmpty()) {
+//            name.setError("Name is required");
+//            name.requestFocus();
+//        } else if (!Patterns.EMAIL_ADDRESS.matcher(enteredEmail).matches()) {
+//            email.setError("Please provide valid email");
+//            email.requestFocus();
+//        }
+//
+//        FirebaseFirestore db = FirebaseFirestore.getInstance();
+//        DocumentReference docIdRef = db.collection("Users").document(enteredName);
+//    }
+//}
 
 //        FirebaseDocument firebaseDocument = new FirebaseDocument() {
 //            @Override

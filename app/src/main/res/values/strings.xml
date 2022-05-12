@@ -3,10 +3,18 @@
 
 <!--    Login Strings -->
     <string name="email_hint">Email</string>
-    <string name="password">Password</string>
+    <string name="password_hint">Password</string>
+    <string name="confirm_password_hint">Confirm Password</string>
+
+    <string name="applicant_login">Applicant Login</string>
+    <string name="employer_login">Employer Login</string>
+    <string name="applicant_sign_up">Applicant Sign Up</string>
+    <string name="employer_sign_up">Employer Sign Up</string>
+
+    <string name="login_button">LOG IN NOW</string>
     <string name="forgot_password">Forgot password?</string>
     <string name="sign_up">Sign Up</string>
-    <string name="name">Name</string>
+    <string name="sign_in">Sign In</string>
 
 
 <!--    Access Strings -->

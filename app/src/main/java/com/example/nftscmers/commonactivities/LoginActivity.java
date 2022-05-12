@@ -66,6 +66,8 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(LoginActivity.this, "Sorry, function is work in progress", Toast.LENGTH_SHORT);
+                Intent intent = new Intent(LoginActivity.this, ForgetPasswordActivity.class);
+                intent.putExtra(SignUpActivity.TAG, loginType);
             }
         });
     }
