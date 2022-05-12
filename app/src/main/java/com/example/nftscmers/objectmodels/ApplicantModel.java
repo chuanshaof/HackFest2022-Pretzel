@@ -14,12 +14,14 @@ public class ApplicantModel implements ObjectModel {
     @DocumentId
     private String documentId;
 
-    private final String name;
+    private String name;
     private String image;
     private String about;
     private String linkedIn;
     private ArrayList<DocumentReference> tags;
     private ArrayList<DocumentReference> skills;
+
+    private ApplicantModel() {};
 
     public ApplicantModel(String name, String image, String about, String linkedIn,
                           ArrayList<DocumentReference> tags, ArrayList<DocumentReference> skills) {
@@ -29,6 +31,14 @@ public class ApplicantModel implements ObjectModel {
         this.linkedIn = linkedIn;
         this.tags = tags;
         this.skills = skills;
+    }
+
+    public static String getCollectionId() {
+        return COLLECTION_ID;
+    }
+
+    public static String getTAG() {
+        return TAG;
     }
 
     public String getName() {
@@ -85,11 +95,11 @@ public class ApplicantModel implements ObjectModel {
 
     @Override
     public String getDocumentId() {
-        return null;
+        return documentId;
     }
 
     @Override
     public void setDocumentId(String documentId) {
-
+        this.documentId = documentId;
     }
 }

@@ -7,6 +7,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,11 +15,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.nftscmers.R;
+import com.example.nftscmers.utils.Globals;
 
 public class LoginActivity extends AppCompatActivity {
-    private static final String TAG = "LoginActivity";
+    public static final String TAG = "LoginActivity";
 
-    private final String[] loginTypes = new String[] {"Applicant", "Employer"};
     private String loginType;
 
     private TextView title;
@@ -26,25 +27,30 @@ public class LoginActivity extends AppCompatActivity {
     private Button login;
     private TextView forgetPassword;
 
+    private EditText email;
+    private EditText password;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        loginType = loginTypes[0];
+        loginType = Globals.APPLICANT;
+
 
         title = findViewById(R.id.login_title);
-        login = findViewById(R.id.loginbtn);
+        login = findViewById(R.id.login_button);
         signUp = findViewById(R.id.sign_up);
         forgetPassword = findViewById(R.id.forgot_password);
+
+        email = findViewById(R.id.login_email);
+        password = findViewById(R.id.login_password);
 
         // TODO: Make this real
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TextView email = (TextView) findViewById(R.id.username);
                 String emailString = email.getText().toString();
-                TextView password = (TextView) findViewById(R.id.password);
                 String passwordString = password.getText().toString();
 
                 // Valid account is by right a method
@@ -56,7 +62,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
-                intent.putExtra(SignUpActivity.TAG, loginType);
+                intent.putExtra(LoginActivity.TAG, loginType);
                 startActivity(intent);
             }
         });
@@ -67,7 +73,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Toast.makeText(LoginActivity.this, "Sorry, function is work in progress", Toast.LENGTH_SHORT);
                 Intent intent = new Intent(LoginActivity.this, ForgetPasswordActivity.class);
-                intent.putExtra(SignUpActivity.TAG, loginType);
+                intent.putExtra(LoginActivity.TAG, loginType);
             }
         });
     }
@@ -86,10 +92,10 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
         } else if (item.getItemId() == R.id.employer_login) {
             title.setText("Employer Login");
-            loginType = loginTypes[1];
+            loginType = Globals.EMPLOYER;
         } else if (item.getItemId() == R.id.applicant_login) {
             title.setText("Applicant Login");
-            loginType = loginTypes[0];
+            loginType = Globals.APPLICANT;
         }
         return true;
     }

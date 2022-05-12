@@ -19,6 +19,14 @@ public class EmployerModel implements ObjectModel {
         this.picture = picture;
     }
 
+    public static String getCollectionId() {
+        return COLLECTION_ID;
+    }
+
+    public static String getTAG() {
+        return TAG;
+    }
+
     public String getName() {
         return name;
     }
@@ -41,11 +49,11 @@ public class EmployerModel implements ObjectModel {
 
     @Override
     public String getDocumentId() {
-        return null;
+        return documentId;
     }
 
     @Override
     public void setDocumentId(String documentId) {
-
+        this.documentId = documentId;
     }
 }

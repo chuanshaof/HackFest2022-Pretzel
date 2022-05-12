@@ -13,11 +13,18 @@ public class SkillModel implements ObjectModel {
 
     @DocumentId
     private String documentId;
-
     private ArrayList<DocumentReference> courses;
 
     SkillModel(ArrayList<DocumentReference> courses) {
         this.courses = courses;
+    }
+
+    public String getCollectionId() {
+        return COLLECTION_ID;
+    }
+
+    public static String getTAG() {
+        return TAG;
     }
 
     public ArrayList<DocumentReference> getCourses() {
@@ -34,12 +41,12 @@ public class SkillModel implements ObjectModel {
 
     @Override
     public String getDocumentId() {
-        return null;
+        return documentId;
     }
 
     @Override
     public void setDocumentId(String documentId) {
-
+        this.documentId = documentId;
     }
 }
 

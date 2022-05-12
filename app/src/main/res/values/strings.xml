@@ -1,7 +1,11 @@
 <resources>
     <string name="app_name">nftscmers</string>
 
-<!--    Login Strings -->
+<!--    Common Strings -->
+    <string name="network_missing">Network Connection Required!</string>
+    <string name="unexpected_error">An unexpected error have occurred, please try again!</string>
+
+<!--    Login & Sign Up Strings -->
     <string name="email_hint">Email</string>
     <string name="password_hint">Password</string>
     <string name="confirm_password_hint">Confirm Password</string>
@@ -15,11 +19,14 @@
     <string name="forgot_password">Forgot password?</string>
     <string name="sign_up">Sign Up</string>
     <string name="sign_in">Sign In</string>
+    <string name="signing_in">Signing In</string>
+    <string name="sign_up_confirm_fail">Password do not match!</string>
+    <string name="duplicate_email">Please use another email!</string>
+    <string name="sign_up_success">Sign up successful</string>
 
 <!--    Edit Profile Strings    -->
     <string name="edit_profile">Edit Profile</string>
     <string name="name">Name</string>
-
 
 <!--    Access Strings -->
     <string name="camera_access">Camera Access Required</string>

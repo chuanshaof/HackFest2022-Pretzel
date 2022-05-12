@@ -47,12 +47,12 @@ public class ApplicationModel implements ObjectModel {
         this.status = statuses[2];
     }
 
-    public static String getTAG() {
-        return TAG;
-    }
-
     public static String getCollectionId() {
         return COLLECTION_ID;
+    }
+
+    public static String getTAG() {
+        return TAG;
     }
 
     public DocumentReference getApplicant() {
@@ -93,7 +93,6 @@ public class ApplicationModel implements ObjectModel {
     public void setDocumentId(String documentId) {
         this.documentId = documentId;
     }
-
 
     @Override
     public String toString() {

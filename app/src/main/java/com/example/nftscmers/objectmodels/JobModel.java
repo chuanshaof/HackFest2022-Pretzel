@@ -33,6 +33,14 @@ public class JobModel implements ObjectModel {
         this.tags = tags;
     }
 
+    public static String getCollectionId() {
+        return COLLECTION_ID;
+    }
+
+    public static String getTAG() {
+        return TAG;
+    }
+
     public DocumentReference getEmployer() {
         return employer;
     }
@@ -83,11 +91,11 @@ public class JobModel implements ObjectModel {
 
     @Override
     public String getDocumentId() {
-        return null;
+        return documentId;
     }
 
     @Override
     public void setDocumentId(String documentId) {
-
+        this.documentId = documentId;
     }
 }
