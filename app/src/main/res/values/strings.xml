@@ -16,6 +16,10 @@
     <string name="sign_up">Sign Up</string>
     <string name="sign_in">Sign In</string>
 
+<!--    Edit Profile Strings    -->
+    <string name="edit_profile">Edit Profile</string>
+    <string name="name">Name</string>
+
 
 <!--    Access Strings -->
     <string name="camera_access">Camera Access Required</string>
