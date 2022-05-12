@@ -27,8 +27,28 @@
 <!--    Edit Profile Strings    -->
     <string name="edit_profile">Edit Profile</string>
     <string name="name">Name</string>
+    <string name="linked_in">Linkedin Name</string>
+    <string name="about">About</string>
+    <string name="skills">Skills</string>
+
+<!--    CreateJobActivity Strings-->
+    <string name="create_job">Create Job</string>
+    <string name="employer_name">Employer Name</string>
+    <string name="job_available">Job Available</string>
+    <string name="job_description">Job Description</string>
+    <string name="location">Location</string>
+    <string name="skills_required">Skills Required</string>
+    <string name="tags_required">Tags Required</string>
+    <string name="confirm">Confirm</string>
+    <string name="back_button">Back Button</string>
+    <string name="job_deadline">Job Deadline</string>
 
 <!--    Access Strings -->
     <string name="camera_access">Camera Access Required</string>
     <string name="storage_access">Storage Access Required</string>
+
+
+<!--    Extra-->
+    <string name="skill_name">Skill Name</string>
+    <string name="add">Add</string>
 </resources>
