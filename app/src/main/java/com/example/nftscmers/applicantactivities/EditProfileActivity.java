@@ -37,12 +37,12 @@ public class EditProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_applicant_edit_profile);
 
-        IV_profile_pic = findViewById(R.id.iv_profile_pic);
-        ET_name = findViewById(R.id.et_name);
-        ET_about = findViewById(R.id.et_about);
-        TV_skills = findViewById(R.id.tv_skills);
-        LV_skills = findViewById(R.id.lv_skills);
-        BT_confirm = findViewById(R.id.button_confirm);
+//        IV_profile_pic = findViewById(R.id.iv_profile_pic);
+//        ET_name = findViewById(R.id.et_name);
+//        ET_about = findViewById(R.id.et_about);
+//        TV_skills = findViewById(R.id.tv_skills);
+//        LV_skills = findViewById(R.id.lv_skills);
+//        BT_confirm = findViewById(R.id.button_confirm);
 
         ArrayAdapter arrayAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1,skills_list);
         LV_skills.setAdapter(arrayAdapter);

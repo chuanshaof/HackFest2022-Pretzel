@@ -15,12 +15,16 @@ import com.example.nftscmers.objectmodels.AccountModel;
 import com.example.nftscmers.objectmodels.ApplicantModel;
 import com.example.nftscmers.utils.Utils;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AccountDb extends Db{
     private static final String TAG = "AccountsDb";
@@ -61,9 +65,27 @@ public class AccountDb extends Db{
                         Log.i(TAG, context.getString(R.string.duplicate_email));
                         onAccountFailure.onResult();
                     } else {
+                        Map<String, Object> account = new HashMap<>();
+                        account.put("email", email.getText().toString());
+                        account.put("password", password.getText().toString());
+                        account.put("profile", null);
 
-                        Utils.toastLog(context, TAG, context.getString(R.string.sign_up_success));
-                        onAccountSuccess.onResult();
+                        getCollection().document(email.getText().toString())
+                                .set(account)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        Utils.toastLog(context, TAG, context.getString(R.string.sign_up_success));
+                                        onAccountSuccess.onResult();
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.w(TAG, context.getString(R.string.firestore_error), e);
+                                        onAccountFailure.onResult();
+                                    }
+                                });
                     }
                 } else {
                     Utils.unexpectedError(context, TAG);

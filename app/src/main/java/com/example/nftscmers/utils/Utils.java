@@ -138,8 +138,18 @@ public class Utils {
      * @param TAG a String object
      */
     public static void unexpectedError(Context context, String TAG){
-        Log.d(TAG, context.getString(R.string.unexpected_error));
+        Log.w(TAG, context.getString(R.string.unexpected_error));
         Toast.makeText(context, context.getString(R.string.unexpected_error), Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * Handling of unexpected errors
+     * @param context a Context object
+     * @param TAG a String object
+     */
+    public static void fireStoreError(Context context, String TAG){
+        Log.w(TAG, context.getString(R.string.firestore_error));
+        Toast.makeText(context, context.getString(R.string.firestore_error), Toast.LENGTH_SHORT).show();
     }
 
     /**

@@ -2,6 +2,7 @@ package com.example.nftscmers.commonactivities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -35,9 +36,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        loginType = Globals.APPLICANT;
-
-
         title = findViewById(R.id.login_title);
         login = findViewById(R.id.login_button);
         signUp = findViewById(R.id.sign_up);
@@ -45,6 +43,22 @@ public class LoginActivity extends AppCompatActivity {
 
         email = findViewById(R.id.login_email);
         password = findViewById(R.id.login_password);
+
+        // Setting up of initial sign up type
+        loginType = getIntent().getStringExtra(LoginActivity.TAG);
+        Log.i(TAG, "onCreate: " + loginType);
+
+        if (loginType == null){
+            loginType = Globals.APPLICANT;
+            title.setText(getString(R.string.applicant_login));
+        } else if (loginType.equals(Globals.APPLICANT)) {
+            title.setText(getString(R.string.applicant_login));
+        } else if (loginType.equals(Globals.EMPLOYER)) {
+            title.setText(getString(R.string.employer_login));
+        } else {
+            loginType = Globals.APPLICANT;
+            title.setText(getString(R.string.applicant_login));
+        }
 
         // TODO: Make this real
         login.setOnClickListener(new View.OnClickListener() {

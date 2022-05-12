@@ -1,12 +1,133 @@
 package com.example.nftscmers.db;
 
-import com.example.nftscmers.objectmodels.EmployerModel;
+import android.content.Context;
+import android.util.Log;
+import android.widget.EditText;
+import android.widget.Toast;
 
-public class EmployerDb {
+import androidx.annotation.NonNull;
+
+import com.example.nftscmers.R;
+import com.example.nftscmers.objectmodels.EmployerModel;
+import com.example.nftscmers.objectmodels.EmployerModel;
+import com.example.nftscmers.utils.Utils;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class EmployerDb extends Db {
     private static final String TAG = "EmployersDb";
     private static OnEmployerModelSuccess onEmployerModelSuccess;
     private static OnEmployerUploadSuccess onEmployerUploadSuccess;
     private static OnEmployerUploadFailure onEmployerUploadFailure;
+
+    public EmployerDb() {
+        super(EmployerModel.getCollectionId());
+    }
+
+    public EmployerDb(EmployerDb.OnEmployerModelSuccess onEmployerModelSuccess) {
+        super(EmployerModel.getCollectionId());
+        this.onEmployerModelSuccess = onEmployerModelSuccess;
+    }
+
+    public EmployerDb(EmployerDb.OnEmployerUploadSuccess onEmployerUploadSuccess) {
+        super(EmployerModel.getCollectionId());
+        this.onEmployerUploadSuccess = onEmployerUploadSuccess;
+    }
+
+    public EmployerDb(EmployerDb.OnEmployerUploadSuccess onEmployerUploadSuccess, EmployerDb.OnEmployerUploadFailure onEmployerUploadFailure) {
+        super(EmployerModel.getCollectionId());
+        this.onEmployerUploadSuccess = onEmployerUploadSuccess;
+        this.onEmployerUploadFailure = onEmployerUploadFailure;
+    }
+
+    /**
+     * Get ApplicationModel from an email address
+     * @param context a Context object
+     * @param email an EditText object containing an email address
+     * @return null
+     */
+    public void getEmployerData(Context context, String email) {
+        if (!Utils.isNetworkAvailable(context)) {
+            Toast.makeText(context, R.string.network_missing, Toast.LENGTH_SHORT).show();
+            onEmployerModelSuccess.onResult(null);
+            return;
+        }
+
+        getDocument(email).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                EmployerModel EmployerModel = documentSnapshot.toObject(EmployerModel.class);
+                onEmployerModelSuccess.onResult(EmployerModel);
+            }
+        });
+    }
+
+    /**
+     * Get ApplicationModel from an email address
+     * @param context a Context object
+     * @param email an EditText object containing an email address
+     * @return null
+     */
+    public void getEmployerData(Context context, EditText email) {
+        if (Utils.invalidData(email)){
+            onEmployerModelSuccess.onResult(null);
+            return;
+        }
+        getEmployerData(context, email.getText().toString());
+    }
+
+    /**
+     * Create new account for Employers using only email with no details yet
+     * @param context a Context object
+     * @param email an EditText object containing an email address
+     * @return null
+     */
+    public void newProfile(Context context, EditText email) {
+        if (Utils.invalidData(email)){
+            onEmployerUploadFailure.onResult();
+            return;
+        }
+
+        getDocument(email.getText().toString()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Log.i(TAG, context.getString(R.string.duplicate_email));
+                        onEmployerUploadFailure.onResult();
+                    } else {
+                        Map<String, Object> account = new HashMap<>();
+                        account.put("email", email.getText().toString());
+
+                        getCollection().document(email.getText().toString()).set(account)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        onEmployerUploadSuccess.onResult();
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.w(TAG, context.getString(R.string.firestore_error), e);
+                                        onEmployerUploadFailure.onResult();
+                                    }
+                                });
+                    }
+                } else {
+                    Log.w(TAG, context.getString(R.string.firestore_error));
+                    onEmployerUploadFailure.onResult();
+                }
+            }
+        });
+    }
 
 
     public interface OnEmployerModelSuccess{

@@ -7,14 +7,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import com.example.nftscmers.R;
 import com.example.nftscmers.objectmodels.ApplicantModel;
 import com.example.nftscmers.utils.Utils;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ApplicantDb extends Db{
     private static final String TAG = "ApplicantsDb";
@@ -29,6 +36,11 @@ public class ApplicantDb extends Db{
     public ApplicantDb(OnApplicantModelSuccess onApplicantModelSuccess) {
         super(ApplicantModel.getCollectionId());
         this.onApplicantModelSuccess = onApplicantModelSuccess;
+    }
+
+    public ApplicantDb(OnApplicantUploadSuccess onApplicantUploadSuccess) {
+        super(ApplicantModel.getCollectionId());
+        this.onApplicantUploadSuccess = onApplicantUploadSuccess;
     }
 
     public ApplicantDb(OnApplicantUploadSuccess onApplicantUploadSuccess, OnApplicantUploadFailure onApplicantUploadFailure) {
@@ -74,20 +86,50 @@ public class ApplicantDb extends Db{
     }
 
     /**
-     * Create new account for applicants using only email and password
+     * Create new account for applicants using only email with no details yet
      * @param context a Context object
      * @param email an EditText object containing an email address
-     * @param password a String object containing a password
      * @return null
      */
-    public void newProfile(Context context, EditText email, String password) {
+    public void newProfile(Context context, EditText email) {
         if (Utils.invalidData(email)){
             onApplicantUploadFailure.onResult();
             return;
         }
 
+        getDocument(email.getText().toString()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Log.i(TAG, context.getString(R.string.duplicate_email));
+                        onApplicantUploadFailure.onResult();
+                    } else {
+                        Map<String, Object> account = new HashMap<>();
+                        account.put("email", email.getText().toString());
 
-
+                        getCollection().document(email.getText().toString()).set(account)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        onApplicantUploadSuccess.onResult();
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.w(TAG, context.getString(R.string.firestore_error), e);
+                                        onApplicantUploadFailure.onResult();
+                                    }
+                                });
+                    }
+                } else {
+                    Log.w(TAG, context.getString(R.string.firestore_error));
+                    onApplicantUploadFailure.onResult();
+                }
+            }
+        });
     }
 
 

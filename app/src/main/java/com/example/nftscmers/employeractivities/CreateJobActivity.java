@@ -85,7 +85,7 @@ public class CreateJobActivity extends AppCompatActivity {
             public void onClick(View view) {
 
             }
-        };
+        });
 
         edit_job_location.setOnClickListener(new View.OnClickListener() {
             @Override

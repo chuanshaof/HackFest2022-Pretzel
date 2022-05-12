@@ -3,8 +3,8 @@ package com.example.nftscmers.objectmodels;
 import com.google.firebase.firestore.DocumentId;
 
 public class EmployerModel implements ObjectModel {
-    public static final String TAG = "Employer Model";
-    public static final String COLLECTION_ID = "Employer";
+    public static final String TAG = "Employers Model";
+    public static final String COLLECTION_ID = "Employers";
 
     @DocumentId
     private String documentId;

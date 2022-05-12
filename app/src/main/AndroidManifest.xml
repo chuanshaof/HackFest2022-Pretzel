@@ -25,14 +25,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Nftscmers">
 
-<!--        <activity-->
-<!--            android:name=".commonactivities.LoginActivity"-->
-<!--            android:exported="true">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
-<!--        </activity>-->
+        <activity
+            android:name=".commonactivities.LoginActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <activity
             android:name=".commonactivities.SignUpActivity"
