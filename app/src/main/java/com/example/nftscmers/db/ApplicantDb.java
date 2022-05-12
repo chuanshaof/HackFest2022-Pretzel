@@ -107,7 +107,7 @@ public class ApplicantDb extends Db{
                         onApplicantUploadFailure.onResult();
                     } else {
                         Map<String, Object> account = new HashMap<>();
-                        account.put("email", email.getText().toString());
+                        account.put(ApplicantModel.EMAIL, email.getText().toString());
 
                         getCollection().document(email.getText().toString()).set(account)
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {

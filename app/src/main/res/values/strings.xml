@@ -13,17 +13,19 @@
 
     <string name="applicant_login">Applicant Login</string>
     <string name="employer_login">Employer Login</string>
-    <string name="applicant_sign_up">Applicant Sign Up</string>
-    <string name="employer_sign_up">Employer Sign Up</string>
-
     <string name="login_button">LOG IN NOW</string>
     <string name="forgot_password">Forgot password?</string>
+    <string name="logging_in">Logging In</string>
+    <string name="login_error">Invalid Login details</string>
+    <string name="login_success">Login Successful!</string>
+    <string name="not_signed_up">Email is not registered</string>
+
+    <string name="applicant_sign_up">Applicant Sign Up</string>
+    <string name="employer_sign_up">Employer Sign Up</string>
     <string name="sign_up">Sign Up</string>
     <string name="sign_in">Sign In</string>
-    <string name="signing_in">Signing In</string>
     <string name="signing_up">Signing Up</string>
     <string name="sign_up_success">Sign up successful</string>
-
     <string name="sign_up_confirm_fail">Password do not match!</string>
     <string name="duplicate_email">Please use another email!</string>
 
@@ -34,6 +36,10 @@
     <string name="linked_in">Linkedin Name</string>
     <string name="about">About</string>
     <string name="skills">Skills</string>
+
+<!--    Profile Strings -->
+    <string name="my_profile">My Profile</string>
+    <string name="logout">Log Out</string>
 
 <!--    CreateJobActivity Strings-->
     <string name="create_job">Create Job</string>

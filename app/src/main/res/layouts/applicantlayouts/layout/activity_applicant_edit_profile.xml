@@ -1,62 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <ImageView
-        android:id="@+id/backButton"
-        android:layout_width="36dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="12dp"
-        app:layout_constraintEnd_toStartOf="@+id/editProfileText"
-        app:layout_constraintHorizontal_bias="0.245"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/back_button" />
+    android:background="@drawable/bg_editprofile"
+    android:fillViewport="true"
+    tools:context=".applicantactivities.EditProfileActivity">
 
     <TextView
-        android:id="@+id/editProfileText"
+        android:id="@+id/tv_edit_profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="12dp"
         android:text="@string/edit_profile"
+        android:textColor="@color/white"
         android:textSize="23sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/editProfilePicture"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.292" />
+        android:textStyle="bold" />
 
     <ImageView
-        android:id="@+id/editProfilePicture"
+        android:id="@+id/iv_profile_pic"
         android:layout_width="120dp"
         android:layout_height="120dp"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="72dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.512"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/profile_image" />
+        app:srcCompat="@drawable/ic_baseline_person_24" />
 
     <EditText
-        android:id="@+id/editName"
+        android:id="@+id/et_name"
         android:layout_width="338dp"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_profile_pic"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="24dp"
         android:background="@drawable/login_bar"
-        android:drawableStart="@drawable/ic_baseline_boy_24"
+        android:drawableStart="@drawable/ic_baseline_person_24"
         android:drawablePadding="20dp"
         android:ems="10"
         android:hint="@string/name"
         android:inputType="textPersonName"
         android:paddingStart="20dp"
+        android:paddingTop="5dp"
         android:paddingEnd="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.482"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editProfilePicture" />
+        android:paddingBottom="5dp" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <EditText
+        android:id="@+id/et_linkedin"
+        android:layout_width="338dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_about"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/login_bar"
+        android:drawableStart="@drawable/ic_linkedin_24"
+        android:drawablePadding="20dp"
+        android:ems="10"
+        android:hint="@string/linked_in"
+        android:inputType="textWebEditText"
+        android:paddingStart="20dp"
+        android:paddingTop="5dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="5dp" />
+
+    <EditText
+        android:id="@+id/et_about"
+        android:layout_width="338dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_name"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/login_bar"
+        android:drawableStart="@drawable/ic_baseline_menu_book_24"
+        android:drawablePadding="20dp"
+        android:ems="10"
+        android:hint="@string/about"
+        android:inputType="textMultiLine"
+        android:paddingStart="20dp"
+        android:paddingTop="5dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="5dp" />
+
+    <TextView
+        android:id="@+id/tv_skills"
+        android:layout_width="338dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_linkedin"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/login_bar"
+        android:drawablePadding="20dp"
+        android:ems="10"
+        android:gravity="center_vertical"
+        android:hint="@string/skills"
+        android:paddingStart="20dp"
+        android:paddingTop="5dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="5dp"
+        android:textSize="18sp"
+        app:drawableEndCompat="@drawable/ic_baseline_add_24"
+        app:drawableStartCompat="@drawable/ic_baseline_library_books_24" />
+
+    <ListView
+        android:id="@+id/lv_skills"
+        android:layout_width="338dp"
+        android:layout_height="220dp"
+        android:layout_below="@+id/tv_skills"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/white_bg" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_confirm"
+        android:layout_width="225dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/lv_skills"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/white_bg"
+        android:text="@string/confirm"
+        android:textSize="20sp" />
+
+</RelativeLayout>

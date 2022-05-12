@@ -11,6 +11,8 @@ public class ApplicantModel implements ObjectModel {
     public static final String TAG = "Applicant Model";
     public static final String COLLECTION_ID = "Applicants";
 
+    public static final String EMAIL = "Email";
+
     @DocumentId
     private String documentId;
 

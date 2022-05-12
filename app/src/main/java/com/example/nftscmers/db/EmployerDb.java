@@ -47,7 +47,7 @@ public class EmployerDb extends Db {
     }
 
     /**
-     * Get ApplicationModel from an email address
+     * Get EmployerModel from an email address
      * @param context a Context object
      * @param email an EditText object containing an email address
      * @return null
@@ -69,7 +69,7 @@ public class EmployerDb extends Db {
     }
 
     /**
-     * Get ApplicationModel from an email address
+     * Get EmployerModel from an email address
      * @param context a Context object
      * @param email an EditText object containing an email address
      * @return null
@@ -104,7 +104,7 @@ public class EmployerDb extends Db {
                         onEmployerUploadFailure.onResult();
                     } else {
                         Map<String, Object> account = new HashMap<>();
-                        account.put("email", email.getText().toString());
+                        account.put(EmployerModel.EMAIL, email.getText().toString());
 
                         getCollection().document(email.getText().toString()).set(account)
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {

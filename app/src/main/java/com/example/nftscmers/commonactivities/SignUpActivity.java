@@ -3,38 +3,28 @@ package com.example.nftscmers.commonactivities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
+import android.accounts.Account;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.nftscmers.R;
-import com.example.nftscmers.applicantactivities.EditProfileActivity;
-import com.example.nftscmers.db.AccountDb;
 import com.example.nftscmers.db.ApplicantDb;
 import com.example.nftscmers.db.EmployerDb;
 import com.example.nftscmers.objectmodels.AccountModel;
-import com.example.nftscmers.objectmodels.ApplicantModel;
-import com.example.nftscmers.objectmodels.EmployerModel;
 import com.example.nftscmers.utils.Globals;
 import com.example.nftscmers.utils.Utils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import org.w3c.dom.Text;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -129,9 +119,10 @@ public class SignUpActivity extends AppCompatActivity {
                                         @Override
                                         public void onResult() {
                                             Map<String, Object> account = new HashMap<>();
-                                            account.put("email", email.getText().toString());
-                                            account.put("password", password.getText().toString());
-                                            account.put("profile", new ApplicantDb().getDocument(email.getText().toString()));
+                                            account.put(AccountModel.EMAIL, email.getText().toString());
+                                            account.put(AccountModel.PASSWORD, password.getText().toString());
+                                            account.put(AccountModel.ACCOUNTTYPE, Globals.APPLICANT);
+                                            account.put(AccountModel.PROFILE, new ApplicantDb().getDocument(email.getText().toString()));
                                             accountDocument.set(account).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void aVoid) {
@@ -154,9 +145,10 @@ public class SignUpActivity extends AppCompatActivity {
                                         @Override
                                         public void onResult() {
                                             Map<String, Object> account = new HashMap<>();
-                                            account.put("email", email.getText().toString());
-                                            account.put("password", password.getText().toString());
-                                            account.put("profile", new EmployerDb().getDocument(email.getText().toString()));
+                                            account.put(AccountModel.EMAIL, email.getText().toString());
+                                            account.put(AccountModel.PASSWORD, password.getText().toString());
+                                            account.put(AccountModel.ACCOUNTTYPE, Globals.EMPLOYER);
+                                            account.put(AccountModel.PROFILE, new EmployerDb().getDocument(email.getText().toString()));
                                             accountDocument.set(account).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void aVoid) {

@@ -24,6 +24,7 @@
         android:imeOptions="actionNext"
         android:inputType="text" />
 
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_add"
         android:layout_width="wrap_content"

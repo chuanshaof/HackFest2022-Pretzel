@@ -16,7 +16,18 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.nftscmers.R;
+import com.example.nftscmers.employeractivities.ViewApplicationActivity;
+import com.example.nftscmers.objectmodels.AccountModel;
 import com.example.nftscmers.utils.Globals;
+import com.example.nftscmers.utils.LoggedInUser;
+import com.example.nftscmers.utils.Utils;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
     public static final String TAG = "LoginActivity";
@@ -64,11 +75,67 @@ public class LoginActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String emailString = email.getText().toString();
-                String passwordString = password.getText().toString();
+                // Ensure that entered data are all valid
+                if (!Utils.isNetworkAvailable(LoginActivity.this)
+                        | Utils.invalidData(email, password)
+                        | Utils.invalidEmail(email)) {
+                    Log.i(TAG, "onSignUp failed");
+                    return;
+                }
 
-                // Valid account is by right a method
-                // validAccount(emailString, passwordString);
+                // Disable button for Firestore processing
+                login.setEnabled(false);
+                login.setText(getString(R.string.logging_in));
+
+                // Validate that account is correct
+                DocumentReference accountDocument = FirebaseFirestore.getInstance().collection(AccountModel.getCollectionId()).document(email.getText().toString());
+                accountDocument.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                Map<String, Object> data = document.getData();
+
+                                if (password.getText().toString().equals(data.get(AccountModel.PASSWORD))
+                                        & loginType.equals(data.get(AccountModel.ACCOUNTTYPE))) {
+
+                                    // If account matches
+                                    Utils.toastLog(LoginActivity.this, TAG, getString(R.string.login_success));
+                                    LoggedInUser.getInstance().setUser(accountDocument, email.getText().toString());
+
+                                    if (loginType.equals(Globals.APPLICANT)) {
+                                        Intent intent = new Intent(LoginActivity.this, ViewApplicationActivity.class);
+                                        startActivity(intent);
+                                    } else if (loginType.equals(Globals.EMPLOYER)) {
+                                        Intent intent = new Intent(LoginActivity.this, ViewJobActivity.class);
+                                        startActivity(intent);
+                                    } else {
+                                        Utils.unexpectedError(LoginActivity.this, TAG);
+                                        login.setEnabled(true);
+                                        login.setText(getString(R.string.login_button));
+                                    }
+                                } else {
+                                    // If account information does not match
+                                    Utils.toastLog(LoginActivity.this, TAG, getString(R.string.login_error));
+                                    login.setEnabled(true);
+                                    login.setText(getString(R.string.login_button));
+                                }
+                            } else {
+                                // If account email does not exist
+                                Log.i(TAG, getString(R.string.not_signed_up));
+                                email.requestFocus();
+                                email.setError(getString(R.string.not_signed_up));
+                                login.setEnabled(true);
+                                login.setText(getString(R.string.login_button));
+                            }
+                        } else {
+                            Utils.fireStoreError(LoginActivity.this, TAG);
+                            login.setEnabled(true);
+                            login.setText(getString(R.string.login_button));
+                        }
+                    }
+                });
             }
         });
 

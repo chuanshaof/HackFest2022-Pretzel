@@ -5,11 +5,10 @@ import android.util.Log;
 import com.google.firebase.firestore.DocumentReference;
 
 public class LoggedInUser {
-
     private static final String TAG = "LoggedInUser";
     private static LoggedInUser ourInstance = null;
     DocumentReference documentReference;
-    String username;
+    String email;
 
     public static LoggedInUser getInstance() {
         if (ourInstance == null)
@@ -20,21 +19,16 @@ public class LoggedInUser {
     private LoggedInUser() {
     }
 
-    public void setUser(DocumentReference documentReference, String username) {
+    public void setUser(DocumentReference documentReference, String email) {
         this.documentReference = documentReference;
-        this.username = username;
+        this.email = email;
     }
 
     public DocumentReference getUserDocRef() {
         return this.documentReference;
     }
 
-    public String getUserId() {
-        Log.i(TAG, "STRING" + this.documentReference.getPath().substring(this.documentReference.getPath().lastIndexOf('/') + 1));
-        return this.documentReference.getPath().substring(this.documentReference.getPath().lastIndexOf('/') + 1);
-    };
-
     public String getUserString() {
-        return this.username;
+        return this.email;
     }
 }

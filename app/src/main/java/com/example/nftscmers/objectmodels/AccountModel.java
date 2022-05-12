@@ -11,6 +11,11 @@ public class AccountModel implements ObjectModel {
     public static final String TAG = "Account Model";
     public static final String COLLECTION_ID = "Accounts";
 
+    public static final String EMAIL = "Email";
+    public static final String PASSWORD = "Password";
+    public static final String ACCOUNTTYPE = "AccountType";
+    public static final String PROFILE = "Profile";
+
     @DocumentId
     private String documentId;
 

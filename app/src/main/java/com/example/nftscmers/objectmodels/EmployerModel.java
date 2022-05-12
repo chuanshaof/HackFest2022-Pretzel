@@ -6,6 +6,8 @@ public class EmployerModel implements ObjectModel {
     public static final String TAG = "Employers Model";
     public static final String COLLECTION_ID = "Employers";
 
+    public static final String EMAIL = "Email";
+
     @DocumentId
     private String documentId;
 
