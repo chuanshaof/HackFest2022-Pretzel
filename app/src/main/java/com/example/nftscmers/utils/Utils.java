@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -161,6 +162,19 @@ public class Utils {
     public static void toastLog(Context context, String TAG, String message){
         Log.i(TAG, message);
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * Showing Toast and
+     * @param textView a TextView object to be set to the information wanted
+     * @param text a String object to be set
+     */
+    public static void setValid(TextView textView, String text){
+        if (text == null) {
+            return;
+        } else {
+            textView.setText(text);
+        }
     }
 
 
