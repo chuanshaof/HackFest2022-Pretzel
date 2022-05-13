@@ -20,17 +20,19 @@ public class ApplicantModel implements ObjectModel {
     private String image;
     private String about;
     private String linkedIn;
+    private String email;
     private ArrayList<DocumentReference> tags;
     private ArrayList<DocumentReference> skills;
 
     private ApplicantModel() {};
 
-    public ApplicantModel(String name, String image, String about, String linkedIn,
+    public ApplicantModel(String name, String image, String about, String linkedIn, String email,
                           ArrayList<DocumentReference> tags, ArrayList<DocumentReference> skills) {
         this.name = name;
         this.image = image;
         this.about = about;
         this.linkedIn = linkedIn;
+        this.email = email;
         this.tags = tags;
         this.skills = skills;
     }
@@ -69,6 +71,10 @@ public class ApplicantModel implements ObjectModel {
 
     public void setLinkedIn(String linkedIn) {
         this.linkedIn = linkedIn;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public ArrayList<DocumentReference> getTags() {

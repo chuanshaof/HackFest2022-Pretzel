@@ -25,10 +25,10 @@ public class LoggedInUser {
     }
 
     public DocumentReference getUserDocRef() {
-        return this.documentReference;
+        return documentReference;
     }
 
-    public String getUserString() {
-        return this.email;
+    public String getEmail() {
+        return email;
     }
 }

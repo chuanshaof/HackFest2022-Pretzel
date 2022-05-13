@@ -10,7 +10,7 @@
     tools:context=".applicantactivities.EditProfileActivity">
 
     <TextView
-        android:id="@+id/tv_edit_profile"
+        android:id="@+id/applicant_edit_profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -21,7 +21,7 @@
         android:textStyle="bold" />
 
     <ImageView
-        android:id="@+id/iv_profile_pic"
+        android:id="@+id/applicant_profile_pic"
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_centerHorizontal="true"
@@ -29,10 +29,10 @@
         app:srcCompat="@drawable/ic_baseline_person_24" />
 
     <EditText
-        android:id="@+id/et_name"
+        android:id="@+id/applicant_name"
         android:layout_width="338dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/iv_profile_pic"
+        android:layout_below="@+id/applicant_profile_pic"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="24dp"
         android:background="@drawable/login_bar"
@@ -46,30 +46,11 @@
         android:paddingEnd="20dp"
         android:paddingBottom="5dp" />
 
-
     <EditText
-        android:id="@+id/et_linkedin"
+        android:id="@+id/applicant_about"
         android:layout_width="338dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/et_about"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/login_bar"
-        android:drawableStart="@drawable/ic_linkedin_24"
-        android:drawablePadding="20dp"
-        android:ems="10"
-        android:hint="@string/linked_in"
-        android:inputType="textWebEditText"
-        android:paddingStart="20dp"
-        android:paddingTop="5dp"
-        android:paddingEnd="20dp"
-        android:paddingBottom="5dp" />
-
-    <EditText
-        android:id="@+id/et_about"
-        android:layout_width="338dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/et_name"
+        android:layout_below="@+id/applicant_name"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:background="@drawable/login_bar"
@@ -83,11 +64,29 @@
         android:paddingEnd="20dp"
         android:paddingBottom="5dp" />
 
-    <TextView
-        android:id="@+id/tv_skills"
+    <EditText
+        android:id="@+id/applicant_linkedin"
         android:layout_width="338dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/et_linkedin"
+        android:layout_below="@+id/applicant_about"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/login_bar"
+        android:drawableStart="@drawable/ic_linkedin_24"
+        android:drawablePadding="20dp"
+        android:ems="10"
+        android:hint="@string/linked_in"
+        android:inputType="textWebEditText"
+        android:paddingStart="20dp"
+        android:paddingTop="5dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="5dp" />
+
+    <TextView
+        android:id="@+id/applicant_skills"
+        android:layout_width="338dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/applicant_linkedin"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:background="@drawable/login_bar"
@@ -104,10 +103,10 @@
         app:drawableStartCompat="@drawable/ic_baseline_library_books_24" />
 
     <ListView
-        android:id="@+id/lv_skills"
+        android:id="@+id/applicant_skills_list"
         android:layout_width="338dp"
         android:layout_height="220dp"
-        android:layout_below="@+id/tv_skills"
+        android:layout_below="@+id/applicant_skills"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="20dp"
@@ -115,10 +114,10 @@
         android:background="@drawable/white_bg" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_confirm"
+        android:id="@+id/applicant_edit_confirm"
         android:layout_width="225dp"
         android:layout_height="50dp"
-        android:layout_below="@+id/lv_skills"
+        android:layout_below="@+id/applicant_skills_list"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:background="@drawable/white_bg"

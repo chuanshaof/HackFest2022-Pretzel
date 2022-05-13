@@ -17,6 +17,7 @@ import com.example.nftscmers.db.ApplicantDb;
 import com.example.nftscmers.db.EmployerDb;
 import com.example.nftscmers.objectmodels.AccountModel;
 import com.example.nftscmers.utils.Globals;
+import com.example.nftscmers.utils.LoggedInUser;
 import com.example.nftscmers.utils.Utils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -126,6 +127,7 @@ public class SignUpActivity extends AppCompatActivity {
                                             accountDocument.set(account).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void aVoid) {
+                                                    LoggedInUser.getInstance().setUser(accountDocument, email.getText().toString());
                                                     Utils.toastLog(SignUpActivity.this, TAG, getString(R.string.sign_up_success));
                                                     Intent intent = new Intent(SignUpActivity.this, com.example.nftscmers.applicantactivities.EditProfileActivity.class);
                                                     startActivity(intent);
@@ -152,6 +154,7 @@ public class SignUpActivity extends AppCompatActivity {
                                             accountDocument.set(account).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void aVoid) {
+                                                    LoggedInUser.getInstance().setUser(accountDocument, email.getText().toString());
                                                     Utils.toastLog(SignUpActivity.this, TAG, getString(R.string.sign_up_success));
                                                     Intent intent = new Intent(SignUpActivity.this, com.example.nftscmers.employeractivities.EditProfileActivity.class);
                                                     startActivity(intent);

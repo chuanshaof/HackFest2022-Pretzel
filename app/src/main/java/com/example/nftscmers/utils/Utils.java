@@ -164,17 +164,7 @@ public class Utils {
     }
 
 
-    public static String getDocumentFromPath(String documentId){
-        return documentId.substring(documentId.lastIndexOf("/") + 1);
-    }
 
-    public static DocumentReference getCurrentUser(FirebaseFirestore db){
-        DocumentReference user = LoggedInUser.getInstance().getUserDocRef(); // singleton
-        if (user != null) {
-            return user;
-        }
-        return null;
-    }
 
     public static class CircleTransform implements Transformation {
         @Override

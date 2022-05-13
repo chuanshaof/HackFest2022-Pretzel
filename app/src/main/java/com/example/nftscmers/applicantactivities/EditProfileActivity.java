@@ -1,9 +1,11 @@
 package com.example.nftscmers.applicantactivities;
 
 import android.app.Dialog;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.ArrayAdapter;
@@ -13,15 +15,21 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.nftscmers.R;
+import com.example.nftscmers.fragments.CropDialogFragment;
 import com.example.nftscmers.objectmodels.ApplicantModel;
 import com.example.nftscmers.utils.LoggedInUser;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
@@ -30,44 +38,56 @@ import java.util.List;
 import java.util.Map;
 
 public class EditProfileActivity extends AppCompatActivity {
-    private static final String TAG = "Applicant.EditProfileActivity";
+    private static final String TAG = "Applicant Edit Profile";
 
-    ImageView IV_profile_pic;
-    EditText ET_name;
-    EditText ET_about;
-    TextView TV_skills;
-    ListView LV_skills;
-    Button BT_confirm;
+    ImageView profile_pic;
+    EditText name;
+    EditText about;
+    TextView skills;
+    ListView skillsList;
+    Button confirm;
 
     ArrayList<String> original_skills_list = new ArrayList<>();
     List<String> new_skills_list = new ArrayList<>();
     ArrayList<String> display_skills_list = new ArrayList<>();
 
     ApplicantModel applicant;
-    DocumentReference applicant_docRef;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_applicant_edit_profile);
 
-        IV_profile_pic = findViewById(R.id.iv_profile_pic);
-        ET_name = findViewById(R.id.et_name);
-        ET_about = findViewById(R.id.et_about);
-        TV_skills = findViewById(R.id.tv_skills);
-        LV_skills = findViewById(R.id.lv_skills);
-        BT_confirm = findViewById(R.id.button_confirm);
+        profile_pic = findViewById(R.id.applicant_profile_pic);
+        name = findViewById(R.id.applicant_name);
+        about = findViewById(R.id.applicant_about);
+        skills = findViewById(R.id.applicant_skills);
+        skillsList = findViewById(R.id.applicant_skills_list);
+        confirm = findViewById(R.id.applicant_edit_confirm);
 
-        /*
-        TODO: get logged in user (applicant acc) ->
-         firebase get userdoc snapshot to applicant object model ->
-         */
-        applicant = null; // update this
-        applicant_docRef = LoggedInUser.getInstance().getUserDocRef(); // update the method too
-        populate_profile(applicant);
+        // Pre-load current information in the user's profile
+        LoggedInUser.getInstance().getUserDocRef().get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    // Document found in the offline cache
+                    DocumentSnapshot document = task.getResult();
+                    applicant = document.toObject(ApplicantModel.class);
+
+                    // IV_profile_pic.setImageURI();
+                    name.setText(applicant.getName());
+                    about.setText(applicant.getAbout());
+                    populate_skills(applicant);
+
+                    Log.d(TAG, "Cached document data: " + document.getData());
+                } else {
+                    Log.d(TAG, "Cached get failed: ", task.getException());
+                }
+            }
+        });
 
         // when user clicks on skills
-        TV_skills.setOnClickListener(new View.OnClickListener() {
+        skills.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showCustomDialog();
@@ -75,22 +95,20 @@ public class EditProfileActivity extends AppCompatActivity {
         });
 
         // TODO: when user clicks on profile photo
+        profile_pic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new CropDialogFragment(new CropDialogFragment.OnCropListener() {
+                    @Override
+                    public void onResult(Uri uri) {
+
+                    }
+                });
+            }
+        });
 
         setup_confirm_button(applicant);
     }
-
-
-    /**
-     * This function populates the entire edit profile page
-     * @param applicant ApplicantModel of logged in user
-     */
-    private void populate_profile(ApplicantModel applicant) {
-        // IV_profile_pic.setImageURI();
-        ET_name.setText(applicant.getName());
-        ET_about.setText(applicant.getAbout());
-        populate_skills(applicant);
-    }
-
 
     /**
      * This function populates the skills listview
@@ -105,7 +123,7 @@ public class EditProfileActivity extends AppCompatActivity {
         }
 
         ArrayAdapter arrayAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1,display_skills_list);
-        LV_skills.setAdapter(arrayAdapter);
+        skillsList.setAdapter(arrayAdapter);
     }
 
 
@@ -144,7 +162,7 @@ public class EditProfileActivity extends AppCompatActivity {
      * @param applicant ApplicantModel of logged in user
      */
     private void setup_confirm_button(ApplicantModel applicant) {
-        ET_name.addTextChangedListener(new TextWatcher() {
+        name.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -159,11 +177,11 @@ public class EditProfileActivity extends AppCompatActivity {
             public void afterTextChanged(Editable editable) {
                 Map<String, Object> name_map = new HashMap<>();
                 name_map.put("name", editable.toString());
-                applicant_docRef.update(name_map);
+//                applicant_docRef.update(name_map);
             }
         });
 
-        ET_about.addTextChangedListener(new TextWatcher() {
+        about.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -178,7 +196,7 @@ public class EditProfileActivity extends AppCompatActivity {
             public void afterTextChanged(Editable editable) {
                 Map<String, Object> about_map = new HashMap<>();
                 about_map.put("about", editable.toString());
-                applicant_docRef.update(about_map);
+//                applicant_docRef.update(about_map);
             }
         });
 
@@ -188,7 +206,7 @@ public class EditProfileActivity extends AppCompatActivity {
             for (String skill_name : new_skills_list) { // this shouldn't be a string right
                 add_hashMap_followers.put("skills", FieldValue.arrayUnion(skill_name));
             }
-            applicant_docRef.update(add_hashMap_followers);
+//            applicant_docRef.update(add_hashMap_followers);
         }
     }
 }
