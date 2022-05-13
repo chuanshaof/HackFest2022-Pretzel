@@ -23,6 +23,7 @@ import com.example.nftscmers.R;
 import com.example.nftscmers.fragments.CropDialogFragment;
 import com.example.nftscmers.objectmodels.ApplicantModel;
 import com.example.nftscmers.utils.LoggedInUser;
+import com.example.nftscmers.utils.Utils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
@@ -43,6 +44,7 @@ public class EditProfileActivity extends AppCompatActivity {
     ImageView profile_pic;
     EditText name;
     EditText about;
+    EditText linkedIn;
     TextView skills;
     ListView skillsList;
     Button confirm;
@@ -61,6 +63,8 @@ public class EditProfileActivity extends AppCompatActivity {
         profile_pic = findViewById(R.id.applicant_profile_pic);
         name = findViewById(R.id.applicant_name);
         about = findViewById(R.id.applicant_about);
+        linkedIn = findViewById(R.id.applicant_linkedin);
+
         skills = findViewById(R.id.applicant_skills);
         skillsList = findViewById(R.id.applicant_skills_list);
         confirm = findViewById(R.id.applicant_edit_confirm);
@@ -74,10 +78,14 @@ public class EditProfileActivity extends AppCompatActivity {
                     DocumentSnapshot document = task.getResult();
                     applicant = document.toObject(ApplicantModel.class);
 
-                    // IV_profile_pic.setImageURI();
+                    // profile_pic.setImageURI();
+                    Utils.setValid(name, applicant.getName());
+                    Utils.setValid(about, applicant.getAbout());
+                    Utils.setValid(linkedIn, applicant.getLinkedIn());
+
                     name.setText(applicant.getName());
                     about.setText(applicant.getAbout());
-                    populate_skills(applicant);
+//                    populate_skills(applicant);
 
                     Log.d(TAG, "Cached document data: " + document.getData());
                 } else {
