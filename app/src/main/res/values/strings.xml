@@ -53,10 +53,15 @@
     <string name="back_button">Back Button</string>
     <string name="job_deadline">Job Deadline</string>
 
+<!--    Feedback Strings -->
+    <string name="feedback">Give feedback</string>
+    <string name="input_feedback">Input feedback</string>
+    <string name="submit_feedback">Submit feedback</string>
+
+
 <!--    Access Strings -->
     <string name="camera_access">Camera Access Required</string>
     <string name="storage_access">Storage Access Required</string>
-
 
 <!--    Extra-->
     <string name="skill_name">Skill Name</string>

@@ -44,7 +44,7 @@ public class CreateJobActivity extends AppCompatActivity {
         // initialise Firestore db
         db = FirebaseFirestore.getInstance();
 
-        // initialise UI elements
+        // initialise UI com.example.nftscmers.elements
         back_button = findViewById(R.id.back_button);
         create_job = findViewById(R.id.create_job);
         employer_name = findViewById(R.id.employer_name);

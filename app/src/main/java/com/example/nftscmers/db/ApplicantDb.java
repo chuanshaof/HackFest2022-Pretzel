@@ -3,8 +3,6 @@ package com.example.nftscmers.db;
 import android.content.Context;
 import android.util.Log;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,16 +14,14 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
 public class ApplicantDb extends Db{
     private static final String TAG = "ApplicantsDb";
-    private static OnApplicantModelSuccess onApplicantModelSuccess;
+    private static OnApplicantModel onApplicantModel;
     private static OnApplicantUploadSuccess onApplicantUploadSuccess;
     private static OnApplicantUploadFailure onApplicantUploadFailure;
 
@@ -33,9 +29,9 @@ public class ApplicantDb extends Db{
         super(ApplicantModel.getCollectionId());
     }
 
-    public ApplicantDb(OnApplicantModelSuccess onApplicantModelSuccess) {
+    public ApplicantDb(OnApplicantModel onApplicantModel) {
         super(ApplicantModel.getCollectionId());
-        this.onApplicantModelSuccess = onApplicantModelSuccess;
+        this.onApplicantModel = onApplicantModel;
     }
 
     public ApplicantDb(OnApplicantUploadSuccess onApplicantUploadSuccess) {
@@ -53,12 +49,11 @@ public class ApplicantDb extends Db{
      * Get ApplicationModel from an email address
      * @param context a Context object
      * @param email an EditText object containing an email address
-     * @return null
      */
-    public void getApplicantData(Context context, String email) {
+    public void getApplicantModel(Context context, String email) {
         if (!Utils.isNetworkAvailable(context)) {
             Toast.makeText(context, R.string.network_missing, Toast.LENGTH_SHORT).show();
-            onApplicantModelSuccess.onResult(null);
+            onApplicantModel.onResult(null);
             return;
         }
 
@@ -66,7 +61,13 @@ public class ApplicantDb extends Db{
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 ApplicantModel applicantModel = documentSnapshot.toObject(ApplicantModel.class);
-                onApplicantModelSuccess.onResult(applicantModel);
+                Log.d(TAG, "onSuccess " + applicantModel.getEmail());
+                onApplicantModel.onResult(applicantModel);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d(TAG, "onFailure");
             }
         });
     }
@@ -75,21 +76,19 @@ public class ApplicantDb extends Db{
      * Get ApplicationModel from an email address
      * @param context a Context object
      * @param email an EditText object containing an email address
-     * @return null
      */
-    public void getApplicantData(Context context, EditText email) {
+    public void getApplicantModel(Context context, EditText email) {
         if (Utils.invalidData(email)){
-            onApplicantModelSuccess.onResult(null);
+            onApplicantModel.onResult(null);
             return;
         }
-        getApplicantData(context, email.getText().toString());
+        getApplicantModel(context, email.getText().toString());
     }
 
     /**
      * Create new account for applicants using only email with no details yet
      * @param context a Context object
      * @param email an EditText object containing an email address
-     * @return null
      */
     public void newProfile(Context context, EditText email) {
         if (Utils.invalidData(email)){
@@ -133,7 +132,7 @@ public class ApplicantDb extends Db{
     }
 
 
-    public interface OnApplicantModelSuccess{
+    public interface OnApplicantModel {
         void onResult(ApplicantModel applicantModel);
     }
 

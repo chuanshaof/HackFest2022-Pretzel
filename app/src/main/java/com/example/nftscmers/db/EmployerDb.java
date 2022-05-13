@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 
 import com.example.nftscmers.R;
 import com.example.nftscmers.objectmodels.EmployerModel;
-import com.example.nftscmers.objectmodels.EmployerModel;
 import com.example.nftscmers.utils.Utils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -22,7 +21,7 @@ import java.util.Map;
 
 public class EmployerDb extends Db {
     private static final String TAG = "EmployersDb";
-    private static OnEmployerModelSuccess onEmployerModelSuccess;
+    private static OnEmployerModel onEmployerModel;
     private static OnEmployerUploadSuccess onEmployerUploadSuccess;
     private static OnEmployerUploadFailure onEmployerUploadFailure;
 
@@ -30,9 +29,9 @@ public class EmployerDb extends Db {
         super(EmployerModel.getCollectionId());
     }
 
-    public EmployerDb(EmployerDb.OnEmployerModelSuccess onEmployerModelSuccess) {
+    public EmployerDb(OnEmployerModel onEmployerModelSuccess) {
         super(EmployerModel.getCollectionId());
-        this.onEmployerModelSuccess = onEmployerModelSuccess;
+        this.onEmployerModel = onEmployerModelSuccess;
     }
 
     public EmployerDb(EmployerDb.OnEmployerUploadSuccess onEmployerUploadSuccess) {
@@ -50,12 +49,11 @@ public class EmployerDb extends Db {
      * Get EmployerModel from an email address
      * @param context a Context object
      * @param email an EditText object containing an email address
-     * @return null
      */
-    public void getEmployerData(Context context, String email) {
+    public void getEmployerModel(Context context, String email) {
         if (!Utils.isNetworkAvailable(context)) {
             Toast.makeText(context, R.string.network_missing, Toast.LENGTH_SHORT).show();
-            onEmployerModelSuccess.onResult(null);
+            onEmployerModel.onResult(null);
             return;
         }
 
@@ -63,7 +61,7 @@ public class EmployerDb extends Db {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 EmployerModel EmployerModel = documentSnapshot.toObject(EmployerModel.class);
-                onEmployerModelSuccess.onResult(EmployerModel);
+                onEmployerModel.onResult(EmployerModel);
             }
         });
     }
@@ -72,21 +70,19 @@ public class EmployerDb extends Db {
      * Get EmployerModel from an email address
      * @param context a Context object
      * @param email an EditText object containing an email address
-     * @return null
      */
-    public void getEmployerData(Context context, EditText email) {
+    public void getEmployerModel(Context context, EditText email) {
         if (Utils.invalidData(email)){
-            onEmployerModelSuccess.onResult(null);
+            onEmployerModel.onResult(null);
             return;
         }
-        getEmployerData(context, email.getText().toString());
+        getEmployerModel(context, email.getText().toString());
     }
 
     /**
      * Create new account for Employers using only email with no details yet
      * @param context a Context object
      * @param email an EditText object containing an email address
-     * @return null
      */
     public void newProfile(Context context, EditText email) {
         if (Utils.invalidData(email)){
@@ -130,7 +126,7 @@ public class EmployerDb extends Db {
     }
 
 
-    public interface OnEmployerModelSuccess{
+    public interface OnEmployerModel {
         void onResult(EmployerModel EmployerModel);
     }
 

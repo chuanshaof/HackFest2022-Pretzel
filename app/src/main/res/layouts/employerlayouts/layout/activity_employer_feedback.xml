@@ -40,7 +40,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:background="@drawable/white_bg"
-        android:text="@string/submit"
+        android:text="@string/submit_feedback"
         android:textSize="20sp" />
 
 </RelativeLayout>

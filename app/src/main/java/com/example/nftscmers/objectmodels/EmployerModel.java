@@ -11,14 +11,19 @@ public class EmployerModel implements ObjectModel {
     @DocumentId
     private String documentId;
 
-    private final String name;
+    private String name;
+    private String email;
     private String about;
     private String picture;
 
-    public EmployerModel(String name, String about, String picture) {
+    private EmployerModel() {}
+
+    public EmployerModel(String name, String email, String about, String picture) {
         this.name = name;
+        this.email = email;
         this.about = about;
         this.picture = picture;
+        this.documentId = email;
     }
 
     public static String getCollectionId() {

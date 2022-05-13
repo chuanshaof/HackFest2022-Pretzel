@@ -11,7 +11,7 @@ public class ApplicantModel implements ObjectModel {
     public static final String TAG = "Applicant Model";
     public static final String COLLECTION_ID = "Applicants";
 
-    public static final String EMAIL = "Email";
+    public static final String EMAIL = "email";
 
     @DocumentId
     private String documentId;
@@ -35,6 +35,7 @@ public class ApplicantModel implements ObjectModel {
         this.email = email;
         this.tags = tags;
         this.skills = skills;
+        this.documentId = email;
     }
 
     public static String getCollectionId() {

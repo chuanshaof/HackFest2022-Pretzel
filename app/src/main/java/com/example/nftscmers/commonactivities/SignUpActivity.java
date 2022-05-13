@@ -16,6 +16,8 @@ import com.example.nftscmers.R;
 import com.example.nftscmers.db.ApplicantDb;
 import com.example.nftscmers.db.EmployerDb;
 import com.example.nftscmers.objectmodels.AccountModel;
+import com.example.nftscmers.objectmodels.ApplicantModel;
+import com.example.nftscmers.objectmodels.EmployerModel;
 import com.example.nftscmers.utils.Globals;
 import com.example.nftscmers.utils.LoggedInUser;
 import com.example.nftscmers.utils.Utils;
@@ -99,6 +101,8 @@ public class SignUpActivity extends AppCompatActivity {
                 signUp.setEnabled(false);
                 signUp.setText(getString(R.string.signing_up));
 
+                String emailAddress = email.getText().toString();
+
                 // Ensuring that email has not already been registered
                 DocumentReference accountDocument = FirebaseFirestore.getInstance().collection(AccountModel.getCollectionId()).document(email.getText().toString());
                 accountDocument.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -120,14 +124,14 @@ public class SignUpActivity extends AppCompatActivity {
                                         @Override
                                         public void onResult() {
                                             Map<String, Object> account = new HashMap<>();
-                                            account.put(AccountModel.EMAIL, email.getText().toString());
+                                            account.put(AccountModel.EMAIL, emailAddress);
                                             account.put(AccountModel.PASSWORD, password.getText().toString());
-                                            account.put(AccountModel.ACCOUNTTYPE, Globals.APPLICANT);
+                                            account.put(AccountModel.ACCOUNTTYPE, signUpType);
                                             account.put(AccountModel.PROFILE, new ApplicantDb().getDocument(email.getText().toString()));
                                             accountDocument.set(account).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void aVoid) {
-                                                    LoggedInUser.getInstance().setUser(accountDocument, email.getText().toString());
+                                                    LoggedInUser.getInstance().setUser(FirebaseFirestore.getInstance().collection(ApplicantModel.getCollectionId()).document(emailAddress), emailAddress, signUpType);
                                                     Utils.toastLog(SignUpActivity.this, TAG, getString(R.string.sign_up_success));
                                                     Intent intent = new Intent(SignUpActivity.this, com.example.nftscmers.applicantactivities.EditProfileActivity.class);
                                                     startActivity(intent);
@@ -154,7 +158,7 @@ public class SignUpActivity extends AppCompatActivity {
                                             accountDocument.set(account).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void aVoid) {
-                                                    LoggedInUser.getInstance().setUser(accountDocument, email.getText().toString());
+                                                    LoggedInUser.getInstance().setUser(FirebaseFirestore.getInstance().collection(EmployerModel.getCollectionId()).document(emailAddress), emailAddress, signUpType);
                                                     Utils.toastLog(SignUpActivity.this, TAG, getString(R.string.sign_up_success));
                                                     Intent intent = new Intent(SignUpActivity.this, com.example.nftscmers.employeractivities.EditProfileActivity.class);
                                                     startActivity(intent);

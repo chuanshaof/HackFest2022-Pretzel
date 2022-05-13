@@ -84,8 +84,21 @@ public class Utils {
      * @param url a String object that contains the image url
      * @param imageView an ImageView Object to be set for the picture
      */
-    public static void loadImage(String url, ImageView imageView) {
-        Picasso.get().load(url).into(imageView);
+    public static void loadImage(ImageView imageView, String url) {
+        if (url != null) {
+            Picasso.get().load(url).into(imageView);
+        }
+    }
+
+    /**
+     * Showing Toast and
+     * @param textView a TextView object to be set to the information wanted
+     * @param text a String object to be set
+     */
+    public static void setValid(TextView textView, String text){
+        if (text != null) {
+            textView.setText(text);
+        }
     }
 
     /**
@@ -163,21 +176,6 @@ public class Utils {
         Log.i(TAG, message);
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
     }
-
-    /**
-     * Showing Toast and
-     * @param textView a TextView object to be set to the information wanted
-     * @param text a String object to be set
-     */
-    public static void setValid(TextView textView, String text){
-        if (text == null) {
-            return;
-        } else {
-            textView.setText(text);
-        }
-    }
-
-
 
 
     public static class CircleTransform implements Transformation {

@@ -18,6 +18,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.nftscmers.R;
 import com.example.nftscmers.employeractivities.ViewApplicationActivity;
 import com.example.nftscmers.objectmodels.AccountModel;
+import com.example.nftscmers.objectmodels.ApplicantModel;
+import com.example.nftscmers.objectmodels.EmployerModel;
 import com.example.nftscmers.utils.Globals;
 import com.example.nftscmers.utils.LoggedInUser;
 import com.example.nftscmers.utils.Utils;
@@ -87,8 +89,10 @@ public class LoginActivity extends AppCompatActivity {
                 login.setEnabled(false);
                 login.setText(getString(R.string.logging_in));
 
+                String emailAddress = email.getText().toString();
+
                 // Validate that account is correct
-                DocumentReference accountDocument = FirebaseFirestore.getInstance().collection(AccountModel.getCollectionId()).document(email.getText().toString());
+                DocumentReference accountDocument = FirebaseFirestore.getInstance().collection(AccountModel.getCollectionId()).document(emailAddress);
                 accountDocument.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -97,17 +101,18 @@ public class LoginActivity extends AppCompatActivity {
                             if (document.exists()) {
                                 Map<String, Object> data = document.getData();
 
-                                if (password.getText().toString().equals(data.get(AccountModel.PASSWORD))
-                                        & loginType.equals(data.get(AccountModel.ACCOUNTTYPE))) {
-
-                                    // If account matches
-                                    Utils.toastLog(LoginActivity.this, TAG, getString(R.string.login_success));
-                                    LoggedInUser.getInstance().setUser(accountDocument, email.getText().toString());
+                                if (password.getText().toString().equals(data.get(AccountModel.PASSWORD)) & loginType.equals(data.get(AccountModel.ACCOUNTTYPE))) {
 
                                     if (loginType.equals(Globals.APPLICANT)) {
+                                        LoggedInUser.getInstance().setUser(FirebaseFirestore.getInstance().collection(ApplicantModel.getCollectionId()).document(emailAddress), emailAddress, loginType);
+                                        Utils.toastLog(LoginActivity.this, TAG, getString(R.string.login_success));
+
                                         Intent intent = new Intent(LoginActivity.this, ViewApplicationActivity.class);
                                         startActivity(intent);
                                     } else if (loginType.equals(Globals.EMPLOYER)) {
+                                        LoggedInUser.getInstance().setUser(FirebaseFirestore.getInstance().collection(EmployerModel.getCollectionId()).document(emailAddress), emailAddress, loginType);
+                                        Utils.toastLog(LoginActivity.this, TAG, getString(R.string.login_success));
+
                                         Intent intent = new Intent(LoginActivity.this, ViewJobActivity.class);
                                         startActivity(intent);
                                     } else {
