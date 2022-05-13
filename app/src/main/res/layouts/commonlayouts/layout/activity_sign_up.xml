@@ -12,9 +12,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="195dp"
-        android:layout_marginLeft="70dp"
         android:text="@string/applicant_sign_up"
+        android:textColor="#000000"
         android:textSize="30dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -23,10 +25,12 @@
         android:layout_width="275dp"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
-        android:drawableStart="@drawable/ic_baseline_perm_identity_24"
         android:drawablePadding="20dp"
         android:hint="@string/email_hint"
-        app:layout_constraintStart_toStartOf="@+id/sign_up_title"
+        android:background="@drawable/rounded_corner_view"
+        android:paddingLeft="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sign_up_title" />
 
     <EditText
@@ -34,7 +38,8 @@
         android:layout_width="275dp"
         android:layout_height="50dp"
         android:layout_marginTop="10dp"
-        android:drawableStart="@drawable/ic_baseline_lock_open_24"
+        android:background="@drawable/rounded_corner_view"
+        android:paddingLeft="20dp"
         android:drawablePadding="20dp"
         android:hint="@string/password_hint"
         android:inputType="textPassword"
@@ -46,7 +51,8 @@
         android:layout_width="275dp"
         android:layout_height="50dp"
         android:layout_marginTop="10dp"
-        android:drawableStart="@drawable/ic_baseline_lock_open_24"
+        android:background="@drawable/rounded_corner_view"
+        android:paddingLeft="20dp"
         android:drawablePadding="20dp"
         android:hint="@string/confirm_password_hint"
         android:inputType="textPassword"
@@ -59,6 +65,8 @@
         android:layout_height="50dp"
         android:layout_marginTop="15dp"
         android:background="@drawable/white_bg"
+        android:backgroundTint="@color/black"
+        app:backgroundTint="#000000"
         android:text="@string/sign_up"
         app:layout_constraintStart_toStartOf="@+id/sign_up_confirm_password"
         app:layout_constraintTop_toBottomOf="@+id/sign_up_confirm_password" />
@@ -68,9 +76,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:text="@string/sign_in"
-        android:textSize="20dp"
-        app:layout_constraintStart_toStartOf="@+id/sign_up_button"
+        android:text="Already have an account? Sign in here"
+        android:textSize="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sign_up_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

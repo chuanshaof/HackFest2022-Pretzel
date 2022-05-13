@@ -7,14 +7,17 @@
     android:background="@drawable/bg_main"
     tools:context=".commonactivities.LoginActivity">
 
+
     <TextView
         android:id="@+id/login_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="195dp"
-        android:layout_marginLeft="70dp"
+        android:layout_marginTop="196dp"
         android:text="@string/applicant_login"
+        android:textColor="#000000"
         android:textSize="30dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -22,11 +25,14 @@
         android:id="@+id/login_email"
         android:layout_width="275dp"
         android:layout_height="50dp"
-        android:layout_marginTop="20dp"
-        android:drawableStart="@drawable/ic_baseline_perm_identity_24"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/rounded_corner_view"
         android:drawablePadding="20dp"
         android:hint="@string/email_hint"
-        app:layout_constraintStart_toStartOf="@+id/login_title"
+        android:outlineProvider="none"
+        android:paddingLeft="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_title" />
 
     <EditText
@@ -34,10 +40,12 @@
         android:layout_width="275dp"
         android:layout_height="50dp"
         android:layout_marginTop="10dp"
-        android:drawableStart="@drawable/ic_baseline_lock_open_24"
+        android:background="@drawable/rounded_corner_view"
         android:drawablePadding="20dp"
         android:hint="@string/password_hint"
         android:inputType="textPassword"
+        android:outlineProvider="none"
+        android:paddingLeft="20dp"
         app:layout_constraintStart_toStartOf="@+id/login_email"
         app:layout_constraintTop_toBottomOf="@+id/login_email" />
 
@@ -48,7 +56,14 @@
         android:layout_marginTop="15dp"
         android:background="@drawable/white_bg"
         android:backgroundTint="@color/black"
-        android:text="@string/login_button"
+        android:shadowColor="#000000"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="0"
+        android:text="Sign in"
+        android:translationZ="10dp"
+        app:backgroundTint="#FC6B68"
+        app:elevation="1000dp"
         app:layout_constraintStart_toStartOf="@+id/login_password"
         app:layout_constraintTop_toBottomOf="@+id/login_password" />
 
@@ -58,17 +73,18 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="@string/forgot_password"
-        app:layout_constraintStart_toStartOf="@+id/login_button"
+        app:layout_constraintEnd_toEndOf="@+id/login_button"
         app:layout_constraintTop_toBottomOf="@+id/login_button" />
 
     <TextView
         android:id="@+id/sign_up"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="@string/sign_up"
-        android:textSize="20dp"
-        app:layout_constraintStart_toStartOf="@+id/forgot_password"
+        android:layout_marginTop="160dp"
+        android:text="Not a member? Register here"
+        android:textSize="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/forgot_password" />
 
 
