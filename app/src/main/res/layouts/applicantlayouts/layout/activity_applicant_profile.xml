@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -46,11 +47,11 @@
 
             <ImageView
                 android:id="@+id/iv_profile_pic"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:src="@drawable/profile_image"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerHorizontal="true"
                 android:layout_marginTop="30dp"
-                android:layout_centerHorizontal="true"/>
+                android:src="@drawable/profile_image" />
 
             <TextView
                 android:id="@+id/tv_name"
@@ -60,6 +61,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
                 android:text="Giga Chad"
+                android:textColor="#CE93D8"
                 android:textSize="32sp"
                 android:textStyle="bold" />
 
@@ -70,7 +72,9 @@
                 android:layout_below="@id/tv_name"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/login_bar">
+                android:background="@drawable/login_bar"
+                android:backgroundTint="#6DE3ADFF"
+                android:padding="15dp">
 
                 <TextView
                     android:id="@+id/tv_about_title"
@@ -100,7 +104,7 @@
                     android:paddingEnd="20dp"
                     android:paddingBottom="10dp"
                     android:text="hello dasfguif aufa ufsufg wef dsafd asdgjas ajskgadk akjd agkjgasjf kajfga ks"
-                    android:textSize="14dp"/>
+                    android:textSize="14dp" />
 
             </RelativeLayout>
 
@@ -108,10 +112,12 @@
                 android:id="@+id/rl_2"
                 android:layout_width="338dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/login_bar"
                 android:layout_below="@id/rl_1"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="20dp"
+                android:background="@drawable/login_bar"
+                android:backgroundTint="#6DE3ADFF"
+                android:padding="15dp">
 
                 <TextView
                     android:id="@+id/tv_linkedin_title"
@@ -142,7 +148,7 @@
                     android:paddingEnd="20dp"
                     android:paddingBottom="10dp"
                     android:text="linkedin.com/gigachadaddy"
-                    android:textSize="14dp"/>
+                    android:textSize="14dp" />
 
             </RelativeLayout>
 
@@ -150,10 +156,12 @@
                 android:id="@+id/rl_3"
                 android:layout_width="338dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/login_bar"
                 android:layout_below="@id/rl_2"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="20dp"
+                android:background="@drawable/login_bar"
+                android:backgroundTint="#6DE3ADFF"
+                android:padding="15dp">
 
                 <TextView
                     android:id="@+id/tv_skills_title"
@@ -191,7 +199,8 @@
                 android:layout_marginTop="20dp"
                 android:background="@drawable/white_bg"
                 android:text="@string/logout"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                app:backgroundTint="#000000" />
 
         </RelativeLayout>
 
