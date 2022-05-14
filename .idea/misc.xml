@@ -3,16 +3,26 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/65818/AndroidStudioProjects/HackFest-nftscmers/app/src/main/res/layout/activity_applicant_swipe.xml" value="0.2765625" />
+        <entry key="..\:/Users/65818/AndroidStudioProjects/HackFest-nftscmers/app/src/main/res/layout/activity_applicant_swiping.xml" value="0.2765625" />
+        <entry key="..\:/Users/65818/AndroidStudioProjects/HackFest-nftscmers/app/src/main/res/layout/activity_applicant_swiping_feature.xml" value="0.2953125" />
+        <entry key="..\:/Users/65818/AndroidStudioProjects/HackFest-nftscmers/app/src/main/res/layout/activity_employer_details_oncard.xml" value="0.2953125" />
+        <entry key="..\:/Users/65818/AndroidStudioProjects/HackFest-nftscmers/app/src/main/res/layout/fragment_dashboard.xml" value="0.2765625" />
+        <entry key="..\:/Users/65818/AndroidStudioProjects/HackFest-nftscmers/app/src/main/res/layout/item_in_cardview.xml" value="0.2765625" />
+        <entry key="..\:/Users/65818/AndroidStudioProjects/HackFest-nftscmers/app/src/main/res/layout/like_dislike_button_bottom.xml" value="0.35054347826086957" />
+        <entry key="..\:/Users/65818/AndroidStudioProjects/HackFest-nftscmers/app/src/main/res/layout/linear_layout_for_swiping.xml" value="0.35054347826086957" />
+        <entry key="..\:/Users/65818/AndroidStudioProjects/HackFest-nftscmers/app/src/main/res/layout/recycler_view_for_swiping.xml" value="0.21145833333333333" />
+        <entry key="..\:/Users/65818/AndroidStudioProjects/HackFest-nftscmers/app/src/main/res/layouts/applicantlayouts/layout/activity_applicant_edit_profile.xml" value="0.2953125" />
+        <entry key="..\:/Users/65818/AndroidStudioProjects/HackFest-nftscmers/app/src/main/res/layouts/applicantlayouts/layout/dialog_edit_profile_skills.xml" value="0.2765625" />
+        <entry key="..\:/Users/65818/AndroidStudioProjects/HackFest-nftscmers/app/src/main/res/layouts/commonlayouts/layout/activity_sign_up.xml" value="0.2765625" />
+        <entry key="..\:/Users/65818/AndroidStudioProjects/HackFest-nftscmers/app/src/main/res/layouts/employerlayouts/layout/activity_employer_edit_job.xml" value="0.2765625" />
+        <entry key="..\:/Users/65818/AndroidStudioProjects/HackFest-nftscmers/app/src/main/res/layouts/employerlayouts/layout/activity_employer_view_application.xml" value="0.2765625" />
         <entry key="..\:/Users/chuanshaof/GitHub/50.001-StudyBuddy/app/src/main/res/drawable/ic_baseline_add_location_24.xml" value="0.1125" />
         <entry key="..\:/Users/chuanshaof/GitHub/50.001-StudyBuddy/app/src/main/res/drawable/ic_baseline_email_24.xml" value="0.1" />
         <entry key="..\:/Users/chuanshaof/GitHub/HackFest-nftscmers/app/src/main/res/drawable-v24/ic_baseline_add_24.xml" value="0.1" />
         <entry key="..\:/Users/chuanshaof/GitHub/HackFest-nftscmers/app/src/main/res/drawable-v24/ic_baseline_filter_list_24.xml" value="0.1" />
         <entry key="..\:/Users/chuanshaof/GitHub/HackFest-nftscmers/app/src/main/res/drawable-v24/ic_baseline_perm_identity_24.xml" value="0.1" />
         <entry key="..\:/Users/chuanshaof/GitHub/HackFest-nftscmers/app/src/main/res/drawable-v24/white_bg.xml" value="0.1935" />
-        <entry key="..\:/Users/chuanshaof/GitHub/HackFest-nftscmers/app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.203" />
-        <entry key="..\:/Users/chuanshaof/GitHub/HackFest-nftscmers/app/src/main/res/drawable/ic_baseline_edit_24.xml" value="0.203" />
-        <entry key="..\:/Users/chuanshaof/GitHub/HackFest-nftscmers/app/src/main/res/drawable/login_bar.xml" value="0.104" />
-        <entry key="..\:/Users/chuanshaof/GitHub/HackFest-nftscmers/app/src/main/res/drawable/sign_in_bar.xml" value="0.104" />
         <entry key="..\:/Users/chuanshaof/GitHub/HackFest-nftscmers/app/src/main/res/font/andada.xml" value="0.215625" />
         <entry key="..\:/Users/chuanshaof/GitHub/HackFest-nftscmers/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/Users/chuanshaof/GitHub/HackFest-nftscmers/app/src/main/res/layout/activity_main.xml" value="0.278125" />
@@ -44,10 +54,11 @@
         <entry key="..\:/Users/chuanshaof/GitHub/HackFest-nftscmers/app/src/main/res/layouts/employerlayouts/layout/activity_employer_view_application.xml" value="0.3109375" />
         <entry key="..\:/Users/chuanshaof/GitHub/HackFest-nftscmers/app/src/main/res/layouts/employerlayouts/layout/activity_profile.xml" value="0.18541666666666667" />
         <entry key="..\:/Users/chuanshaof/GitHub/HackFest-nftscmers/app/src/main/res/menu/login_menu.xml" value="0.278125" />
+        <entry key="..\:/Users/chuanshaof/GitHub/HackFest-nftscmers/app/src/main/res/layout/activity_login.xml" value="0.1757852077001013" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>
