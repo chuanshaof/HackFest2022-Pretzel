@@ -1,7 +1,6 @@
 package com.example.nftscmers.fragments;
 
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -9,7 +8,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,7 +21,6 @@ import com.example.nftscmers.utils.Utils;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class SkillsDialogFragment extends DialogFragment {
@@ -58,7 +55,7 @@ public class SkillsDialogFragment extends DialogFragment {
         EditText addText = dialog.findViewById(R.id.skills_add_text);
         Button addButton = dialog.findViewById(R.id.skills_add_button);
 
-        ArrayAdapter arrayAdapter = new SkillsAdapter(getContext(), R.layout.dialog_skills_element, skillsList);
+        ArrayAdapter arrayAdapter = new SkillsAdapter(getContext(), R.layout.dialog_item_skills, skillsList);
         listView.setAdapter(arrayAdapter);
 
         ((SkillsAdapter) arrayAdapter).setOnDeleteListener(new SkillsAdapter.OnDeleteListener() {

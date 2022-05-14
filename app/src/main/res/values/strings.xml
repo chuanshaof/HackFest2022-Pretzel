@@ -36,6 +36,7 @@
     <string name="linked_in">Linkedin Name</string>
     <string name="about">About</string>
     <string name="skills">Skills</string>
+    <string name="email">Email</string>
 
 <!--    Profile Strings -->
     <string name="my_profile">My Profile</string>

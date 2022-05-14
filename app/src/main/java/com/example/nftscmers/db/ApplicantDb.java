@@ -1,14 +1,16 @@
 package com.example.nftscmers.db;
 
 import android.content.Context;
+import android.net.Uri;
 import android.util.Log;
 import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 
 import com.example.nftscmers.R;
 import com.example.nftscmers.objectmodels.ApplicantModel;
+import com.example.nftscmers.utils.FirebaseStorageReference;
 import com.example.nftscmers.utils.Utils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -24,35 +26,37 @@ public class ApplicantDb extends Db{
     private static OnApplicantModel onApplicantModel;
     private static OnApplicantUploadSuccess onApplicantUploadSuccess;
     private static OnApplicantUploadFailure onApplicantUploadFailure;
+    private Context context;
 
     public ApplicantDb() {
         super(ApplicantModel.getCollectionId());
     }
 
-    public ApplicantDb(OnApplicantModel onApplicantModel) {
+    public ApplicantDb(Context context, OnApplicantModel onApplicantModel) {
         super(ApplicantModel.getCollectionId());
+        this.context = context;
         this.onApplicantModel = onApplicantModel;
     }
 
-    public ApplicantDb(OnApplicantUploadSuccess onApplicantUploadSuccess) {
+    public ApplicantDb(Context context, OnApplicantUploadSuccess onApplicantUploadSuccess) {
         super(ApplicantModel.getCollectionId());
+        this.context = context;
         this.onApplicantUploadSuccess = onApplicantUploadSuccess;
     }
 
-    public ApplicantDb(OnApplicantUploadSuccess onApplicantUploadSuccess, OnApplicantUploadFailure onApplicantUploadFailure) {
+    public ApplicantDb(Context context, OnApplicantUploadSuccess onApplicantUploadSuccess, OnApplicantUploadFailure onApplicantUploadFailure) {
         super(ApplicantModel.getCollectionId());
+        this.context = context;
         this.onApplicantUploadSuccess = onApplicantUploadSuccess;
         this.onApplicantUploadFailure = onApplicantUploadFailure;
     }
 
     /**
      * Get ApplicationModel from an email address
-     * @param context a Context object
      * @param email an EditText object containing an email address
      */
-    public void getApplicantModel(Context context, String email) {
+    public void getApplicantModel(String email) {
         if (!Utils.isNetworkAvailable(context)) {
-            Toast.makeText(context, R.string.network_missing, Toast.LENGTH_SHORT).show();
             onApplicantModel.onResult(null);
             return;
         }
@@ -74,23 +78,21 @@ public class ApplicantDb extends Db{
 
     /**
      * Get ApplicationModel from an email address
-     * @param context a Context object
      * @param email an EditText object containing an email address
      */
-    public void getApplicantModel(Context context, EditText email) {
+    public void getApplicantModel(EditText email) {
         if (Utils.invalidData(email)){
             onApplicantModel.onResult(null);
             return;
         }
-        getApplicantModel(context, email.getText().toString());
+        getApplicantModel(email.getText().toString());
     }
 
     /**
      * Create new account for applicants using only email with no details yet
-     * @param context a Context object
      * @param email an EditText object containing an email address
      */
-    public void newProfile(Context context, EditText email) {
+    public void newProfile(EditText email) {
         if (Utils.invalidData(email)){
             onApplicantUploadFailure.onResult();
             return;
@@ -131,13 +133,73 @@ public class ApplicantDb extends Db{
         });
     }
 
+    /**
+     * Push account details to FireStore
+     * @param applicantModel an ApplicantModel object containing the details of the applicant profile
+     */
+    public void updateProfile(ApplicantModel applicantModel) {
+        if (!Utils.isNetworkAvailable(context)) {
+            onApplicantModel.onResult(null);
+            return;
+        }
+
+        getDocument(applicantModel.getEmail()).set(applicantModel).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                onApplicantUploadSuccess.onResult();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                onApplicantUploadFailure.onResult();
+            }
+        });
+    }
+
+    /**
+     * Push new profile picture to Firebase Storage
+     * @param imageView an ImageView object
+     * @param email a String object indicating the user's email
+     */
+    public void updateProfilePicture(ImageView imageView, String email) {
+        new FirebaseStorageReference() {
+            @Override
+            public void uploadSuccess(String url) {
+                onApplicantUploadSuccess.onResult(url);
+            }
+            @Override
+            public void uploadFailed() {
+                onApplicantUploadFailure.onResult();
+            }
+        }.uploadImage(imageView, ApplicantModel.getCollectionId() + "/" + email);
+    }
+
+    /**
+     * Push new profile picture to Firebase Storage
+     * @param uri a Uri object containing the file location
+     * @param email a String object indicating the user's email
+     */
+    public void updateProfilePicture(Uri uri, String email) {
+        new FirebaseStorageReference() {
+            @Override
+            public void uploadSuccess(String url) {
+                onApplicantUploadSuccess.onResult(url);
+            }
+            @Override
+            public void uploadFailed() {
+                onApplicantUploadFailure.onResult();
+            }
+        }.uploadImage(uri, ApplicantModel.getCollectionId() + "/" + email);
+    }
 
     public interface OnApplicantModel {
         void onResult(ApplicantModel applicantModel);
     }
 
-    public interface OnApplicantUploadSuccess{
-        void onResult();
+    public static abstract class OnApplicantUploadSuccess{
+        protected void onResult() {};
+
+        protected void onResult(String string) {};
     }
 
     public interface OnApplicantUploadFailure{

@@ -2,6 +2,7 @@ package com.example.nftscmers.applicantactivities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -14,8 +15,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.nftscmers.R;
+import com.example.nftscmers.db.ApplicantDb;
+import com.example.nftscmers.fragments.SkillsFragment;
 import com.example.nftscmers.objectmodels.ApplicantModel;
+import com.example.nftscmers.utils.Globals;
 import com.example.nftscmers.utils.LoggedInUser;
+import com.example.nftscmers.utils.Utils;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
@@ -27,63 +32,54 @@ import java.util.List;
 import java.util.Map;
 
 public class ProfileActivity extends AppCompatActivity {
-    private static final String TAG = "Applicant.EditProfileActivity";
+    private static final String TAG = "ApplicantEditProfile";
 
-    ImageView IV_back;
-    ImageView IV_edit_profile;
-    ImageView IV_profile_pic;
-    TextView TV_name;
-    TextView TV_about;
-    TextView TV_linkedin;
-    Button BT_logout;
-    ListView LV_skills;
+    ImageView back;
+    ImageView editProfile;
+    ImageView profilePic;
+    TextView name;
+    TextView email;
+    TextView about;
+    TextView linkedIn;
+    Button logout;
+    ListView skills;
 
     ApplicantModel applicant;
-
-    ArrayList<String> skills_list = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_applicant_profile);
 
-        IV_back = findViewById(R.id.iv_back_arrow);
-        IV_edit_profile = findViewById(R.id.iv_edit_profile);
-        IV_profile_pic = findViewById(R.id.iv_profile_pic);
-        TV_name = findViewById(R.id.tv_name);
-        TV_about = findViewById(R.id.tv_about);
-        TV_linkedin = findViewById(R.id.tv_linkedin);
-        BT_logout = findViewById(R.id.button_logout);
-        LV_skills = findViewById(R.id.lv_skills);
+        back = findViewById(R.id.applicant_back_arrow);
+        editProfile = findViewById(R.id.applicant_edit_profile);
+        profilePic = findViewById(R.id.applicant_profile_pic);
+        name = findViewById(R.id.applicant_name);
+        email = findViewById(R.id.applicant_email);
+        about = findViewById(R.id.applicant_about);
+        linkedIn = findViewById(R.id.applicant_linkedIn);
 
-        /*
-        TODO: get logged in user (applicant acc) ->
-         firebase get userdoc snapshot to applicant object model ->
-         */
-        applicant = null; // update this
+        LoggedInUser.getInstance().setUser(null, "tester@gmail.com", Globals.APPLICANT);
 
-        setup_edit_button();
-    }
+        // Loading of previous applicant data
+        new ApplicantDb(ProfileActivity.this, new ApplicantDb.OnApplicantModel() {
+            @Override
+            public void onResult(ApplicantModel applicantModel) {
+                Log.d(TAG, "onResult: " + applicantModel);
+                applicant = applicantModel;
 
-    /**
-     * This function populates the entire profile page
-     * @param applicant ApplicantModel of logged in user
-     */
-    private void populate_profile(ApplicantModel applicant) {
-        for (DocumentReference docRef : applicant.getSkills()) {
-            skills_list.add(docRef.getId());
-        }
+                Utils.loadImage(profilePic, applicant.getImage());
+                Utils.setValid(name, applicant.getName());
+                Utils.setValid(about, applicant.getAbout());
+                Utils.setValid(linkedIn, applicant.getLinkedIn());
+                Utils.setValid(email, applicant.getEmail());
 
-        ArrayAdapter arrayAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1,skills_list);
-        LV_skills.setAdapter(arrayAdapter);
-    }
+                SkillsFragment skillsFragment = new SkillsFragment(applicant.getSkills());
+                getSupportFragmentManager().beginTransaction().replace(R.id.applicant_skills, skillsFragment).commit();
+            }
+        }).getApplicantModel(LoggedInUser.getInstance().getEmail());
 
-
-    /**
-     * This function sets up the edit icon and navigate user to edit profile page on press
-     */
-    private void setup_edit_button(){
-        IV_edit_profile.setOnClickListener(new View.OnClickListener() {
+        editProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ProfileActivity.this, EditProfileActivity.class);
@@ -91,5 +87,4 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
     }
-
 }

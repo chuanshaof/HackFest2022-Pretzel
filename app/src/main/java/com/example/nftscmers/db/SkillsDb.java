@@ -46,7 +46,6 @@ public class SkillsDb extends Db {
      */
     public void getSkillsModel(String skill) {
         if (!Utils.isNetworkAvailable(context)) {
-            Toast.makeText(context, R.string.network_missing, Toast.LENGTH_SHORT).show();
             onSkillsModel.onResult(null);
             return;
         }
@@ -84,7 +83,6 @@ public class SkillsDb extends Db {
      */
     public void createNewSkill(String skill) {
         if (!Utils.isNetworkAvailable(context)) {
-            Toast.makeText(context, R.string.network_missing, Toast.LENGTH_SHORT).show();
             onSkillsModel.onResult(null);
             return;
         }

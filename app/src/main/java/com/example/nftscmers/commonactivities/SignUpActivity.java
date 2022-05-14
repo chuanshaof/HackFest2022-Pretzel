@@ -120,7 +120,7 @@ public class SignUpActivity extends AppCompatActivity {
                             } else {
                                 // Creating new profile in applicant
                                 if (signUpType.equals(Globals.APPLICANT)) {
-                                    new ApplicantDb(new ApplicantDb.OnApplicantUploadSuccess() {
+                                    new ApplicantDb(SignUpActivity.this, new ApplicantDb.OnApplicantUploadSuccess() {
                                         @Override
                                         public void onResult() {
                                             Map<String, Object> account = new HashMap<>();
@@ -145,7 +145,7 @@ public class SignUpActivity extends AppCompatActivity {
                                                 }
                                             });
                                         }
-                                    }).newProfile(SignUpActivity.this, email);
+                                    }).newProfile(email);
                                 } else if (signUpType.equals(Globals.EMPLOYER)) {
                                     new EmployerDb(new EmployerDb.OnEmployerUploadSuccess() {
                                         @Override

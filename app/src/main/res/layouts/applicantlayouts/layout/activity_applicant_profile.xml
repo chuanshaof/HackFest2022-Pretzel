@@ -8,7 +8,7 @@
     tools:context=".applicantactivities.ProfileActivity">
 
     <ImageView
-        android:id="@+id/iv_back_arrow"
+        android:id="@+id/applicant_back_arrow"
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:layout_marginStart="16dp"
@@ -16,7 +16,7 @@
         android:src="@drawable/ic_baseline_arrow_back_24" />
 
     <TextView
-        android:id="@+id/tv_my_profile"
+        android:id="@+id/applicant_my_profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -27,18 +27,18 @@
         android:textStyle="bold" />
 
     <ImageView
-        android:id="@+id/iv_edit_profile"
+        android:id="@+id/applicant_edit_profile"
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:layout_alignParentRight="true"
-        android:layout_marginEnd="16dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
         android:src="@drawable/ic_baseline_edit_24" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_my_profile"
+        android:layout_below="@+id/applicant_my_profile"
         android:fillViewport="true">
 
         <RelativeLayout
@@ -46,7 +46,7 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/iv_profile_pic"
+                android:id="@+id/applicant_profile_pic"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_centerHorizontal="true"
@@ -54,10 +54,10 @@
                 android:src="@drawable/profile_image" />
 
             <TextView
-                android:id="@+id/tv_name"
+                android:id="@+id/applicant_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/iv_profile_pic"
+                android:layout_below="@id/applicant_profile_pic"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
                 android:text="Giga Chad"
@@ -69,7 +69,7 @@
                 android:id="@+id/rl_1"
                 android:layout_width="338dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tv_name"
+                android:layout_below="@id/applicant_name"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/login_bar"
@@ -77,7 +77,7 @@
                 android:padding="15dp">
 
                 <TextView
-                    android:id="@+id/tv_about_title"
+                    android:id="@+id/applicant_about_title"
                     android:layout_width="338dp"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
@@ -93,10 +93,10 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/tv_about"
+                    android:id="@+id/applicant_about"
                     android:layout_width="338dp"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/tv_about_title"
+                    android:layout_below="@id/applicant_about_title"
                     android:layout_centerHorizontal="true"
                     android:ems="10"
                     android:paddingStart="20dp"
@@ -120,34 +120,33 @@
                 android:padding="15dp">
 
                 <TextView
-                    android:id="@+id/tv_linkedin_title"
+                    android:id="@+id/applicant_email_title"
                     android:layout_width="338dp"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:drawableStart="@drawable/ic_linkedin_24"
+                    android:drawableStart="@drawable/ic_baseline_email_24"
                     android:drawablePadding="20dp"
                     android:ems="10"
                     android:paddingStart="20dp"
                     android:paddingTop="5dp"
                     android:paddingEnd="20dp"
                     android:paddingBottom="0dp"
-                    android:text="@string/linked_in"
+                    android:text="@string/email"
                     android:textSize="17dp"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/tv_linkedin"
+                    android:id="@+id/applicant_email"
                     android:layout_width="338dp"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/tv_linkedin_title"
+                    android:layout_below="@id/applicant_email_title"
                     android:layout_centerHorizontal="true"
-                    android:drawablePadding="20dp"
                     android:ems="10"
                     android:paddingStart="20dp"
                     android:paddingTop="5dp"
                     android:paddingEnd="20dp"
                     android:paddingBottom="10dp"
-                    android:text="linkedin.com/gigachadaddy"
+                    android:text="test@gmail.com"
                     android:textSize="14dp" />
 
             </RelativeLayout>
@@ -164,7 +163,51 @@
                 android:padding="15dp">
 
                 <TextView
-                    android:id="@+id/tv_skills_title"
+                    android:id="@+id/applicant_linkedin_title"
+                    android:layout_width="338dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:drawableStart="@drawable/ic_linkedin_24"
+                    android:drawablePadding="20dp"
+                    android:ems="10"
+                    android:paddingStart="20dp"
+                    android:paddingTop="5dp"
+                    android:paddingEnd="20dp"
+                    android:paddingBottom="0dp"
+                    android:text="@string/linked_in"
+                    android:textSize="17dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/applicant_linkedIn"
+                    android:layout_width="338dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/applicant_linkedin_title"
+                    android:layout_centerHorizontal="true"
+                    android:drawablePadding="20dp"
+                    android:ems="10"
+                    android:paddingStart="20dp"
+                    android:paddingTop="5dp"
+                    android:paddingEnd="20dp"
+                    android:paddingBottom="10dp"
+                    android:text="linkedin.com/gigachadaddy"
+                    android:textSize="14dp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_4"
+                android:layout_width="338dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_3"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/login_bar"
+                android:backgroundTint="#6DE3ADFF"
+                android:padding="15dp">
+
+                <TextView
+                    android:id="@+id/applicant_skills_title"
                     android:layout_width="338dp"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
@@ -179,22 +222,21 @@
                     android:textSize="17dp"
                     android:textStyle="bold" />
 
-                <ListView
-                    android:id="@+id/lv_skills"
+                <FrameLayout
+                    android:id="@+id/applicant_skills"
                     android:layout_width="338dp"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/tv_skills_title"
+                    android:layout_below="@+id/applicant_skills_title"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginBottom="10dp" />
-
             </RelativeLayout>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/button_logout"
                 android:layout_width="225dp"
                 android:layout_height="50dp"
-                android:layout_below="@+id/rl_3"
+                android:layout_below="@+id/rl_4"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/white_bg"

@@ -50,6 +50,10 @@ public class ApplicantModel implements ObjectModel {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getImage() {
         return image;
     }

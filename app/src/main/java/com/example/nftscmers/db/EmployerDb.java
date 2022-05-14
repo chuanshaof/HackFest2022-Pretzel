@@ -52,7 +52,6 @@ public class EmployerDb extends Db {
      */
     public void getEmployerModel(Context context, String email) {
         if (!Utils.isNetworkAvailable(context)) {
-            Toast.makeText(context, R.string.network_missing, Toast.LENGTH_SHORT).show();
             onEmployerModel.onResult(null);
             return;
         }

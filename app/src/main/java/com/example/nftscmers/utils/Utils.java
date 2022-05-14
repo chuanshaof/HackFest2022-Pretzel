@@ -24,27 +24,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 
-//import com.example.nftscmers.MainPageActivity;
-//import com.example.nftscmers.R;
-//import com.example.nftscmers.fragments.DatePickerDialogFragment;
-//import com.example.nftscmers.fragments.TimePickerDialogFragment;
-//import com.example.nftscmers.interfaces.CustomDialogInterface;
-//import com.example.nftscmers.objectmodel.EventModel;
 import com.example.nftscmers.R;
-import com.example.nftscmers.commonactivities.SignUpActivity;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.material.button.MaterialButton;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
+
+import org.w3c.dom.Text;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
@@ -92,13 +76,28 @@ public class Utils {
 
     /**
      * Showing Toast and
-     * @param textView a TextView object to be set to the information wanted
+     * @param textView a TextView object
      * @param text a String object to be set
      */
     public static void setValid(TextView textView, String text){
         if (text != null) {
             textView.setText(text);
         }
+    }
+
+    /**
+     * This method checks for a valid email address format
+     * @param textView a TextView object that
+     */
+    public static void uneditableField(TextView textView) {
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                textView.requestFocus();
+                textView.setError("Field is uneditable");
+                Toast.makeText(view.getContext(), "Field is uneditable", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     /**

@@ -34,7 +34,7 @@ public class SkillsAdapter extends ArrayAdapter<DocumentReference> {
     @NonNull
     @Override
     public View getView(int position, View convertView, @NonNull ViewGroup parent) {
-        View view = mInflater.inflate(R.layout.dialog_skills_element, parent, false);
+        View view = mInflater.inflate(R.layout.dialog_item_skills, parent, false);
         TextView skillName = view.findViewById(R.id.skill_name);
         DocumentReference skill = skillsList.get(position);
         Button deleteSkill = view.findViewById(R.id.skill_delete);
