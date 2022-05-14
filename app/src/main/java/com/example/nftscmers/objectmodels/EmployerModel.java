@@ -10,6 +10,7 @@ public class EmployerModel implements ObjectModel {
     public static final String COLLECTION_ID = "Employers";
 
     public static final String EMAIL = "email";
+    public static final String JOBS = "jobs";
 
     @DocumentId
     private String documentId;

@@ -9,21 +9,30 @@ import java.util.Date;
 
 public class JobModel implements ObjectModel {
     public static final String TAG = "Job Model";
-    public static final String COLLECTION_ID = "Job";
+    public static final String COLLECTION_ID = "Jobs";
 
     @DocumentId
     private String documentId;
 
-    private final DocumentReference employer;
-    private final String position;
+    private DocumentReference employer;
+    private String position;
     private String description;
     private Date deadline;
     private String location;
+    private ArrayList<DocumentReference> accepted;
+    private ArrayList<DocumentReference> pending;
     private ArrayList<DocumentReference> skills;
     private ArrayList<DocumentReference> tags;
 
+    private JobModel() {}
+
+    public JobModel(DocumentReference employer) {
+        this.employer = employer;
+    }
+
     public JobModel(DocumentReference employer, String position, String description, Date deadline,
-                    String location, ArrayList<DocumentReference> skills, ArrayList<DocumentReference> tags) {
+                    String location, ArrayList<DocumentReference> skills, ArrayList<DocumentReference> tags,
+                    ArrayList<DocumentReference> accepted, ArrayList<DocumentReference> pending) {
         this.employer = employer;
         this.position = position;
         this.description = description;
@@ -31,6 +40,8 @@ public class JobModel implements ObjectModel {
         this.location = location;
         this.skills = skills;
         this.tags = tags;
+        this.accepted = accepted;
+        this.pending = pending;
     }
 
     public static String getCollectionId() {
@@ -47,6 +58,10 @@ public class JobModel implements ObjectModel {
 
     public String getPosition() {
         return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
     }
 
     public String getDescription() {
@@ -87,6 +102,22 @@ public class JobModel implements ObjectModel {
 
     public void setTags(ArrayList<DocumentReference> tags) {
         this.tags = tags;
+    }
+
+    public ArrayList<DocumentReference> getAccepted() {
+        return accepted;
+    }
+
+    public void setAccepted(ArrayList<DocumentReference> accepted) {
+        this.accepted = accepted;
+    }
+
+    public ArrayList<DocumentReference> getPending() {
+        return pending;
+    }
+
+    public void setPending(ArrayList<DocumentReference> pending) {
+        this.pending = pending;
     }
 
     @Override

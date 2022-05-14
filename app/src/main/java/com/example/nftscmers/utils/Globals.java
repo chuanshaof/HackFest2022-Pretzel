@@ -9,5 +9,5 @@ public class Globals {
     public static final String APPLICANT = "APPLICANT";
     public static final String EMPLOYER = "EMPLOYER";
 
-    public static final DateFormat DATEFORMAT = new SimpleDateFormat("EEE, dd MMM @ hh:mm aa");
+    public static final DateFormat DATEFORMAT = new SimpleDateFormat("EEE, dd MMM");
 }

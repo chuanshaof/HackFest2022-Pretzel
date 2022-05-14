@@ -18,7 +18,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -187,6 +189,25 @@ public class EmployerDb extends Db {
                 onEmployerUploadFailure.onResult();
             }
         }.uploadImage(uri, EmployerModel.getCollectionId() + "/" + email);
+    }
+
+    /**
+     * Update the job field of an employer
+     * @param job a DocumentReference object indicating the job to be added
+     * @param employer a DocumentReference object indicating the employer to be edited
+     */
+    public void updateJob(DocumentReference job, DocumentReference employer) {
+        employer.update(EmployerModel.JOBS,  FieldValue.arrayUnion(job)).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                onEmployerUploadSuccess.onResult();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                onEmployerUploadFailure.onResult();
+            }
+        });
     }
 
     public interface OnEmployerModel {
