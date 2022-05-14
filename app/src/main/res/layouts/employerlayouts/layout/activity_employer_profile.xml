@@ -1,6 +1,251 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_editprofile"
+    tools:context=".employeractivities.ProfileActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageView
+        android:id="@+id/employer_back_arrow"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/ic_baseline_arrow_back_24" />
+
+    <TextView
+        android:id="@+id/employer_my_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="@string/company_profile"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/employer_edit_profile"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/ic_baseline_edit_24" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/employer_my_profile"
+        android:fillViewport="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/employer_profile_pic"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp"
+                android:src="@drawable/profile_image" />
+
+            <TextView
+                android:id="@+id/employer_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/employer_profile_pic"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:text="Giga Chad"
+                android:textColor="#CE93D8"
+                android:textSize="32sp"
+                android:textStyle="bold" />
+
+            <RelativeLayout
+                android:id="@+id/rl_1"
+                android:layout_width="338dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/employer_name"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/login_bar"
+                android:backgroundTint="#6DE3ADFF"
+                android:padding="15dp">
+
+                <TextView
+                    android:id="@+id/employer_about_title"
+                    android:layout_width="338dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:drawableStart="@drawable/ic_baseline_menu_book_24"
+                    android:drawablePadding="20dp"
+                    android:ems="10"
+                    android:paddingStart="20dp"
+                    android:paddingTop="5dp"
+                    android:paddingEnd="20dp"
+                    android:paddingBottom="0dp"
+                    android:text="@string/about"
+                    android:textSize="17dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/employer_about"
+                    android:layout_width="338dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/employer_about_title"
+                    android:layout_centerHorizontal="true"
+                    android:ems="10"
+                    android:paddingStart="20dp"
+                    android:paddingTop="5dp"
+                    android:paddingEnd="20dp"
+                    android:paddingBottom="10dp"
+                    android:text="hello dasfguif aufa ufsufg wef dsafd asdgjas ajskgadk akjd agkjgasjf kajfga ks"
+                    android:textSize="14dp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_2"
+                android:layout_width="338dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_1"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/login_bar"
+                android:backgroundTint="#6DE3ADFF"
+                android:padding="15dp">
+
+                <TextView
+                    android:id="@+id/employer_email_title"
+                    android:layout_width="338dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:drawableStart="@drawable/ic_baseline_email_24"
+                    android:drawablePadding="20dp"
+                    android:ems="10"
+                    android:paddingStart="20dp"
+                    android:paddingTop="5dp"
+                    android:paddingEnd="20dp"
+                    android:paddingBottom="0dp"
+                    android:text="@string/email"
+                    android:textSize="17dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/employer_email"
+                    android:layout_width="338dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/employer_email_title"
+                    android:layout_centerHorizontal="true"
+                    android:ems="10"
+                    android:paddingStart="20dp"
+                    android:paddingTop="5dp"
+                    android:paddingEnd="20dp"
+                    android:paddingBottom="10dp"
+                    android:text="test@gmail.com"
+                    android:textSize="14dp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_3"
+                android:layout_width="338dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_2"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/login_bar"
+                android:backgroundTint="#6DE3ADFF"
+                android:padding="15dp">
+
+                <TextView
+                    android:id="@+id/employer_linkedin_title"
+                    android:layout_width="338dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:drawableStart="@drawable/ic_linkedin_24"
+                    android:drawablePadding="20dp"
+                    android:ems="10"
+                    android:paddingStart="20dp"
+                    android:paddingTop="5dp"
+                    android:paddingEnd="20dp"
+                    android:paddingBottom="0dp"
+                    android:text="@string/linked_in"
+                    android:textSize="17dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/employer_linkedIn"
+                    android:layout_width="338dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/employer_linkedin_title"
+                    android:layout_centerHorizontal="true"
+                    android:drawablePadding="20dp"
+                    android:ems="10"
+                    android:paddingStart="20dp"
+                    android:paddingTop="5dp"
+                    android:paddingEnd="20dp"
+                    android:paddingBottom="10dp"
+                    android:text="linkedin.com/gigachadaddy"
+                    android:textSize="14dp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_4"
+                android:layout_width="338dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_3"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/login_bar"
+                android:backgroundTint="#6DE3ADFF"
+                android:padding="15dp">
+
+                <TextView
+                    android:id="@+id/employer_jobs_title"
+                    android:layout_width="338dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:drawableStart="@drawable/ic_baseline_library_books_24"
+                    android:drawablePadding="20dp"
+                    android:ems="10"
+                    android:paddingStart="20dp"
+                    android:paddingTop="5dp"
+                    android:paddingEnd="20dp"
+                    android:paddingBottom="0dp"
+                    android:text="@string/jobs"
+                    android:textSize="17dp"
+                    android:textStyle="bold" />
+
+                <FrameLayout
+                    android:id="@+id/employer_jobs"
+                    android:layout_width="338dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/employer_jobs_title"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="10dp" />
+            </RelativeLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_logout"
+                android:layout_width="225dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/rl_4"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/white_bg"
+                android:text="@string/logout"
+                android:textSize="20sp"
+                app:backgroundTint="#000000" />
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

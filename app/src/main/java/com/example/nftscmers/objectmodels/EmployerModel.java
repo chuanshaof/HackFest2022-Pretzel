@@ -1,12 +1,15 @@
 package com.example.nftscmers.objectmodels;
 
 import com.google.firebase.firestore.DocumentId;
+import com.google.firebase.firestore.DocumentReference;
+
+import java.util.ArrayList;
 
 public class EmployerModel implements ObjectModel {
     public static final String TAG = "Employers Model";
     public static final String COLLECTION_ID = "Employers";
 
-    public static final String EMAIL = "Email";
+    public static final String EMAIL = "email";
 
     @DocumentId
     private String documentId;
@@ -14,16 +17,20 @@ public class EmployerModel implements ObjectModel {
     private String name;
     private String email;
     private String about;
-    private String picture;
+    private String website;
+    private String image;
+    ArrayList<DocumentReference> jobs;
 
     private EmployerModel() {}
 
-    public EmployerModel(String name, String email, String about, String picture) {
+    public EmployerModel(String name, String email, String about, String website, String image, ArrayList<DocumentReference> jobs) {
         this.name = name;
         this.email = email;
         this.about = about;
-        this.picture = picture;
+        this.image = image;
+        this.website = website;
         this.documentId = email;
+        this.jobs = jobs;
     }
 
     public static String getCollectionId() {
@@ -38,12 +45,28 @@ public class EmployerModel implements ObjectModel {
         return name;
     }
 
-    public String getPicture() {
-        return picture;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setPicture(String picture) {
-        this.picture = picture;
+    public String getImage() {
+        return image;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public void setAbout(String about) {
@@ -52,6 +75,14 @@ public class EmployerModel implements ObjectModel {
 
     public String getAbout() {
         return about;
+    }
+
+    public void setJobs(ArrayList<DocumentReference> jobs) {
+        this.jobs = jobs;
+    }
+
+    public ArrayList<DocumentReference> getJobs() {
+        return jobs;
     }
 
     @Override

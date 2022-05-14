@@ -33,7 +33,7 @@
         <entry key="..\:/Users/chuanshaof/GitHub/HackFest-nftscmers/app/src/main/res/layout/test.xml" value="0.18541666666666667" />
         <entry key="..\:/Users/chuanshaof/GitHub/HackFest-nftscmers/app/src/main/res/layouts/applicantlayouts/layout/activity_applicant_edit_profile 2.xml" value="0.346875" />
         <entry key="..\:/Users/chuanshaof/GitHub/HackFest-nftscmers/app/src/main/res/layouts/applicantlayouts/layout/activity_applicant_edit_profile.xml" value="0.2" />
-        <entry key="..\:/Users/chuanshaof/GitHub/HackFest-nftscmers/app/src/main/res/layouts/applicantlayouts/layout/activity_applicant_profile.xml" value="0.1" />
+        <entry key="..\:/Users/chuanshaof/GitHub/HackFest-nftscmers/app/src/main/res/layouts/applicantlayouts/layout/activity_applicant_profile.xml" value="0.2" />
         <entry key="..\:/Users/chuanshaof/GitHub/HackFest-nftscmers/app/src/main/res/layouts/applicantlayouts/layout/activity_applicant_view_application.xml" value="0.1" />
         <entry key="..\:/Users/chuanshaof/GitHub/HackFest-nftscmers/app/src/main/res/layouts/applicantlayouts/layout/activity_profile.xml" value="0.18541666666666667" />
         <entry key="..\:/Users/chuanshaof/GitHub/HackFest-nftscmers/app/src/main/res/layouts/applicantlayouts/layout/activity_search.xml" value="0.3109375" />
@@ -48,9 +48,9 @@
         <entry key="..\:/Users/chuanshaof/GitHub/HackFest-nftscmers/app/src/main/res/layouts/commonlayouts/layout/dialog_skills_element.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/chuanshaof/GitHub/HackFest-nftscmers/app/src/main/res/layouts/commonlayouts/layout/fragment_skills.xml" value="0.1" />
         <entry key="..\:/Users/chuanshaof/GitHub/HackFest-nftscmers/app/src/main/res/layouts/commonlayouts/layout/skills_element.xml" value="0.176" />
-        <entry key="..\:/Users/chuanshaof/GitHub/HackFest-nftscmers/app/src/main/res/layouts/employerlayouts/layout/activity_employer_create_job.xml" value="0.3109375" />
+        <entry key="..\:/Users/chuanshaof/GitHub/HackFest-nftscmers/app/src/main/res/layouts/employerlayouts/layout/activity_employer_create_job.xml" value="0.2" />
         <entry key="..\:/Users/chuanshaof/GitHub/HackFest-nftscmers/app/src/main/res/layouts/employerlayouts/layout/activity_employer_edit_job.xml" value="0.3109375" />
-        <entry key="..\:/Users/chuanshaof/GitHub/HackFest-nftscmers/app/src/main/res/layouts/employerlayouts/layout/activity_employer_edit_profile.xml" value="0.3109375" />
+        <entry key="..\:/Users/chuanshaof/GitHub/HackFest-nftscmers/app/src/main/res/layouts/employerlayouts/layout/activity_employer_edit_profile.xml" value="0.2" />
         <entry key="..\:/Users/chuanshaof/GitHub/HackFest-nftscmers/app/src/main/res/layouts/employerlayouts/layout/activity_employer_feedback.xml" value="0.3109375" />
         <entry key="..\:/Users/chuanshaof/GitHub/HackFest-nftscmers/app/src/main/res/layouts/employerlayouts/layout/activity_employer_profile.xml" value="0.23125" />
         <entry key="..\:/Users/chuanshaof/GitHub/HackFest-nftscmers/app/src/main/res/layouts/employerlayouts/layout/activity_employer_view_application.xml" value="0.3109375" />

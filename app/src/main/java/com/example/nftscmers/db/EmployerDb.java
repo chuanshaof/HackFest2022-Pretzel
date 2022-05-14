@@ -1,14 +1,18 @@
 package com.example.nftscmers.db;
 
 import android.content.Context;
+import android.net.Uri;
 import android.util.Log;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
 import com.example.nftscmers.R;
 import com.example.nftscmers.objectmodels.EmployerModel;
+import com.example.nftscmers.objectmodels.EmployerModel;
+import com.example.nftscmers.utils.FirebaseStorageReference;
 import com.example.nftscmers.utils.Utils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -24,33 +28,36 @@ public class EmployerDb extends Db {
     private static OnEmployerModel onEmployerModel;
     private static OnEmployerUploadSuccess onEmployerUploadSuccess;
     private static OnEmployerUploadFailure onEmployerUploadFailure;
+    private Context context;
 
     public EmployerDb() {
         super(EmployerModel.getCollectionId());
     }
 
-    public EmployerDb(OnEmployerModel onEmployerModelSuccess) {
+    public EmployerDb(Context context, OnEmployerModel onEmployerModelSuccess) {
         super(EmployerModel.getCollectionId());
         this.onEmployerModel = onEmployerModelSuccess;
+        this.context = context;
     }
 
-    public EmployerDb(EmployerDb.OnEmployerUploadSuccess onEmployerUploadSuccess) {
+    public EmployerDb(Context context, EmployerDb.OnEmployerUploadSuccess onEmployerUploadSuccess) {
         super(EmployerModel.getCollectionId());
         this.onEmployerUploadSuccess = onEmployerUploadSuccess;
+        this.context = context;
     }
 
-    public EmployerDb(EmployerDb.OnEmployerUploadSuccess onEmployerUploadSuccess, EmployerDb.OnEmployerUploadFailure onEmployerUploadFailure) {
+    public EmployerDb(Context context, EmployerDb.OnEmployerUploadSuccess onEmployerUploadSuccess, EmployerDb.OnEmployerUploadFailure onEmployerUploadFailure) {
         super(EmployerModel.getCollectionId());
         this.onEmployerUploadSuccess = onEmployerUploadSuccess;
         this.onEmployerUploadFailure = onEmployerUploadFailure;
+        this.context = context;
     }
 
     /**
      * Get EmployerModel from an email address
-     * @param context a Context object
      * @param email an EditText object containing an email address
      */
-    public void getEmployerModel(Context context, String email) {
+    public void getEmployerModel(String email) {
         if (!Utils.isNetworkAvailable(context)) {
             onEmployerModel.onResult(null);
             return;
@@ -67,23 +74,21 @@ public class EmployerDb extends Db {
 
     /**
      * Get EmployerModel from an email address
-     * @param context a Context object
      * @param email an EditText object containing an email address
      */
-    public void getEmployerModel(Context context, EditText email) {
+    public void getEmployerModel(EditText email) {
         if (Utils.invalidData(email)){
             onEmployerModel.onResult(null);
             return;
         }
-        getEmployerModel(context, email.getText().toString());
+        getEmployerModel(email.getText().toString());
     }
 
     /**
      * Create new account for Employers using only email with no details yet
-     * @param context a Context object
      * @param email an EditText object containing an email address
      */
-    public void newProfile(Context context, EditText email) {
+    public void newProfile(EditText email) {
         if (Utils.invalidData(email)){
             onEmployerUploadFailure.onResult();
             return;
@@ -124,13 +129,73 @@ public class EmployerDb extends Db {
         });
     }
 
+    /**
+     * Push account details to FireStore
+     * @param employerModel an EmployerModel object containing the details of the employer profile
+     */
+    public void updateProfile(EmployerModel employerModel) {
+        if (!Utils.isNetworkAvailable(context)) {
+            onEmployerModel.onResult(null);
+            return;
+        }
+
+        getDocument(employerModel.getEmail()).set(employerModel).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                onEmployerUploadSuccess.onResult();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                onEmployerUploadFailure.onResult();
+            }
+        });
+    }
+
+
+    /**
+     * Push new profile picture to Firebase Storage
+     * @param imageView an ImageView object
+     * @param email a String object indicating the user's email
+     */
+    public void updateProfilePicture(ImageView imageView, String email) {
+        new FirebaseStorageReference() {
+            @Override
+            public void uploadSuccess(String url) {
+                onEmployerUploadSuccess.onResult(url);
+            }
+            @Override
+            public void uploadFailed() {
+                onEmployerUploadFailure.onResult();
+            }
+        }.uploadImage(imageView, EmployerModel.getCollectionId() + "/" + email);
+    }
+
+    /**
+     * Push new profile picture to Firebase Storage
+     * @param uri a Uri object containing the file location
+     * @param email a String object indicating the user's email
+     */
+    public void updateProfilePicture(Uri uri, String email) {
+        new FirebaseStorageReference() {
+            @Override
+            public void uploadSuccess(String url) {
+                onEmployerUploadSuccess.onResult(url);
+            }
+            @Override
+            public void uploadFailed() {
+                onEmployerUploadFailure.onResult();
+            }
+        }.uploadImage(uri, EmployerModel.getCollectionId() + "/" + email);
+    }
 
     public interface OnEmployerModel {
         void onResult(EmployerModel EmployerModel);
     }
 
-    public interface OnEmployerUploadSuccess{
-        void onResult();
+    public abstract static class OnEmployerUploadSuccess{
+        protected void onResult() {}
+        protected void onResult(String string) {}
     }
 
     public interface OnEmployerUploadFailure{

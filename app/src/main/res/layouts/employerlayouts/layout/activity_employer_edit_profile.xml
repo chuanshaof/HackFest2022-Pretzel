@@ -1,6 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_editprofile"
+    android:fillViewport="true"
+    tools:context=".employeractivities.EditProfileActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/employer_edit_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="12dp"
+        android:text="@string/edit_profile"
+        android:textColor="@color/white"
+        android:textSize="23sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/employer_profile_pic"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="72dp"
+        app:srcCompat="@drawable/ic_baseline_person_24" />
+
+    <EditText
+        android:id="@+id/employer_name"
+        android:layout_width="338dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/employer_profile_pic"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/login_bar"
+        android:drawableStart="@drawable/ic_baseline_person_24"
+        android:drawablePadding="20dp"
+        android:ems="10"
+        android:hint="@string/name"
+        android:inputType="textPersonName"
+        android:paddingStart="20dp"
+        android:paddingTop="5dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="5dp" />
+
+    <EditText
+        android:id="@+id/employer_email"
+        android:layout_width="338dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/employer_name"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/login_bar"
+        android:drawableStart="@drawable/ic_baseline_email_24"
+        android:drawablePadding="20dp"
+        android:ems="10"
+        android:focusable="false"
+        android:hint="@string/email"
+        android:paddingStart="20dp"
+        android:paddingTop="5dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="5dp" />
+
+    <EditText
+        android:id="@+id/employer_about"
+        android:layout_width="338dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/employer_email"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/login_bar"
+        android:drawableStart="@drawable/ic_baseline_menu_book_24"
+        android:drawablePadding="20dp"
+        android:ems="10"
+        android:hint="@string/about"
+        android:inputType="textMultiLine"
+        android:paddingStart="20dp"
+        android:paddingTop="5dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="5dp" />
+
+    <EditText
+        android:id="@+id/employer_website"
+        android:layout_width="338dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/employer_about"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/login_bar"
+        android:drawableStart="@drawable/ic_baseline_web_24"
+        android:drawablePadding="20dp"
+        android:ems="10"
+        android:hint="@string/website"
+        android:inputType="textWebEditText"
+        android:paddingStart="20dp"
+        android:paddingTop="5dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="5dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/employer_edit_confirm"
+        android:layout_width="225dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/employer_website"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/white_bg"
+        android:text="@string/confirm"
+        android:textSize="20sp" />
+
+</RelativeLayout>

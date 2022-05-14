@@ -23,11 +23,13 @@ public class ApplicantModel implements ObjectModel {
     private String email;
     private ArrayList<DocumentReference> tags;
     private ArrayList<DocumentReference> skills;
+    private ArrayList<DocumentReference> applications;
 
     private ApplicantModel() {};
 
     public ApplicantModel(String name, String image, String about, String linkedIn, String email,
-                          ArrayList<DocumentReference> tags, ArrayList<DocumentReference> skills) {
+                          ArrayList<DocumentReference> tags, ArrayList<DocumentReference> skills,
+                          ArrayList<DocumentReference> applications) {
         this.name = name;
         this.image = image;
         this.about = about;
@@ -36,6 +38,7 @@ public class ApplicantModel implements ObjectModel {
         this.tags = tags;
         this.skills = skills;
         this.documentId = email;
+        this.applications = applications;
     }
 
     public static String getCollectionId() {
@@ -104,6 +107,14 @@ public class ApplicantModel implements ObjectModel {
 
     public void addSkill(DocumentReference skill) {
         this.skills.add(skill);
+    }
+
+    public void setApplications(ArrayList<DocumentReference> applications) {
+        this.applications = applications;
+    }
+
+    public ArrayList<DocumentReference> getApplications() {
+        return applications;
     }
 
     @Override

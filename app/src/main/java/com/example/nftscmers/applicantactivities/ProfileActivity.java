@@ -15,8 +15,10 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.nftscmers.R;
+import com.example.nftscmers.commonactivities.LoginActivity;
 import com.example.nftscmers.db.ApplicantDb;
 import com.example.nftscmers.fragments.SkillsFragment;
+import com.example.nftscmers.fragments.YesNoDialogFragment;
 import com.example.nftscmers.objectmodels.ApplicantModel;
 import com.example.nftscmers.utils.Globals;
 import com.example.nftscmers.utils.LoggedInUser;
@@ -42,7 +44,6 @@ public class ProfileActivity extends AppCompatActivity {
     TextView about;
     TextView linkedIn;
     Button logout;
-    ListView skills;
 
     ApplicantModel applicant;
 
@@ -58,8 +59,7 @@ public class ProfileActivity extends AppCompatActivity {
         email = findViewById(R.id.applicant_email);
         about = findViewById(R.id.applicant_about);
         linkedIn = findViewById(R.id.applicant_linkedIn);
-
-        LoggedInUser.getInstance().setUser(null, "tester@gmail.com", Globals.APPLICANT);
+        logout = findViewById(R.id.button_logout);
 
         // Loading of previous applicant data
         new ApplicantDb(ProfileActivity.this, new ApplicantDb.OnApplicantModel() {
@@ -84,6 +84,22 @@ public class ProfileActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(ProfileActivity.this, EditProfileActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new YesNoDialogFragment("Confirm Logout?", new YesNoDialogFragment.OnClickListener() {
+                    @Override
+                    public void onResult(boolean bool) {
+                        if (bool == true) {
+                            LoggedInUser.getInstance().setUser(null, null, null);
+                            Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
+                            startActivity(intent);
+                        }
+                    }
+                }).show(getSupportFragmentManager(), TAG);
             }
         });
     }

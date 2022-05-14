@@ -78,6 +78,7 @@ dependencies {
     // https://github.com/ArthurHub/Android-Image-Cropper
     implementation 'com.github.CanHub:Android-Image-Cropper:4.2.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'jp.wasabeef:picasso-transformations:2.4.0'
 
     //cardswipe view
     implementation 'com.lorentzos.swipecards:library:1.0.9'

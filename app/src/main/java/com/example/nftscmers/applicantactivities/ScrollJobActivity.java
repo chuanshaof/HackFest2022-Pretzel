@@ -1,4 +1,4 @@
-package com.example.nftscmers.commonactivities;
+package com.example.nftscmers.applicantactivities;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.nftscmers.R;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,7 +26,7 @@ import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ViewJobActivity extends AppCompatActivity {
+public class ScrollJobActivity extends AppCompatActivity {
 
     private ArrayAdapter<String> arrayAdapter;
     List<String> data;
@@ -63,7 +64,7 @@ public class ViewJobActivity extends AppCompatActivity {
                     }
                 });
 
-        arrayAdapter=new ArrayAdapter<>(ViewJobActivity.this, R.layout.item_in_cardview, R.id.data, data);
+        arrayAdapter=new ArrayAdapter<>(ScrollJobActivity.this, R.layout.item_in_cardview, R.id.data, data);
 
         flingAdapterView.setAdapter(arrayAdapter);
 
@@ -77,13 +78,13 @@ public class ViewJobActivity extends AppCompatActivity {
             @Override
             public void onLeftCardExit(Object o) {
 
-                Toast.makeText(ViewJobActivity.this,"dislike",Toast.LENGTH_SHORT).show();
+                Toast.makeText(ScrollJobActivity.this,"dislike",Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onRightCardExit(Object o) {
 
-                Toast.makeText(ViewJobActivity.this,"like",Toast.LENGTH_SHORT).show();
+                Toast.makeText(ScrollJobActivity.this,"like",Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -100,7 +101,7 @@ public class ViewJobActivity extends AppCompatActivity {
         flingAdapterView.setOnItemClickListener(new SwipeFlingAdapterView.OnItemClickListener() {
             @Override
             public void onItemClicked(int i, Object o) {
-                Toast.makeText(ViewJobActivity.this, "data is "+data.get(i),Toast.LENGTH_SHORT).show();
+                Toast.makeText(ScrollJobActivity.this, "data is "+data.get(i),Toast.LENGTH_SHORT).show();
             }
         });
         Button like,dislike;

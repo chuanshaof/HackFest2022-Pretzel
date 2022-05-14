@@ -147,7 +147,7 @@ public class SignUpActivity extends AppCompatActivity {
                                         }
                                     }).newProfile(email);
                                 } else if (signUpType.equals(Globals.EMPLOYER)) {
-                                    new EmployerDb(new EmployerDb.OnEmployerUploadSuccess() {
+                                    new EmployerDb(SignUpActivity.this, new EmployerDb.OnEmployerUploadSuccess() {
                                         @Override
                                         public void onResult() {
                                             Map<String, Object> account = new HashMap<>();
@@ -172,7 +172,7 @@ public class SignUpActivity extends AppCompatActivity {
                                                 }
                                             });
                                         }
-                                    }).newProfile(SignUpActivity.this, email);
+                                    }).newProfile(email);
                                 } else {
                                     Utils.unexpectedError(SignUpActivity.this, TAG);
                                     signUp.setEnabled(true);

@@ -15,13 +15,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.nftscmers.R;
-import com.example.nftscmers.commonactivities.ViewJobActivity;
 import com.example.nftscmers.db.ApplicantDb;
 import com.example.nftscmers.fragments.CropDialogFragment;
 import com.example.nftscmers.fragments.SkillsDialogFragment;
 import com.example.nftscmers.fragments.SkillsFragment;
 import com.example.nftscmers.objectmodels.ApplicantModel;
-import com.example.nftscmers.utils.Globals;
 import com.example.nftscmers.utils.LoggedInUser;
 import com.example.nftscmers.utils.Utils;
 import com.google.firebase.firestore.DocumentReference;

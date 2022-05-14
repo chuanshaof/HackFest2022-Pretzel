@@ -21,7 +21,7 @@ import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
 import java.util.ArrayList;
 
-public class ViewApplicationActivity extends AppCompatActivity {
+public class ScrollApplicationActivity extends AppCompatActivity {
 
     private ArrayAdapter<String> arrayAdapter;
 
@@ -66,7 +66,7 @@ public class ViewApplicationActivity extends AppCompatActivity {
 
 
 
-        arrayAdapter=new ArrayAdapter<>(ViewApplicationActivity.this, R.layout.item_in_cardview, R.id.data, data);
+        arrayAdapter=new ArrayAdapter<>(ScrollApplicationActivity.this, R.layout.item_in_cardview, R.id.data, data);
 
         flingAdapterView.setAdapter(arrayAdapter);
 
@@ -80,13 +80,13 @@ public class ViewApplicationActivity extends AppCompatActivity {
             @Override
             public void onLeftCardExit(Object o) {
 
-                Toast.makeText(ViewApplicationActivity.this,"dislike",Toast.LENGTH_SHORT).show();
+                Toast.makeText(ScrollApplicationActivity.this,"dislike",Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onRightCardExit(Object o) {
 
-                Toast.makeText(ViewApplicationActivity.this,"like",Toast.LENGTH_SHORT).show();
+                Toast.makeText(ScrollApplicationActivity.this,"like",Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -103,7 +103,7 @@ public class ViewApplicationActivity extends AppCompatActivity {
         flingAdapterView.setOnItemClickListener(new SwipeFlingAdapterView.OnItemClickListener() {
             @Override
             public void onItemClicked(int i, Object o) {
-                Toast.makeText(ViewApplicationActivity.this, "data is "+data.get(i),Toast.LENGTH_SHORT).show();
+                Toast.makeText(ScrollApplicationActivity.this, "data is "+data.get(i),Toast.LENGTH_SHORT).show();
             }
         });
         Button like,dislike;

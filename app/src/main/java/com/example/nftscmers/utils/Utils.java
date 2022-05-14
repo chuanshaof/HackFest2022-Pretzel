@@ -43,6 +43,8 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.UUID;
 
+import jp.wasabeef.picasso.transformations.CropCircleTransformation;
+
 public class Utils {
     private static final String TAG = "UTILS";
 
@@ -70,7 +72,7 @@ public class Utils {
      */
     public static void loadImage(ImageView imageView, String url) {
         if (url != null) {
-            Picasso.get().load(url).into(imageView);
+            Picasso.get().load(url).transform(new CropCircleTransformation()).into(imageView);
         }
     }
 
@@ -174,41 +176,5 @@ public class Utils {
     public static void toastLog(Context context, String TAG, String message){
         Log.i(TAG, message);
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-    }
-
-
-    public static class CircleTransform implements Transformation {
-        @Override
-        public Bitmap transform(Bitmap source) {
-            int size = Math.min(source.getWidth(), source.getHeight());
-
-            int x = (source.getWidth() - size) / 2;
-            int y = (source.getHeight() - size) / 2;
-
-            Bitmap squaredBitmap = Bitmap.createBitmap(source, x, y, size, size);
-            if (squaredBitmap != source) {
-                source.recycle();
-            }
-
-            Bitmap bitmap = Bitmap.createBitmap(size, size, source.getConfig());
-
-            Canvas canvas = new Canvas(bitmap);
-            Paint paint = new Paint();
-            BitmapShader shader = new BitmapShader(squaredBitmap,
-                    Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
-            paint.setShader(shader);
-            paint.setAntiAlias(true);
-
-            float r = size / 2f;
-            canvas.drawCircle(r, r, r, paint);
-
-            squaredBitmap.recycle();
-            return bitmap;
-        }
-
-        @Override
-        public String key() {
-            return "circle";
-        }
     }
 }

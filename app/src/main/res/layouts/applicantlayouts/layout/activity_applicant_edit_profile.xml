@@ -57,8 +57,8 @@
         android:drawableStart="@drawable/ic_baseline_email_24"
         android:drawablePadding="20dp"
         android:ems="10"
-        android:hint="@string/email"
         android:focusable="false"
+        android:hint="@string/email"
         android:paddingStart="20dp"
         android:paddingTop="5dp"
         android:paddingEnd="20dp"
@@ -130,18 +130,6 @@
         android:layout_marginTop="5dp"
         android:layout_marginRight="20dp"
         android:background="@drawable/white_bg" />
-
-
-<!--    <ListView-->
-<!--        android:id="@+id/applicant_skills_list"-->
-<!--        android:layout_width="338dp"-->
-<!--        android:layout_height="220dp"-->
-<!--        android:layout_below="@+id/applicant_skills"-->
-<!--        android:layout_centerHorizontal="true"-->
-<!--        android:layout_marginLeft="20dp"-->
-<!--        android:layout_marginTop="5dp"-->
-<!--        android:layout_marginRight="20dp"-->
-<!--        android:background="@drawable/white_bg" />-->
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/applicant_edit_confirm"

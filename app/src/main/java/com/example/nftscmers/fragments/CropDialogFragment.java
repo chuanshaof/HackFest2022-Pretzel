@@ -80,6 +80,7 @@ public class CropDialogFragment extends DialogFragment {
             CropImageContractOptions options = new CropImageContractOptions(null, new CropImageOptions());
             options.setAspectRatio(1, 1);
             options.setImageSource(false, true);
+            options.setCropShape(CropImageView.CropShape.OVAL);
             cropImage.launch(options);
             Log.i(TAG, "cameraLaunch: Permission allowed, camera launched");
         } else {
