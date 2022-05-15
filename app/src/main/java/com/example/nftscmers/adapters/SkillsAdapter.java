@@ -1,4 +1,4 @@
-package com.example.nftscmers.fragments;
+package com.example.nftscmers.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;

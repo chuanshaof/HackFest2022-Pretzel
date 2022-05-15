@@ -135,7 +135,44 @@ public class ApplicationDb extends Db{
                 onApplicationUploadFailure.onResult();
             }
         });
+    }
 
+    /**
+     * Update feedback of the application
+     * @param status a String object containing the new status of the application
+     * @param uid a String object containing the application ID
+     */
+    public void updateApplicationStatus(String status, String uid) {
+        if (!Utils.isNetworkAvailable(context)) {
+            onApplicationModel.onResult(null);
+            return;
+        }
+
+        updateApplicationStatus(status, getDocument(uid));
+    }
+
+    /**
+     * Update feedback of the application
+     * @param status a String object containing the new status of the application
+     * @param application a DocumentReference referring to the application to be edited
+     */
+    public void updateApplicationStatus(String status, DocumentReference application) {
+        if (!Utils.isNetworkAvailable(context)) {
+            onApplicationModel.onResult(null);
+            return;
+        }
+
+        application.update(ApplicationModel.STATUS, status).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                onApplicationUploadSuccess.onResult();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                onApplicationUploadFailure.onResult();
+            }
+        });
     }
 
 

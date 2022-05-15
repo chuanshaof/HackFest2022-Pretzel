@@ -33,6 +33,7 @@ public class ApplicationModel implements ObjectModel {
     public static final String ACCEPTED = "Accepted";
     public static final String REJECTED = "Rejected";
     public static final String PENDING = "Pending";
+    public static final String STATUS = "status";
 
     @DocumentId
     private String documentId;

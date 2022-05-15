@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.nftscmers.R;
+import com.example.nftscmers.adapters.SkillsAdapter;
 import com.example.nftscmers.db.SkillsDb;
 import com.example.nftscmers.objectmodels.SkillsModel;
 import com.example.nftscmers.utils.LoggedInUser;

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/overlay_item_label"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/application_company"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="4dp"
+        android:layout_marginRight="15dp"
+        android:padding="4dp"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:text="company"/>
+
+    <TextView
+        android:id="@+id/application_position"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="4dp"
+        android:layout_marginRight="15dp"
+        android:padding="4dp"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:text="position"/>
+
+    <TextView
+        android:id="@+id/application_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="4dp"
+        android:layout_marginRight="15dp"
+        android:padding="4dp"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:text="status"/>
+
+</LinearLayout>
