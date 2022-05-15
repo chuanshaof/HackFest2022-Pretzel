@@ -18,7 +18,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.nftscmers.R;
 import com.example.nftscmers.commonactivities.LoginActivity;
-import com.example.nftscmers.commonactivities.ViewHistoryActivity;
 import com.example.nftscmers.db.ApplicantDb;
 import com.example.nftscmers.employeractivities.ScrollApplicationActivity;
 import com.example.nftscmers.fragments.SkillsFragment;
@@ -141,6 +140,7 @@ public class ProfileActivity extends AppCompatActivity {
                     case R.id.home:
                         startActivity(new Intent(getApplicationContext(),ScrollJobActivity.class));
                         overridePendingTransition(0,0);
+                        return true;
                     case R.id.profile:
                         return true;
                 }

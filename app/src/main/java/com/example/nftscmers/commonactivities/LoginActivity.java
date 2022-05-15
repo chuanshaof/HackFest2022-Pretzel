@@ -110,14 +110,14 @@ public class LoginActivity extends AppCompatActivity {
 
                                         Utils.toastLog(LoginActivity.this, TAG, getString(R.string.login_success));
 
-                                        Intent intent = new Intent(LoginActivity.this, ScrollApplicationActivity.class);
+                                        Intent intent = new Intent(LoginActivity.this, ScrollJobActivity.class);
                                         startActivity(intent);
                                     } else if (loginType.equals(Globals.EMPLOYER)) {
                                         LoggedInUser.getInstance().setUser(FirebaseFirestore.getInstance().collection(ApplicantModel.getCollectionId()).document(emailAddress), emailAddress, loginType);
 
                                         Utils.toastLog(LoginActivity.this, TAG, getString(R.string.login_success));
 
-                                        Intent intent = new Intent(LoginActivity.this, ScrollJobActivity.class);
+                                        Intent intent = new Intent(LoginActivity.this, ScrollApplicationActivity.class);
                                         startActivity(intent);
                                     } else {
                                         Utils.unexpectedError(LoginActivity.this, TAG);

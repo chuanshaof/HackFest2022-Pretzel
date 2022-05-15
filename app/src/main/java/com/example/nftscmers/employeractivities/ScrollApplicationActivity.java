@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -17,7 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.nftscmers.R;
 import com.example.nftscmers.adapters.ApplicantAdapter;
-import com.example.nftscmers.applicantactivities.ProfileActivity;
+import com.example.nftscmers.employeractivities.ProfileActivity;
 import com.example.nftscmers.db.ApplicantDb;
 import com.example.nftscmers.fragments.SkillsFragment;
 import com.example.nftscmers.objectmodels.ApplicantModel;
@@ -26,6 +27,7 @@ import com.example.nftscmers.utils.LoggedInUser;
 import com.example.nftscmers.utils.Utils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -63,8 +65,9 @@ public class ScrollApplicationActivity extends AppCompatActivity {
         flingAdapterView=findViewById(R.id.swipe);
 
         ArrayList<Object> item = new ArrayList<>();
-//        item.add("welcome");
 
+        ApplicantAdapter arrayAdapter =new ApplicantAdapter(ScrollApplicationActivity.this, R.layout.item_in_cardview, item);
+        flingAdapterView.setAdapter(arrayAdapter);
 
         //Iterating through list of applicant details in firebase and displaying on card swipe
         db.collection("Applicants")
@@ -83,6 +86,7 @@ public class ScrollApplicationActivity extends AppCompatActivity {
                                 ApplicantModel applicant = applicantModel;
 
                                 item.add(applicant);
+                                arrayAdapter.notifyDataSetChanged();
                             }
                         }).getApplicantModel(document.getReference());
 
@@ -99,8 +103,6 @@ public class ScrollApplicationActivity extends AppCompatActivity {
 
 
         //arrayAdapter=new ArrayAdapter<>(ScrollApplicationActivity.this, R.layout.item_in_cardview, item);
-        ApplicantAdapter arrayAdapter =new ApplicantAdapter(ScrollApplicationActivity.this, R.layout.item_in_cardview, item);
-        flingAdapterView.setAdapter(arrayAdapter);
 
         flingAdapterView.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {
             @Override
@@ -154,6 +156,38 @@ public class ScrollApplicationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 flingAdapterView.getTopCardListener().selectLeft();
+            }
+        });
+
+        // Initialize and assign variable
+        BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation);
+
+        // Set Home selected
+        bottomNavigationView.setSelectedItemId(R.id.home);
+
+        // Perform item selected listener
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Intent intent;
+
+                switch(item.getItemId())
+                {
+                    case R.id.history:
+                        intent = new Intent(ScrollApplicationActivity.this, JobHistoryActivity.class);
+                        startActivity(intent);
+                        overridePendingTransition(0,0);
+                        return true;
+                    case R.id.home:
+                        return true;
+                    case R.id.profile:
+                        intent = new Intent(ScrollApplicationActivity.this, ProfileActivity.class);
+                        intent.putExtra(ProfileActivity.TAG, LoggedInUser.getInstance().getEmail());
+                        startActivity(intent);
+                        overridePendingTransition(0,0);
+                        return true;
+                }
+                return false;
             }
         });
 

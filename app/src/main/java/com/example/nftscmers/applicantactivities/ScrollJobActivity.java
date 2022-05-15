@@ -17,7 +17,6 @@ import com.example.nftscmers.R;
 
 import com.example.nftscmers.adapters.ApplicantAdapter;
 import com.example.nftscmers.adapters.EmployerAdapter;
-import com.example.nftscmers.commonactivities.ViewHistoryActivity;
 import com.example.nftscmers.commonactivities.ViewJobActivity;
 import com.example.nftscmers.db.ApplicantDb;
 import com.example.nftscmers.db.EmployerDb;
@@ -40,7 +39,7 @@ import java.util.List;
 
 public class ScrollJobActivity extends AppCompatActivity {
 
-    private ArrayAdapter<String> arrayAdapter;
+    private EmployerAdapter arrayAdapter;
     SwipeFlingAdapterView flingAdapterView;
 
     FirebaseAuth auth;
@@ -76,52 +75,52 @@ public class ScrollJobActivity extends AppCompatActivity {
                                     }
                                 }).getEmployerModel(document.getReference());
                             }
+                            arrayAdapter=new EmployerAdapter(ScrollJobActivity.this, R.layout.item_in_cardview, data);
+                            EmployerAdapter arrayAdapter =new EmployerAdapter(ScrollJobActivity.this, R.layout.item_in_cardview, data);
+                            flingAdapterView.setAdapter(arrayAdapter);
+
+                            flingAdapterView.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {
+                                @Override
+                                public void removeFirstObjectInAdapter() {
+                                    data.remove(0);
+                                    arrayAdapter.notifyDataSetChanged();
+                                }
+
+                                @Override
+                                public void onLeftCardExit(Object o) {
+
+                                    Toast.makeText(ScrollJobActivity.this,"dislike",Toast.LENGTH_SHORT).show();
+                                }
+
+                                @Override
+                                public void onRightCardExit(Object o) {
+
+                                    Toast.makeText(ScrollJobActivity.this,"like",Toast.LENGTH_SHORT).show();
+                                }
+
+                                @Override
+                                public void onAdapterAboutToEmpty(int i) {
+
+                                }
+
+                                @Override
+                                public void onScroll(float v) {
+
+                                }
+                            });
+
+                            flingAdapterView.setOnItemClickListener(new SwipeFlingAdapterView.OnItemClickListener() {
+                                @Override
+                                public void onItemClicked(int i, Object o) {
+                                    Toast.makeText(ScrollJobActivity.this, "data is "+data.get(i),Toast.LENGTH_SHORT).show();
+                                }
+                            });
                         } else {
                             Log.w(TAG, "Error getting documents.", task.getException());
                         }
                     }
                 });
 
-        arrayAdapter=new ArrayAdapter<>(ScrollJobActivity.this, R.layout.item_in_cardview, R.id.name, data);
-        EmployerAdapter arrayAdapter =new EmployerAdapter(ScrollJobActivity.this, R.layout.item_in_cardview, data);
-        flingAdapterView.setAdapter(arrayAdapter);
-
-        flingAdapterView.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {
-            @Override
-            public void removeFirstObjectInAdapter() {
-                data.remove(0);
-                arrayAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onLeftCardExit(Object o) {
-
-                Toast.makeText(ScrollJobActivity.this,"dislike",Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onRightCardExit(Object o) {
-
-                Toast.makeText(ScrollJobActivity.this,"like",Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onAdapterAboutToEmpty(int i) {
-
-            }
-
-            @Override
-            public void onScroll(float v) {
-
-            }
-        });
-
-        flingAdapterView.setOnItemClickListener(new SwipeFlingAdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClicked(int i, Object o) {
-                Toast.makeText(ScrollJobActivity.this, "data is "+data.get(i),Toast.LENGTH_SHORT).show();
-            }
-        });
         Button like,dislike;
 
         like=findViewById(R.id.like);
@@ -155,12 +154,14 @@ public class ScrollJobActivity extends AppCompatActivity {
                     case R.id.history:
                         startActivity(new Intent(getApplicationContext(), ApplicationHistoryActivity.class));
                         overridePendingTransition(0,0);
+                        Log.i("jon@gma-tings", "go to history");
                         return true;
                     case R.id.home:
                         return true;
                     case R.id.profile:
                         startActivity(new Intent(getApplicationContext(),ProfileActivity.class));
                         overridePendingTransition(0,0);
+                        Log.i("navbar-tings", "go to profile");
                         return true;
                 }
                 return false;
