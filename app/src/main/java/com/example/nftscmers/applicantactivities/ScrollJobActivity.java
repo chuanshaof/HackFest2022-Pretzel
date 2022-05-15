@@ -68,7 +68,7 @@ public class ScrollJobActivity extends AppCompatActivity {
                     }
                 });
 
-        arrayAdapter=new ArrayAdapter<>(ScrollJobActivity.this, R.layout.item_in_cardview, R.id.data, data);
+        arrayAdapter=new ArrayAdapter<>(ScrollJobActivity.this, R.layout.item_in_cardview, R.id.name, data);
 
         flingAdapterView.setAdapter(arrayAdapter);
 

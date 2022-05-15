@@ -16,7 +16,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.nftscmers.R;
+import com.example.nftscmers.fragments.ApplicantAdapter;
 import com.example.nftscmers.objectmodels.ApplicantModel;
+import com.example.nftscmers.objectmodels.TestModel;
 import com.example.nftscmers.utils.Utils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -35,8 +37,11 @@ import java.util.ArrayList;
 
 public class ScrollApplicationActivity extends AppCompatActivity {
 
-    private ArrayAdapter<String> arrayAdapter;
-
+    private ArrayAdapter<Object> arrayAdapter;
+//    ApplicantAdapter arrayAdapter;
+    TextView name;
+    TextView email;
+    ImageView image;
     SwipeFlingAdapterView flingAdapterView;
 
 
@@ -53,10 +58,8 @@ public class ScrollApplicationActivity extends AppCompatActivity {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         flingAdapterView=findViewById(R.id.swipe);
 
-        ArrayList<String> data=new ArrayList<>();
-
-//        data.add("welcome");
-
+        ArrayList<Object> item = new ArrayList<>();
+//        item.add("welcome");
 
 
         //Iterating through list of applicant details in firebase and displaying on card swipe
@@ -69,9 +72,8 @@ public class ScrollApplicationActivity extends AppCompatActivity {
 
                     for (QueryDocumentSnapshot document : task.getResult()) {
 //                        Log.d(TAG, document.getId() + " => " + document.getData());
-                        data.add(document.getString("email") + "\n" + document.getString("about"));
+                        item.add(document.getString("email") + "\n" + document.getString("about") + "\n" + document.get("skills"));
 //                        Utils.loadImage(model.getImage(), thisimage);
-
                     arrayAdapter.notifyDataSetChanged();
                 }} else {
                     Log.w(TAG, "Error getting documents.", task.getException());
@@ -81,18 +83,14 @@ public class ScrollApplicationActivity extends AppCompatActivity {
 
 
 
-
-
-
-
-        arrayAdapter=new ArrayAdapter<>(ScrollApplicationActivity.this, R.layout.item_in_cardview, R.id.data, data);
+        arrayAdapter=new ArrayAdapter<>(ScrollApplicationActivity.this, R.layout.item_in_cardview, R.id.name, item);
 
         flingAdapterView.setAdapter(arrayAdapter);
 
         flingAdapterView.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {
             @Override
             public void removeFirstObjectInAdapter() {
-                data.remove(0);
+                item.remove(0);
                 arrayAdapter.notifyDataSetChanged();
             }
 
@@ -122,7 +120,7 @@ public class ScrollApplicationActivity extends AppCompatActivity {
         flingAdapterView.setOnItemClickListener(new SwipeFlingAdapterView.OnItemClickListener() {
             @Override
             public void onItemClicked(int i, Object o) {
-                Toast.makeText(ScrollApplicationActivity.this, "data is "+data.get(i),Toast.LENGTH_SHORT).show();
+                Toast.makeText(ScrollApplicationActivity.this, "data is "+item.get(i),Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -144,7 +142,12 @@ public class ScrollApplicationActivity extends AppCompatActivity {
             }
         });
 
-    }}
+    }
+
+
+
+
+}
 
 
 

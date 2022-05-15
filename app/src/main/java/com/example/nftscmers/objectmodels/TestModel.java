@@ -5,18 +5,17 @@ import com.google.firebase.firestore.DocumentReference;
 
 import java.util.ArrayList;
 
-public class ApplicantModel implements ObjectModel {
+public class TestModel implements ObjectModel {
     public static final String TAG = "Applicant Model";
     public static final String COLLECTION_ID = "Applicants";
 
     public static final String EMAIL = "email";
-    public static final String APPLICATIONS = "applications";
 
     @DocumentId
     private String documentId;
 
     private String name;
-    private String image;
+    private int image1;
     private String about;
     private String linkedIn;
     private String email;
@@ -24,21 +23,7 @@ public class ApplicantModel implements ObjectModel {
     private ArrayList<DocumentReference> skills;
     private ArrayList<DocumentReference> applications;
 
-    public ApplicantModel() {};
 
-    public ApplicantModel(String name, String image, String about, String linkedIn, String email,
-                          ArrayList<DocumentReference> tags, ArrayList<DocumentReference> skills,
-                          ArrayList<DocumentReference> applications) {
-        this.name = name;
-        this.image = image;
-        this.about = about;
-        this.linkedIn = linkedIn;
-        this.email = email;
-        this.tags = tags;
-        this.skills = skills;
-        this.documentId = email;
-        this.applications = applications;
-    }
 
     public static String getCollectionId() {
         return COLLECTION_ID;
@@ -56,12 +41,12 @@ public class ApplicantModel implements ObjectModel {
         this.name = name;
     }
 
-    public String getImage() {
-        return image;
+    public int getImage1() {
+        return image1;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImage1(int image1) {
+        this.image1 = image1;
     }
 
     public String getAbout() {
@@ -126,3 +111,4 @@ public class ApplicantModel implements ObjectModel {
         this.documentId = documentId;
     }
 }
+
