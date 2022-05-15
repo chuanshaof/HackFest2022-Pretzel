@@ -21,10 +21,17 @@ public class JobHistoryAdapter extends ArrayAdapter<HashMap<String, String>> {
     private final LayoutInflater mInflater;
     private final List<HashMap<String, String>> jobList;
 
-    public JobHistoryAdapter(Context context, int resource, @NonNull ArrayList<HashMap<String, String>> jobList) {
+    OnItemClickListener onItemClickListener;
+
+    public JobHistoryAdapter(Context context, int resource, @NonNull ArrayList<HashMap<String, String>> jobList, OnItemClickListener onItemClickListener) {
         super(context, resource, jobList);
         this.jobList = jobList;
         mInflater = LayoutInflater.from(context);
+        this.onItemClickListener = onItemClickListener;
+    }
+
+    public interface OnItemClickListener {
+        void onResult(int position);
     }
 
     @NonNull
@@ -39,6 +46,13 @@ public class JobHistoryAdapter extends ArrayAdapter<HashMap<String, String>> {
 
         jobPosition.setText(job.get(JobModel.POSITION));
         jobDeadline.setText(job.get(JobModel.DEADLINE));
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onItemClickListener.onResult(position);
+            }
+        });
 
         return view;
     }

@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -45,25 +46,34 @@ public class SkillsDb extends Db {
      * @param skill a String Object
      */
     public void getSkillsModel(String skill) {
+        getSkillsModel(getDocument(skill));
+    }
+
+    /**
+     * Get SkillsModel from skill reference
+     * @param skillReference a DocumentReference
+     */
+    public void getSkillsModel(DocumentReference skillReference) {
         if (!Utils.isNetworkAvailable(context)) {
             onSkillsModel.onResult(null);
             return;
         }
 
-        getDocument(skill).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+        skillReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 SkillsModel skillsModel = documentSnapshot.toObject(SkillsModel.class);
 
                 if (skillsModel == null) {
-                    createNewSkill(skill);
+                    createNewSkill(skillReference.getId());
                 } else {
-                    Log.i(TAG, "onSuccess: " + skill);
+                    Log.i(TAG, "onSuccess: " + skillReference.getId());
                     onSkillsModel.onResult(skillsModel);
                 }
             }
         });
     }
+
 
     /**
      * Get SkillsModel from skill name

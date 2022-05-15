@@ -89,7 +89,10 @@
             android:exported="true">
         </activity>
 
-
+        <activity
+            android:name=".employeractivities.JobHistoryActivity"
+            android:exported="true">
+        </activity>
 
         <activity
             android:name=".commonactivities.FeedbackActivity"

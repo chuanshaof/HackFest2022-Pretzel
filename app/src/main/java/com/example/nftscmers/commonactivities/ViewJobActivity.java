@@ -46,8 +46,7 @@ public class ViewJobActivity extends AppCompatActivity {
         deadline = findViewById(R.id.job_deadline);
         location = findViewById(R.id.job_location);
 
-        // TODO: pass the Job UUID into the intent
-        // Loading of previous job data
+        // Loading of previous job data, pass UUID into the intent
         new JobDb(ViewJobActivity.this, new JobDb.OnJobModel() {
             @Override
             public void onResult(JobModel jobModel) {
@@ -78,10 +77,13 @@ public class ViewJobActivity extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: Link to somewhere else
-                Intent intent = new Intent(ViewJobActivity.this, ViewJobActivity.class);
-                startActivity(intent);
+                finish();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
     }
 }

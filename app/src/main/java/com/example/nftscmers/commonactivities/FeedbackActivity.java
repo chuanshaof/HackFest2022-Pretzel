@@ -25,7 +25,7 @@ import com.google.firebase.firestore.DocumentReference;
 import java.util.ArrayList;
 
 public class FeedbackActivity extends AppCompatActivity {
-    private static final String TAG = "FeedbackActivity";
+    public static final String TAG = "FeedbackActivity";
 
     ImageView backButton;
     TextView feedbackTitle;
@@ -58,33 +58,33 @@ public class FeedbackActivity extends AppCompatActivity {
 
         if (LoggedInUser.getInstance().getAccountType() == Globals.EMPLOYER) {
             Utils.disableButton(backButton);
-            feedbackTitle.setText(getString(R.string.feedback_view));
+            feedbackTitle.setText(getString(R.string.feedback_set));
+            // When user clicks on skills
+            skills.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    new SkillsDialogFragment(application.getFeedbackSkills(), new SkillsDialogFragment.onConfirmListener() {
+                        @Override
+                        public void onResult(ArrayList<DocumentReference> skillsList) {
+                            Log.d(TAG, "onResult: " + skillsList);
+                            application.setFeedbackSkills(skillsList);
+
+                            SkillsFragment skillsFragment = new SkillsFragment(application.getFeedbackSkills());
+                            getSupportFragmentManager().beginTransaction().replace(R.id.feedback_skills_list, skillsFragment).commit();
+                        }
+                    }).show(getSupportFragmentManager(), TAG);
+                }
+            });
         } else {
             Utils.disableButton(submit);
-            feedbackTitle.setText(getString(R.string.feedback_set));
+            feedback.setKeyListener(null);
+            feedbackTitle.setText(getString(R.string.feedback_view));
         }
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
-            }
-        });
-
-        // When user clicks on skills
-        skills.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                new SkillsDialogFragment(application.getFeedbackSkills(), new SkillsDialogFragment.onConfirmListener() {
-                    @Override
-                    public void onResult(ArrayList<DocumentReference> skillsList) {
-                        Log.d(TAG, "onResult: " + skillsList);
-                        application.setFeedbackSkills(skillsList);
-
-                        SkillsFragment skillsFragment = new SkillsFragment(application.getFeedbackSkills());
-                        getSupportFragmentManager().beginTransaction().replace(R.id.feedback_skills_list, skillsFragment).commit();
-                    }
-                }).show(getSupportFragmentManager(), TAG);
             }
         });
 

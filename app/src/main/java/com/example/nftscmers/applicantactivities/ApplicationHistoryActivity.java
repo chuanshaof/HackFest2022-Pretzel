@@ -1,5 +1,6 @@
 package com.example.nftscmers.applicantactivities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
@@ -11,12 +12,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.nftscmers.R;
 import com.example.nftscmers.adapters.ApplicationHistoryAdapter;
+import com.example.nftscmers.commonactivities.FeedbackActivity;
 import com.example.nftscmers.db.ApplicantDb;
 import com.example.nftscmers.db.ApplicationDb;
 import com.example.nftscmers.db.JobDb;
 import com.example.nftscmers.objectmodels.ApplicantModel;
 import com.example.nftscmers.objectmodels.ApplicationModel;
 import com.example.nftscmers.objectmodels.JobModel;
+import com.example.nftscmers.utils.Globals;
 import com.example.nftscmers.utils.LoggedInUser;
 import com.google.firebase.firestore.DocumentReference;
 
@@ -28,6 +31,7 @@ public class ApplicationHistoryActivity extends AppCompatActivity {
 
     ListView applicationListView;
     ArrayList<HashMap<String, String>> applicationDetailsList = new ArrayList<>();
+    ArrayList<DocumentReference> applicationsList;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,15 +40,21 @@ public class ApplicationHistoryActivity extends AppCompatActivity {
 
         applicationListView = findViewById(R.id.application_history_list);
 
-        LoggedInUser.getInstance().setUser(null, "jon@gmail.com", null);
+        ArrayAdapter arrayAdapter = new ApplicationHistoryAdapter(ApplicationHistoryActivity.this, R.layout.item_application_history, applicationDetailsList, new ApplicationHistoryAdapter.OnItemClickListener() {
+            @Override
+            public void onResult(int position) {
+                Intent intent = new Intent(ApplicationHistoryActivity.this, FeedbackActivity.class);
+                intent.putExtra(FeedbackActivity.TAG, applicationsList.get(position).getId());
 
-        ArrayAdapter arrayAdapter = new ApplicationHistoryAdapter(ApplicationHistoryActivity.this, R.layout.item_application_history, applicationDetailsList);
+                startActivityForResult(intent, 0);
+            }
+        });
         applicationListView.setAdapter(arrayAdapter);
 
         new ApplicantDb(ApplicationHistoryActivity.this, new ApplicantDb.OnApplicantModel() {
             @Override
             public void onResult(ApplicantModel applicantModel) {
-                ArrayList<DocumentReference> applicationsList = applicantModel.getApplications();
+                applicationsList = applicantModel.getApplications();
 
                 for (DocumentReference application : applicationsList) {
                     Log.d(TAG, "onResult: " + application.getId());

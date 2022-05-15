@@ -139,7 +139,7 @@ public class ScrollJobActivity extends AppCompatActivity {
                 switch(item.getItemId())
                 {
                     case R.id.history:
-                        startActivity(new Intent(getApplicationContext(), ViewHistoryActivity.class));
+                        startActivity(new Intent(getApplicationContext(), ApplicationHistoryActivity.class));
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.home:
