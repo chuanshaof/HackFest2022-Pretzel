@@ -61,7 +61,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
                 android:text="Giga Chad"
-                android:textColor="#CE93D8"
+                android:textColor="#939ED8"
                 android:textSize="32sp"
                 android:textStyle="bold" />
 
@@ -73,7 +73,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/login_bar"
-                android:backgroundTint="#6DE3ADFF"
+                android:backgroundTint="#6DBED0FF"
                 android:padding="15dp">
 
                 <TextView
@@ -116,7 +116,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/login_bar"
-                android:backgroundTint="#6DE3ADFF"
+                android:backgroundTint="#6DBED0FF"
                 android:padding="15dp">
 
                 <TextView
@@ -159,7 +159,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/login_bar"
-                android:backgroundTint="#6DE3ADFF"
+                android:backgroundTint="#6DBED0FF"
                 android:padding="15dp">
 
                 <TextView
@@ -203,7 +203,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/login_bar"
-                android:backgroundTint="#6DE3ADFF"
+                android:backgroundTint="#6DBED0FF"
                 android:padding="15dp">
 
                 <TextView

@@ -59,10 +59,34 @@
         <entry key="..\:/Users/chuanshaof/GitHub/HackFest-nftscmers/app/src/main/res/layouts/employerlayouts/layout/activity_employer_view_application.xml" value="0.3109375" />
         <entry key="..\:/Users/chuanshaof/GitHub/HackFest-nftscmers/app/src/main/res/layouts/employerlayouts/layout/activity_profile.xml" value="0.18541666666666667" />
         <entry key="..\:/Users/chuanshaof/GitHub/HackFest-nftscmers/app/src/main/res/menu/login_menu.xml" value="0.278125" />
+        <entry key="app/src/main/res/drawable/menu_navigation.xml" value="0.1635" />
+        <entry key="app/src/main/res/drawable/selector.xml" value="0.1635" />
+        <entry key="app/src/main/res/layout/activity_applicant_checks_job_profile.xml" value="0.15416666666666667" />
+        <entry key="app/src/main/res/layout/activity_employer_checks_applicant_profile.xml" value="0.15416666666666667" />
+        <entry key="app/src/main/res/layout/activity_scroll_job.xml" value="0.15416666666666667" />
+        <entry key="app/src/main/res/layout/fragment_skills.xml" value="0.3078125" />
+        <entry key="app/src/main/res/layout/item_in_cardview.xml" value="0.3078125" />
+        <entry key="app/src/main/res/layout/like_dislike_button_bottom.xml" value="0.3078125" />
+        <entry key="app/src/main/res/layouts/applicantlayouts/layout/activity_applicant_edit_profile.xml" value="0.15416666666666667" />
+        <entry key="app/src/main/res/layouts/applicantlayouts/layout/activity_applicant_profile.xml" value="0.15416666666666667" />
+        <entry key="app/src/main/res/layouts/applicantlayouts/layout/activity_search.xml" value="0.15416666666666667" />
+        <entry key="app/src/main/res/layouts/applicantlayouts/layout/activity_view_history.xml" value="0.15416666666666667" />
+        <entry key="app/src/main/res/layouts/commonlayouts/layout/activity_login.xml" value="0.15416666666666667" />
+        <entry key="app/src/main/res/layouts/commonlayouts/layout/activity_main.xml" value="0.15416666666666667" />
+        <entry key="app/src/main/res/layouts/commonlayouts/layout/activity_sign_up.xml" value="0.15416666666666667" />
+        <entry key="app/src/main/res/layouts/commonlayouts/layout/activity_view_job.xml" value="0.25" />
+        <entry key="app/src/main/res/layouts/commonlayouts/layout/dialog_item_skills.xml" value="0.22418478260869565" />
+        <entry key="app/src/main/res/layouts/commonlayouts/layout/dialog_skills.xml" value="0.22418478260869565" />
+        <entry key="app/src/main/res/layouts/employerlayouts/layout/activity_employer_edit_job.xml" value="0.15416666666666667" />
+        <entry key="app/src/main/res/layouts/employerlayouts/layout/activity_employer_edit_profile.xml" value="0.15416666666666667" />
+        <entry key="app/src/main/res/layouts/employerlayouts/layout/activity_employer_feedback.xml" value="0.25" />
+        <entry key="app/src/main/res/layouts/employerlayouts/layout/activity_employer_profile.xml" value="0.15416666666666667" />
+        <entry key="app/src/main/res/layouts/employerlayouts/layout/activity_employer_view_application.xml" value="0.15416666666666667" />
+        <entry key="app/src/main/res/menu/menu_navigation.xml" value="0.15416666666666667" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>

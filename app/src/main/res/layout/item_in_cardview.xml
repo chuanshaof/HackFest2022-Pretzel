@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/idCVCOurseItem"
     android:layout_width="match_parent"
-    android:layout_height="600dp"
+    android:layout_height="500dp"
     android:layout_margin="5dp"
     app:cardCornerRadius="10dp"
     app:cardElevation="20dp">
@@ -15,11 +14,10 @@
         android:orientation="vertical">
 
         <ImageView
+            android:id="@+id/thisimage"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:id="@+id/thisimage"
-            />
+            android:scaleType="centerCrop" />
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -20,6 +20,7 @@ import com.example.nftscmers.fragments.CropDialogFragment;
 import com.example.nftscmers.fragments.SkillsDialogFragment;
 import com.example.nftscmers.fragments.SkillsFragment;
 import com.example.nftscmers.objectmodels.ApplicantModel;
+import com.example.nftscmers.utils.Globals;
 import com.example.nftscmers.utils.LoggedInUser;
 import com.example.nftscmers.utils.Utils;
 import com.google.firebase.firestore.DocumentReference;
@@ -57,6 +58,7 @@ public class EditProfileActivity extends AppCompatActivity {
         Utils.uneditableField(name);
         Utils.uneditableField(email);
 
+        LoggedInUser.getInstance().setUser(null, "jon@gmail.com", Globals.APPLICANT);
         // Loading of previous applicant data
         new ApplicantDb(EditProfileActivity.this, new ApplicantDb.OnApplicantModel() {
             @Override
