@@ -1,6 +1,198 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    android:orientation="vertical"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingBottom="30dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/job_back"
+            android:layout_width="36dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="12dp"
+            android:contentDescription="@string/back_button"
+            app:layout_constraintEnd_toStartOf="@+id/job_title"
+            app:layout_constraintHorizontal_bias="0.245"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/back_button" />
+
+        <TextView
+            android:id="@+id/job_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/job_details"
+            android:textSize="23sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.292" />
+
+        <ImageView
+            android:id="@+id/job_edit"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_baseline_edit_24"
+            tools:ignore="MissingConstraints" />
+
+        <ImageView
+            android:id="@+id/job_picture"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="72dp"
+            app:srcCompat="@drawable/ic_baseline_person_24"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/job_employer"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="72dp"
+            android:text="@string/employer_name"
+            app:srcCompat="@drawable/ic_baseline_person_24"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/job_position"
+            android:layout_width="338dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:autofillHints="Job Available"
+            android:background="@drawable/login_bar"
+            android:drawableStart="@drawable/ic_baseline_person_pin_24"
+            android:drawablePadding="20dp"
+            android:ems="10"
+            android:hint="@string/job_available"
+            android:inputType="text"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            app:layout_constraintEnd_toEndOf="@+id/job_title"
+            app:layout_constraintStart_toStartOf="@+id/job_title"
+            app:layout_constraintTop_toBottomOf="@+id/job_title" />
+
+        <TextView
+            android:id="@+id/job_description"
+            android:layout_width="338dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="20dp"
+            android:autofillHints="Job Description"
+            android:background="@drawable/login_bar"
+            android:drawableStart="@drawable/ic_baseline_job_description_24"
+            android:drawablePadding="20dp"
+            android:ems="10"
+            android:hint="@string/job_description"
+            android:inputType="text"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            app:layout_constraintEnd_toEndOf="@+id/job_position"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/job_position"
+            app:layout_constraintTop_toBottomOf="@+id/job_position" />
+
+        <TextView
+            android:id="@+id/job_deadline"
+            android:layout_width="338dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="28dp"
+            android:autofillHints="Job Sign Up Deadline"
+            android:background="@drawable/login_bar"
+            android:drawableStart="@drawable/ic_baseline_calendar_month_24"
+            android:drawablePadding="20dp"
+            android:ems="10"
+            android:hint="@string/job_deadline"
+            android:focusable="false"
+            android:inputType="text"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            app:layout_constraintEnd_toEndOf="@+id/job_description"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/job_description"
+            app:layout_constraintTop_toBottomOf="@+id/job_description" />
+
+        <TextView
+            android:id="@+id/job_location"
+            android:layout_width="338dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="24dp"
+            android:autofillHints="Location"
+            android:background="@drawable/login_bar"
+            android:drawableStart="@drawable/ic_baseline_add_location_24"
+            android:drawablePadding="20dp"
+            android:ems="10"
+            android:hint="@string/location"
+            android:inputType="text"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            app:layout_constraintEnd_toEndOf="@+id/job_deadline"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/job_deadline"
+            app:layout_constraintTop_toBottomOf="@+id/job_deadline" />
+
+        <TextView
+            android:id="@+id/job_skills"
+            android:layout_width="338dp"
+            android:layout_height="65dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/login_bar"
+            android:drawablePadding="20dp"
+            android:ems="10"
+            android:gravity="center_vertical"
+            android:hint="@string/skills_required"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:textSize="18sp"
+            app:drawableStartCompat="@drawable/ic_baseline_highlight_24"
+            app:layout_constraintEnd_toEndOf="@+id/job_location"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/job_location"
+            app:layout_constraintTop_toBottomOf="@+id/job_location" />
+
+        <FrameLayout
+            android:id="@+id/job_skills_list"
+            android:layout_width="338dp"
+            android:layout_height="220dp"
+            android:layout_below="@+id/job_skills"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/white_bg"
+            app:layout_constraintEnd_toEndOf="@+id/job_skills"
+            app:layout_constraintStart_toStartOf="@+id/job_skills"
+            app:layout_constraintTop_toBottomOf="@+id/job_skills"/>
+
+
+        <Button
+            android:id="@+id/job_confirm"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="28dp"
+            android:background="@drawable/sign_in_bar"
+            android:text="@string/confirm"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="@+id/job_skills_list"
+            app:layout_constraintStart_toStartOf="@+id/job_skills_list"
+            app:layout_constraintTop_toBottomOf="@+id/job_skills_list" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

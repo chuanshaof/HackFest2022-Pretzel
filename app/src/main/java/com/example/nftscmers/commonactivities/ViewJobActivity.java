@@ -1,125 +1,169 @@
 package com.example.nftscmers.commonactivities;
 
+import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.Toast;
+import android.widget.DatePicker;
+import android.widget.TextView;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.nftscmers.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-import com.lorentzos.flingswipe.SwipeFlingAdapterView;
+import com.example.nftscmers.commonactivities.ViewJobActivity;
+import com.example.nftscmers.db.EmployerDb;
+import com.example.nftscmers.db.JobDb;
+import com.example.nftscmers.fragments.DatePickerDialogFragment;
+import com.example.nftscmers.fragments.SkillsDialogFragment;
+import com.example.nftscmers.fragments.SkillsFragment;
+import com.example.nftscmers.objectmodels.JobModel;
+import com.example.nftscmers.utils.Globals;
+import com.example.nftscmers.utils.LoggedInUser;
+import com.example.nftscmers.utils.Utils;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.ktx.Firebase;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Calendar;
+import java.util.Date;
+
+import kotlinx.coroutines.Job;
 
 public class ViewJobActivity extends AppCompatActivity {
+    public static final String TAG = "View Job";
 
-    private ArrayAdapter<String> arrayAdapter;
-    List<String> data;
-    SwipeFlingAdapterView flingAdapterView;
+    ImageView backButton;
+    ImageView edit;
+    TextView employer;
+    TextView position;
+    TextView description;
+    TextView deadline;
+    TextView location;
+    TextView skills;
+    Button confirm;
 
-    FirebaseAuth auth;
-    FirebaseUser user;
-    DatabaseReference reference;
-    public static final String TAG = "YOUR-TAG-NAME";
+    JobModel job;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.like_dislike_button_bottom);
+        setContentView(R.layout.activity_view_job);
 
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        flingAdapterView=findViewById(R.id.swipe);
-        data=new ArrayList<>();
-        data.add("1");
+        backButton = findViewById(R.id.job_back);
+        edit = findViewById(R.id.job_edit);
+        employer = findViewById(R.id.employer_name);
+        position = findViewById(R.id.job_position);
+        description = findViewById(R.id.job_description);
+        deadline = findViewById(R.id.job_deadline);
+        location = findViewById(R.id.job_location);
+        skills = findViewById(R.id.job_skills);
+        confirm = findViewById(R.id.job_confirm);
 
-        db.collection("Employers")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        // TODO: pass the Job UUID into the intent
+        if (getIntent().getStringExtra(ViewJobActivity.TAG) != null) {
+            // Loading of previous job data
+            new JobDb(ViewJobActivity.this, new JobDb.OnJobModel() {
+                @Override
+                public void onResult(JobModel jobModel) {
+                    Log.d(TAG, "onResult: " + jobModel);
+                    job = jobModel;
+
+                    Utils.setValid(position, job.getEmployer());
+
+                    Utils.setValid(position, job.getPosition());
+                    Utils.setValid(description, job.getDescription());
+
+                    Utils.setValid(deadline, Globals.DATEFORMAT.format(job.getDeadline()));
+                    Utils.setValid(location, job.getLocation());
+
+                    position.setEnabled(false);
+                    Utils.uneditableField(position);
+
+                    SkillsFragment skillsFragment = new SkillsFragment(job.getSkills());
+                    getSupportFragmentManager().beginTransaction().replace(R.id.applicant_skills_list, skillsFragment).commit();
+
+                    // Remove edit button if user viewing is not the employer
+                    if (!LoggedInUser.getInstance().getUserDocRef().equals(job.getEmployer())) {
+                        edit.setEnabled(false);
+                        edit.setClickable(false);
+                        edit.setVisibility(View.GONE);
+                    }
+                }
+            }).getJobModel(getIntent().getStringExtra(ViewJobActivity.TAG));
+        } else {
+            LoggedInUser.getInstance().setUser(new EmployerDb().getDocument("employer@gmail.com"), "employer@gmail.com", Globals.EMPLOYER);
+            job = new JobModel(LoggedInUser.getInstance().getUserDocRef());
+        }
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ViewJobActivity.this, ViewJobActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        deadline.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new DatePickerDialogFragment(new DatePickerDialogFragment.OnDateSetListener() {
                     @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
+                    public void onResult(Calendar calendar) {
+                        deadlineCalendar = calendar;
+                        Utils.setValid(deadline, Globals.DATEFORMAT.format(calendar.getTime()));
+                    }
+                }).setMinDate(Calendar.getInstance()).show(getSupportFragmentManager(), TAG);
+            }
+        });
 
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-//                        Log.d(TAG, document.getId() + " => " + document.getData());
-                                data.add(document.getId() + document.getData());
-                            }
-                        } else {
-                            Log.w(TAG, "Error getting documents.", task.getException());
-                        }
+        skills.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new SkillsDialogFragment(job.getSkills(), new SkillsDialogFragment.onConfirmListener() {
+                    @Override
+                    public void onResult(ArrayList<DocumentReference> skillsList) {
+                        Log.d(TAG, "onResult: " + skillsList);
+                        job.setSkills(skillsList);
+
+                        SkillsFragment skillsFragment = new SkillsFragment(job.getSkills());
+                        getSupportFragmentManager().beginTransaction().replace(R.id.job_skills_list, skillsFragment).commit();
+                    }
+                }).show(getSupportFragmentManager(), TAG);
+            }
+        });
+
+        confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (Utils.invalidData(position, deadline, description)) {
+                    return;
+                }
+
+                JobDb jobDb = new JobDb(ViewJobActivity.this, new JobDb.OnJobUploadSuccess() {
+                    @Override
+                    public void onResult() {
+                        Intent intent = new Intent(ViewJobActivity.this, ViewJobActivity.class);
+                        startActivity(intent);
                     }
                 });
 
-        arrayAdapter=new ArrayAdapter<>(ViewJobActivity.this, R.layout.item_in_cardview, R.id.data, data);
+                job.setDeadline(deadlineCalendar.getTime());
+                job.setLocation(location.getText().toString());
+                job.setDescription(description.getText().toString());
+                job.setPosition(position.getText().toString());
 
-        flingAdapterView.setAdapter(arrayAdapter);
-
-        flingAdapterView.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {
-            @Override
-            public void removeFirstObjectInAdapter() {
-                data.remove(0);
-                arrayAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onLeftCardExit(Object o) {
-
-                Toast.makeText(ViewJobActivity.this,"dislike",Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onRightCardExit(Object o) {
-
-                Toast.makeText(ViewJobActivity.this,"like",Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onAdapterAboutToEmpty(int i) {
-
-            }
-
-            @Override
-            public void onScroll(float v) {
-
-            }
-        });
-
-        flingAdapterView.setOnItemClickListener(new SwipeFlingAdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClicked(int i, Object o) {
-                Toast.makeText(ViewJobActivity.this, "data is "+data.get(i),Toast.LENGTH_SHORT).show();
-            }
-        });
-        Button like,dislike;
-
-        like=findViewById(R.id.like);
-        dislike=findViewById(R.id.dislike);
-        like.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                flingAdapterView.getTopCardListener().selectRight();
-            }
-        });
-        dislike.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                flingAdapterView.getTopCardListener().selectLeft();
+                // Handling if it is an existing job or new job
+                if (job.getDocumentId() == null) {
+                    jobDb.createJob(job);
+                } else {
+                    jobDb.updateJob(job);
+                }
             }
         });
     }
-
-
 }

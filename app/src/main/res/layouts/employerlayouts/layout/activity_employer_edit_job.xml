@@ -23,14 +23,14 @@
             android:layout_height="30dp"
             android:layout_marginTop="12dp"
             android:contentDescription="@string/back_button"
-            app:layout_constraintEnd_toStartOf="@+id/job_details"
+            app:layout_constraintEnd_toStartOf="@+id/job_title"
             app:layout_constraintHorizontal_bias="0.245"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/back_button" />
 
         <TextView
-            android:id="@+id/job_details"
+            android:id="@+id/job_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -57,9 +57,9 @@
             android:inputType="text"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
-            app:layout_constraintEnd_toEndOf="@+id/job_details"
-            app:layout_constraintStart_toStartOf="@+id/job_details"
-            app:layout_constraintTop_toBottomOf="@+id/job_details" />
+            app:layout_constraintEnd_toEndOf="@+id/job_title"
+            app:layout_constraintStart_toStartOf="@+id/job_title"
+            app:layout_constraintTop_toBottomOf="@+id/job_title" />
 
         <EditText
             android:id="@+id/edit_job_description"

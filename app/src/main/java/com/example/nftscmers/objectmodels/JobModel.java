@@ -3,7 +3,6 @@ package com.example.nftscmers.objectmodels;
 import com.google.firebase.firestore.DocumentId;
 import com.google.firebase.firestore.DocumentReference;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Date;
 
