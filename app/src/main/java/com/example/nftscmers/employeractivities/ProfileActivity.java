@@ -61,9 +61,6 @@ public class ProfileActivity extends AppCompatActivity {
         linkedIn = findViewById(R.id.employer_linkedIn);
         logout = findViewById(R.id.button_logout);
 
-
-        LoggedInUser.getInstance().setUser(null, "employer@gmail.com", Globals.EMPLOYER);
-
         // Loading of previous employer data
         new EmployerDb(ProfileActivity.this, new EmployerDb.OnEmployerModel() {
             @Override

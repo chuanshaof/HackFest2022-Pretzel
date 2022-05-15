@@ -12,6 +12,7 @@ public class ApplicantModel implements ObjectModel {
     public static final String COLLECTION_ID = "Applicants";
 
     public static final String EMAIL = "email";
+    public static final String NAME = "name";
 
     @DocumentId
     private String documentId;

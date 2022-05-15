@@ -45,6 +45,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
         confirm = findViewById(R.id.employer_edit_confirm);
 
+        Utils.uneditableField(name);
         Utils.uneditableField(email);
 
         // Loading of previous employer data

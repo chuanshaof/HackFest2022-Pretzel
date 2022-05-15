@@ -88,23 +88,32 @@ public class JobDb extends Db {
      * Push a job onto FireStore
      * @param jobModel a JobModel object containing the details of the job
      */
-    public void createJob(JobModel jobModel) {
+    public void createJob(JobModel jobModel, DocumentReference employer) {
         if (!Utils.isNetworkAvailable(context)) {
             Toast.makeText(context, R.string.network_missing, Toast.LENGTH_SHORT).show();
             onJobModel.onResult(null);
             return;
         }
 
-        DocumentReference job = getDocument(UUID.randomUUID().toString());
-        job.set(jobModel).addOnSuccessListener(new OnSuccessListener<Void>() {
+        employer.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
-            public void onSuccess(Void unused) {
-                new EmployerDb(context, new EmployerDb.OnEmployerUploadSuccess() {
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                EmployerModel employerModel = documentSnapshot.toObject(EmployerModel.class);
+                jobModel.setEmployerName(employerModel.getName());
+                jobModel.setEmployerPic(employerModel.getImage());
+
+                DocumentReference job = getDocument(UUID.randomUUID().toString());
+                job.set(jobModel).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
-                    protected void onResult() {
-                        onJobUploadSuccess.onResult();
+                    public void onSuccess(Void unused) {
+                        new EmployerDb(context, new EmployerDb.OnEmployerUploadSuccess() {
+                            @Override
+                            protected void onResult() {
+                                onJobUploadSuccess.onResult();
+                            }
+                        }).updateJob(job, jobModel.getEmployer());
                     }
-                }).updateJob(job, jobModel.getEmployer());
+                });
             }
         });
     }

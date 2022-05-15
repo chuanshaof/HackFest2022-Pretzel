@@ -54,6 +54,7 @@ public class EditProfileActivity extends AppCompatActivity {
         skills = findViewById(R.id.applicant_skills);
         confirm = findViewById(R.id.applicant_edit_confirm);
 
+        Utils.uneditableField(name);
         Utils.uneditableField(email);
 
         // Loading of previous applicant data

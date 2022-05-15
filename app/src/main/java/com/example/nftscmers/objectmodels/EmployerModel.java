@@ -11,6 +11,7 @@ public class EmployerModel implements ObjectModel {
 
     public static final String EMAIL = "email";
     public static final String JOBS = "jobs";
+    public static final String NAME = "name";
 
     @DocumentId
     private String documentId;

@@ -21,11 +21,13 @@ import com.example.nftscmers.db.JobDb;
 import com.example.nftscmers.fragments.DatePickerDialogFragment;
 import com.example.nftscmers.fragments.SkillsDialogFragment;
 import com.example.nftscmers.fragments.SkillsFragment;
+import com.example.nftscmers.objectmodels.EmployerModel;
 import com.example.nftscmers.objectmodels.JobModel;
 import com.example.nftscmers.utils.Globals;
 import com.example.nftscmers.utils.LoggedInUser;
 import com.example.nftscmers.utils.Utils;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.ktx.Firebase;
 
 import java.util.ArrayList;
@@ -40,11 +42,11 @@ public class ViewJobActivity extends AppCompatActivity {
     ImageView backButton;
     ImageView edit;
     TextView employer;
+    ImageView employerPic;
     TextView position;
     TextView description;
     TextView deadline;
     TextView location;
-    TextView skills;
     Button confirm;
 
     JobModel job;
@@ -56,49 +58,47 @@ public class ViewJobActivity extends AppCompatActivity {
 
         backButton = findViewById(R.id.job_back);
         edit = findViewById(R.id.job_edit);
-        employer = findViewById(R.id.employer_name);
+        employer = findViewById(R.id.job_employer);
+        employerPic = findViewById(R.id.job_picture);
         position = findViewById(R.id.job_position);
         description = findViewById(R.id.job_description);
         deadline = findViewById(R.id.job_deadline);
         location = findViewById(R.id.job_location);
-        skills = findViewById(R.id.job_skills);
         confirm = findViewById(R.id.job_confirm);
 
+        LoggedInUser.getInstance().setUser(FirebaseFirestore.getInstance().collection(EmployerModel.getCollectionId()).document("employer@gmail.com"), "employer@gmail.com", Globals.EMPLOYER);
+
         // TODO: pass the Job UUID into the intent
-        if (getIntent().getStringExtra(ViewJobActivity.TAG) != null) {
-            // Loading of previous job data
-            new JobDb(ViewJobActivity.this, new JobDb.OnJobModel() {
-                @Override
-                public void onResult(JobModel jobModel) {
-                    Log.d(TAG, "onResult: " + jobModel);
-                    job = jobModel;
+        // Loading of previous job data
+        new JobDb(ViewJobActivity.this, new JobDb.OnJobModel() {
+            @Override
+            public void onResult(JobModel jobModel) {
+                Log.d(TAG, "onResult: " + jobModel);
+                job = jobModel;
 
-                    Utils.setValid(position, job.getEmployer());
+                Utils.loadImage(employerPic, job.getEmployerPic());
+                Utils.setValid(employer, job.getEmployerName());
+                Utils.setValid(position, job.getPosition());
+                Utils.setValid(description, job.getDescription());
 
-                    Utils.setValid(position, job.getPosition());
-                    Utils.setValid(description, job.getDescription());
+                Utils.setValid(deadline, Globals.DATEFORMAT.format(job.getDeadline()));
+                Utils.setValid(location, job.getLocation());
 
-                    Utils.setValid(deadline, Globals.DATEFORMAT.format(job.getDeadline()));
-                    Utils.setValid(location, job.getLocation());
+                position.setEnabled(false);
+                Utils.uneditableField(position);
 
-                    position.setEnabled(false);
-                    Utils.uneditableField(position);
+//                SkillsFragment skillsFragment = new SkillsFragment(job.getSkills());
+//                getSupportFragmentManager().beginTransaction().replace(R.id.applicant_skills_list, skillsFragment).commit();
 
-                    SkillsFragment skillsFragment = new SkillsFragment(job.getSkills());
-                    getSupportFragmentManager().beginTransaction().replace(R.id.applicant_skills_list, skillsFragment).commit();
-
-                    // Remove edit button if user viewing is not the employer
-                    if (!LoggedInUser.getInstance().getUserDocRef().equals(job.getEmployer())) {
-                        edit.setEnabled(false);
-                        edit.setClickable(false);
-                        edit.setVisibility(View.GONE);
-                    }
+                // Remove edit button if user viewing is not the employer
+                if (!LoggedInUser.getInstance().getUserDocRef().equals(job.getEmployer())) {
+                    edit.setEnabled(false);
+                    edit.setClickable(false);
+                    edit.setVisibility(View.GONE);
                 }
-            }).getJobModel(getIntent().getStringExtra(ViewJobActivity.TAG));
-        } else {
-            LoggedInUser.getInstance().setUser(new EmployerDb().getDocument("employer@gmail.com"), "employer@gmail.com", Globals.EMPLOYER);
-            job = new JobModel(LoggedInUser.getInstance().getUserDocRef());
-        }
+            }
+        }).getJobModel("f27a560d-77fe-4c06-a416-a632055197db");
+        //getJobModel(getIntent().getStringExtra(ViewJobActivity.TAG));
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,62 +108,42 @@ public class ViewJobActivity extends AppCompatActivity {
             }
         });
 
-        deadline.setOnClickListener(new View.OnClickListener() {
+        backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new DatePickerDialogFragment(new DatePickerDialogFragment.OnDateSetListener() {
-                    @Override
-                    public void onResult(Calendar calendar) {
-                        deadlineCalendar = calendar;
-                        Utils.setValid(deadline, Globals.DATEFORMAT.format(calendar.getTime()));
-                    }
-                }).setMinDate(Calendar.getInstance()).show(getSupportFragmentManager(), TAG);
+                // TODO: Link to somewhere else
+                Intent intent = new Intent(ViewJobActivity.this, ViewJobActivity.class);
+                startActivity(intent);
             }
         });
 
-        skills.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                new SkillsDialogFragment(job.getSkills(), new SkillsDialogFragment.onConfirmListener() {
-                    @Override
-                    public void onResult(ArrayList<DocumentReference> skillsList) {
-                        Log.d(TAG, "onResult: " + skillsList);
-                        job.setSkills(skillsList);
-
-                        SkillsFragment skillsFragment = new SkillsFragment(job.getSkills());
-                        getSupportFragmentManager().beginTransaction().replace(R.id.job_skills_list, skillsFragment).commit();
-                    }
-                }).show(getSupportFragmentManager(), TAG);
-            }
-        });
-
-        confirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (Utils.invalidData(position, deadline, description)) {
-                    return;
-                }
-
-                JobDb jobDb = new JobDb(ViewJobActivity.this, new JobDb.OnJobUploadSuccess() {
-                    @Override
-                    public void onResult() {
-                        Intent intent = new Intent(ViewJobActivity.this, ViewJobActivity.class);
-                        startActivity(intent);
-                    }
-                });
-
-                job.setDeadline(deadlineCalendar.getTime());
-                job.setLocation(location.getText().toString());
-                job.setDescription(description.getText().toString());
-                job.setPosition(position.getText().toString());
-
-                // Handling if it is an existing job or new job
-                if (job.getDocumentId() == null) {
-                    jobDb.createJob(job);
-                } else {
-                    jobDb.updateJob(job);
-                }
-            }
-        });
+//        confirm.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if (Utils.invalidData(position, deadline, description)) {
+//                    return;
+//                }
+//
+//                JobDb jobDb = new JobDb(ViewJobActivity.this, new JobDb.OnJobUploadSuccess() {
+//                    @Override
+//                    public void onResult() {
+//                        Intent intent = new Intent(ViewJobActivity.this, ViewJobActivity.class);
+//                        startActivity(intent);
+//                    }
+//                });
+//
+//                job.setDeadline(deadlineCalendar.getTime());
+//                job.setLocation(location.getText().toString());
+//                job.setDescription(description.getText().toString());
+//                job.setPosition(position.getText().toString());
+//
+//                // Handling if it is an existing job or new job
+//                if (job.getDocumentId() == null) {
+//                    jobDb.createJob(job);
+//                } else {
+//                    jobDb.updateJob(job);
+//                }
+//            }
+//        });
     }
 }

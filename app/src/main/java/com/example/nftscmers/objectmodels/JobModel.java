@@ -14,6 +14,8 @@ public class JobModel implements ObjectModel {
     private String documentId;
 
     private DocumentReference employer;
+    private String employerName;
+    private String employerPic;
     private String position;
     private String description;
     private Date deadline;
@@ -29,10 +31,13 @@ public class JobModel implements ObjectModel {
         this.employer = employer;
     }
 
-    public JobModel(DocumentReference employer, String position, String description, Date deadline,
-                    String location, ArrayList<DocumentReference> skills, ArrayList<DocumentReference> tags,
-                    ArrayList<DocumentReference> accepted, ArrayList<DocumentReference> pending) {
+    public JobModel(DocumentReference employer, String employerName, String employerPic, String position,
+                    String description, Date deadline, String location, ArrayList<DocumentReference> skills,
+                    ArrayList<DocumentReference> tags, ArrayList<DocumentReference> accepted,
+                    ArrayList<DocumentReference> pending) {
         this.employer = employer;
+        this.employerName = employerName;
+        this.employerPic = employerPic;
         this.position = position;
         this.description = description;
         this.deadline = deadline;
@@ -53,6 +58,22 @@ public class JobModel implements ObjectModel {
 
     public DocumentReference getEmployer() {
         return employer;
+    }
+
+    public String getEmployerName() {
+        return employerName;
+    }
+
+    public void setEmployerName(String employerName) {
+        this.employerName = employerName;
+    }
+
+    public String getEmployerPic() {
+        return employerPic;
+    }
+
+    public void setEmployerPic(String employerPic) {
+        this.employerPic = employerPic;
     }
 
     public String getPosition() {

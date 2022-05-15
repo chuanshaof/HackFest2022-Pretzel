@@ -11,6 +11,7 @@ public class LoggedInUser {
     DocumentReference documentReference;
     String accountType;
     String email;
+    String name;
 
     public static LoggedInUser getInstance() {
         if (ourInstance == null)
@@ -33,5 +34,13 @@ public class LoggedInUser {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getAccountType() {
+        return accountType;
     }
 }

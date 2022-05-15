@@ -84,7 +84,6 @@ public class EditJobActivity extends AppCompatActivity {
                 }
             }).getJobModel(getIntent().getStringExtra(ViewJobActivity.TAG));
         } else {
-            LoggedInUser.getInstance().setUser(new EmployerDb().getDocument("employer@gmail.com"), "employer@gmail.com", Globals.EMPLOYER);
             job = new JobModel(LoggedInUser.getInstance().getUserDocRef());
         }
 
@@ -147,7 +146,7 @@ public class EditJobActivity extends AppCompatActivity {
 
                 // Handling if it is an existing job or new job
                 if (job.getDocumentId() == null) {
-                    jobDb.createJob(job);
+                    jobDb.createJob(job, LoggedInUser.getInstance().getUserDocRef());
                 } else {
                     jobDb.updateJob(job);
                 }

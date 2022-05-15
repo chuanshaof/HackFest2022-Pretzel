@@ -5,12 +5,10 @@ import android.net.Uri;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
 import com.example.nftscmers.R;
-import com.example.nftscmers.objectmodels.EmployerModel;
 import com.example.nftscmers.objectmodels.EmployerModel;
 import com.example.nftscmers.utils.FirebaseStorageReference;
 import com.example.nftscmers.utils.Utils;
@@ -68,8 +66,8 @@ public class EmployerDb extends Db {
         getDocument(email).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                EmployerModel EmployerModel = documentSnapshot.toObject(EmployerModel.class);
-                onEmployerModel.onResult(EmployerModel);
+                EmployerModel employerModel = documentSnapshot.toObject(EmployerModel.class);
+                onEmployerModel.onResult(employerModel);
             }
         });
     }
@@ -206,6 +204,20 @@ public class EmployerDb extends Db {
             @Override
             public void onFailure(@NonNull Exception e) {
                 onEmployerUploadFailure.onResult();
+            }
+        });
+    }
+
+    /**
+     * Update the job field of an employer
+     * @param employer a DocumentReference object indicating the employer
+     */
+    public void getEmployerName(DocumentReference employer) {
+        employer.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                EmployerModel employerModel = documentSnapshot.toObject(EmployerModel.class);
+                onEmployerUploadSuccess.onResult(employerModel.getName());
             }
         });
     }
