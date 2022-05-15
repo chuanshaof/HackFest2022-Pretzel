@@ -85,7 +85,7 @@ public class EditProfileActivity extends AppCompatActivity {
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (Utils.invalidData(name, about)) {
+                if (Utils.invalidData(name, about) || employer.getImage() == null) {
                     return;
                 }
 

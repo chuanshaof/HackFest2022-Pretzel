@@ -20,6 +20,7 @@ import androidx.annotation.NonNull;
 
 import com.example.nftscmers.R;
 import com.example.nftscmers.objectmodels.ApplicantModel;
+import com.example.nftscmers.objectmodels.EmployerModel;
 import com.example.nftscmers.objectmodels.TestModel;
 import com.example.nftscmers.utils.Utils;
 import com.google.firebase.firestore.DocumentReference;
@@ -27,29 +28,30 @@ import com.google.firebase.firestore.DocumentReference;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ApplicantAdapter extends ArrayAdapter {
+public class EmployerAdapter extends ArrayAdapter {
     public static final String TAG = "YOUR-TAG-NAME";
-    ArrayList<Object> applicants_list;
+    ArrayList<Object> employer_list;
     public Activity context;
     public LayoutInflater inflater;
 
-    public ApplicantAdapter(Activity context, int resource, ArrayList<Object> applicants_list) {
-        super(context, resource, applicants_list);
+    public EmployerAdapter(Activity context, int resource, ArrayList<Object> employer_list) {
+        super(context, resource, employer_list);
 
-        this.applicants_list = applicants_list;
+        this.employer_list = employer_list;
         this.context = context;
         this.inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
+
     @Override
     public int getCount() {
-        return applicants_list.size();
+        return employer_list.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return applicants_list.get(position);
+        return employer_list.get(position);
     }
 
     @Override
@@ -63,13 +65,13 @@ public class ApplicantAdapter extends ArrayAdapter {
         View view = inflater.inflate(R.layout.item_in_cardview, parent, false);
         TextView nameView = view.findViewById(R.id.name);
         ImageView imageView = view.findViewById(R.id.thisimage);
-        ApplicantModel applicant = (ApplicantModel) applicants_list.get(position);
+        EmployerModel employer = (EmployerModel) employer_list.get(position);
 
 
-        nameView.setText(applicant.getName());
-        Utils.loadImage(imageView, applicant.getImage());
-        Log.i("applicant data", applicant.getName());
-        Log.i("applicant data", applicant.getImage());
+        nameView.setText(employer.getName());
+        Utils.loadImage(imageView, employer.getImage());
+        Log.i("applicant data", employer.getName());
+        Log.i("applicant data", employer.getImage());
 
 
         return view;

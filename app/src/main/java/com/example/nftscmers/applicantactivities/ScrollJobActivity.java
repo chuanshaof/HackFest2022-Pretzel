@@ -15,7 +15,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.nftscmers.R;
 
+import com.example.nftscmers.adapters.ApplicantAdapter;
+import com.example.nftscmers.adapters.EmployerAdapter;
+import com.example.nftscmers.commonactivities.ViewHistoryActivity;
 import com.example.nftscmers.commonactivities.ViewJobActivity;
+import com.example.nftscmers.db.ApplicantDb;
+import com.example.nftscmers.db.EmployerDb;
+import com.example.nftscmers.employeractivities.ScrollApplicationActivity;
+import com.example.nftscmers.objectmodels.ApplicantModel;
+import com.example.nftscmers.objectmodels.EmployerModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -33,7 +41,6 @@ import java.util.List;
 public class ScrollJobActivity extends AppCompatActivity {
 
     private ArrayAdapter<String> arrayAdapter;
-    List<String> data;
     SwipeFlingAdapterView flingAdapterView;
 
     FirebaseAuth auth;
@@ -48,8 +55,7 @@ public class ScrollJobActivity extends AppCompatActivity {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         flingAdapterView=findViewById(R.id.swipe);
-        data=new ArrayList<>();
-        data.add("1");
+        ArrayList data=new ArrayList<>();
 
         db.collection("Employers")
                 .get()
@@ -59,8 +65,16 @@ public class ScrollJobActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
 
                             for (QueryDocumentSnapshot document : task.getResult()) {
-//                        Log.d(TAG, document.getId() + " => " + document.getData());
-                                data.add(document.getId() + document.getData());
+                                // Loading oaf previous applicant data
+                                new EmployerDb(ScrollJobActivity.this, new EmployerDb.OnEmployerModel() {
+                                    @Override
+                                    public void onResult(EmployerModel employerModel) {
+                                        Log.d(TAG, "onResult: " + employerModel);
+                                        EmployerModel employer = employerModel;
+
+                                        data.add(employer);
+                                    }
+                                }).getEmployerModel(document.getReference());
                             }
                         } else {
                             Log.w(TAG, "Error getting documents.", task.getException());
@@ -69,7 +83,7 @@ public class ScrollJobActivity extends AppCompatActivity {
                 });
 
         arrayAdapter=new ArrayAdapter<>(ScrollJobActivity.this, R.layout.item_in_cardview, R.id.name, data);
-
+        EmployerAdapter arrayAdapter =new EmployerAdapter(ScrollJobActivity.this, R.layout.item_in_cardview, data);
         flingAdapterView.setAdapter(arrayAdapter);
 
         flingAdapterView.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {

@@ -64,7 +64,20 @@ public class ApplicantDb extends Db{
             return;
         }
 
-        getDocument(email).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+        getApplicantModel(getDocument(email));
+    }
+
+    /**
+     * Get ApplicationModel from user document reference
+     * @param applicant a DocumentReference of an applicant
+     */
+    public void getApplicantModel(DocumentReference applicant) {
+        if (!Utils.isNetworkAvailable(context)) {
+            onApplicantModel.onResult(null);
+            return;
+        }
+
+        applicant.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 ApplicantModel applicantModel = documentSnapshot.toObject(ApplicantModel.class);
@@ -78,6 +91,8 @@ public class ApplicantDb extends Db{
             }
         });
     }
+
+
 
     /**
      * Get ApplicationModel from an email address

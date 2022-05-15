@@ -16,9 +16,13 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.nftscmers.R;
-import com.example.nftscmers.fragments.ApplicantAdapter;
+import com.example.nftscmers.adapters.ApplicantAdapter;
+import com.example.nftscmers.applicantactivities.ProfileActivity;
+import com.example.nftscmers.db.ApplicantDb;
+import com.example.nftscmers.fragments.SkillsFragment;
 import com.example.nftscmers.objectmodels.ApplicantModel;
 import com.example.nftscmers.objectmodels.TestModel;
+import com.example.nftscmers.utils.LoggedInUser;
 import com.example.nftscmers.utils.Utils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -37,7 +41,7 @@ import java.util.ArrayList;
 
 public class ScrollApplicationActivity extends AppCompatActivity {
 
-    private ArrayAdapter<Object> arrayAdapter;
+//    private ApplicantAdapter arrayAdapter;
 //    ApplicantAdapter arrayAdapter;
     TextView name;
     TextView email;
@@ -71,10 +75,22 @@ public class ScrollApplicationActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
 
                     for (QueryDocumentSnapshot document : task.getResult()) {
+                        // Loading of previous applicant data
+                        new ApplicantDb(ScrollApplicationActivity.this, new ApplicantDb.OnApplicantModel() {
+                            @Override
+                            public void onResult(ApplicantModel applicantModel) {
+                                Log.d(TAG, "onResult: " + applicantModel);
+                                ApplicantModel applicant = applicantModel;
+
+                                item.add(applicant);
+                            }
+                        }).getApplicantModel(document.getReference());
+
+
 //                        Log.d(TAG, document.getId() + " => " + document.getData());
-                        item.add(document.getString("email") + "\n" + document.getString("about") + "\n" + document.get("skills"));
+//                        item.add(document.getString("email") + "\n" + document.getString("about") + "\n" + document.get("skills"));
 //                        Utils.loadImage(model.getImage(), thisimage);
-                    arrayAdapter.notifyDataSetChanged();
+                    //arrayAdapter.notifyDataSetChanged();
                 }} else {
                     Log.w(TAG, "Error getting documents.", task.getException());
                 }
@@ -82,9 +98,8 @@ public class ScrollApplicationActivity extends AppCompatActivity {
         });
 
 
-
-        arrayAdapter=new ArrayAdapter<>(ScrollApplicationActivity.this, R.layout.item_in_cardview, R.id.name, item);
-
+        //arrayAdapter=new ArrayAdapter<>(ScrollApplicationActivity.this, R.layout.item_in_cardview, item);
+        ApplicantAdapter arrayAdapter =new ApplicantAdapter(ScrollApplicationActivity.this, R.layout.item_in_cardview, item);
         flingAdapterView.setAdapter(arrayAdapter);
 
         flingAdapterView.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {

@@ -73,6 +73,25 @@ public class EmployerDb extends Db {
     }
 
     /**
+     * Get EmployerModel from user document reference
+     * * @param employer a DocumentReference of an employer
+     */
+    public void getEmployerModel(DocumentReference employer) {
+        if (!Utils.isNetworkAvailable(context)) {
+            onEmployerModel.onResult(null);
+            return;
+        }
+
+        employer.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                EmployerModel employerModel = documentSnapshot.toObject(EmployerModel.class);
+                onEmployerModel.onResult(employerModel);
+            }
+        });
+    }
+
+    /**
      * Get EmployerModel from an email address
      * @param email an EditText object containing an email address
      */
