@@ -64,6 +64,9 @@
     <string name="input_feedback">Input feedback</string>
     <string name="submit_feedback">Submit feedback</string>
 
+<!--    History Strings -->
+    <string name="application_history">Application History</string>
+    <string name="job_history">Job History</string>
 
 <!--    Access Strings -->
     <string name="camera_access">Camera Access Required</string>

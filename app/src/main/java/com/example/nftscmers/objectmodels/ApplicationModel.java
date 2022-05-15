@@ -33,6 +33,9 @@ public class ApplicationModel implements ObjectModel {
     public static final String ACCEPTED = "Accepted";
     public static final String REJECTED = "Rejected";
     public static final String PENDING = "Pending";
+
+    public static final String COMPANY = "company";
+    public static final String POSITION = "position";
     public static final String STATUS = "status";
 
     @DocumentId
@@ -43,6 +46,8 @@ public class ApplicationModel implements ObjectModel {
     private DocumentReference job;
     private String status;
     private ArrayList<DocumentReference> feedbackSkills;
+
+    private ApplicationModel() {}
 
     public ApplicationModel(DocumentReference applicant, DocumentReference job, String feedback, ArrayList<DocumentReference> feedbackSkills, String status) {
         this.applicant = applicant;

@@ -14,15 +14,16 @@ import com.example.nftscmers.R;
 import com.example.nftscmers.objectmodels.ApplicationModel;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
-public class ApplicationHistoryAdapter extends ArrayAdapter<ApplicationModel> {
+public class ApplicationHistoryAdapter extends ArrayAdapter<HashMap<String, String>> {
     private final LayoutInflater mInflater;
-    private final List<ApplicationModel> applicationModelList;
+    private final List<HashMap<String, String>> applicationList;
 
-    public ApplicationHistoryAdapter(Context context, int resource, @NonNull ArrayList<ApplicationModel> applicationModelList) {
-        super(context, resource, applicationModelList);
-        this.applicationModelList = applicationModelList;
+    public ApplicationHistoryAdapter(Context context, int resource, @NonNull ArrayList<HashMap<String, String>> applicationList) {
+        super(context, resource, applicationList);
+        this.applicationList = applicationList;
         mInflater = LayoutInflater.from(context);
     }
 
@@ -34,6 +35,12 @@ public class ApplicationHistoryAdapter extends ArrayAdapter<ApplicationModel> {
         TextView applicationCompany = view.findViewById(R.id.application_company);
         TextView applicationPosition = view.findViewById(R.id.application_position);
         TextView applicationStatus = view.findViewById(R.id.application_status);
+
+        HashMap<String, String> application = applicationList.get(position);
+
+        applicationCompany.setText(application.get(ApplicationModel.COMPANY));
+        applicationPosition.setText(application.get(ApplicationModel.POSITION));
+        applicationStatus.setText(application.get(ApplicationModel.STATUS));
 
         return view;
     }

@@ -55,7 +55,7 @@
         </activity>
 
         <activity
-            android:name=".commonactivities.ViewHistoryActivity"
+            android:name=".applicantactivities.ApplicationHistoryActivity"
             android:exported="true">
         </activity>
 

@@ -12,6 +12,9 @@ public class JobModel implements ObjectModel {
 
     public static final String PENDING = "pending";
 
+    public static final String POSITION = "position";
+    public static final String DEADLINE = "deadline";
+
     @DocumentId
     private String documentId;
 

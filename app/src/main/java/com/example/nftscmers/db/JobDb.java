@@ -18,6 +18,8 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 
+import org.w3c.dom.Document;
+
 import java.util.UUID;
 
 public class JobDb extends Db {
@@ -55,13 +57,21 @@ public class JobDb extends Db {
      * @param jobID a String object containing the ID of the job
      */
     public void getJobModel(String jobID) {
+        getJobModel(getDocument(jobID));
+    }
+
+    /**
+     * Get JobModel from the DocumentReference
+     * @param job a DocumentReference object
+     */
+    public void getJobModel(DocumentReference job) {
         if (!Utils.isNetworkAvailable(context)) {
             Toast.makeText(context, R.string.network_missing, Toast.LENGTH_SHORT).show();
             onJobModel.onResult(null);
             return;
         }
 
-        getDocument(jobID).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+        job.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 JobModel JobModel = documentSnapshot.toObject(JobModel.class);
@@ -69,6 +79,7 @@ public class JobDb extends Db {
             }
         });
     }
+
 
     /**
      * Push a job onto FireStore
@@ -172,7 +183,7 @@ public class JobDb extends Db {
 
 
     public interface OnJobModel {
-        void onResult(JobModel JobModel);
+        void onResult(JobModel jobModel);
     }
 
     public interface OnJobUploadSuccess{

@@ -78,14 +78,6 @@ public class ViewJobActivity extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ViewJobActivity.this, ViewJobActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
                 // TODO: Link to somewhere else
                 Intent intent = new Intent(ViewJobActivity.this, ViewJobActivity.class);
                 startActivity(intent);

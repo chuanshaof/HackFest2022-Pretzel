@@ -60,12 +60,20 @@ public class ApplicationDb extends Db{
      * @param uid a String object containing an email address
      */
     public void getApplicationModel(String uid) {
+        getApplicationModel(getDocument(uid));
+    }
+
+    /**
+     * Get ApplicationModel from an email address
+     * @param application a DocumentReference indicating an email address
+     */
+    public void getApplicationModel(DocumentReference application) {
         if (!Utils.isNetworkAvailable(context)) {
             onApplicationModel.onResult(null);
             return;
         }
 
-        getDocument(uid).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+        application.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 ApplicationModel applicationModel = documentSnapshot.toObject(ApplicationModel.class);
