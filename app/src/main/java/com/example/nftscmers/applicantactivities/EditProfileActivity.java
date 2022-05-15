@@ -58,7 +58,6 @@ public class EditProfileActivity extends AppCompatActivity {
         Utils.uneditableField(name);
         Utils.uneditableField(email);
 
-        LoggedInUser.getInstance().setUser(null, "jon@gmail.com", Globals.APPLICANT);
         // Loading of previous applicant data
         new ApplicantDb(EditProfileActivity.this, new ApplicantDb.OnApplicantModel() {
             @Override

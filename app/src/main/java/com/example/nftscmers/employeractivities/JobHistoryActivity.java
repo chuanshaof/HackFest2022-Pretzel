@@ -42,8 +42,6 @@ public class JobHistoryActivity extends AppCompatActivity {
 
         jobListView = findViewById(R.id.job_history_list);
 
-        LoggedInUser.getInstance().setUser(FirebaseFirestore.getInstance().collection(EmployerModel.getCollectionId()).document("aftershock@gmail.com"), "aftershock@gmail.com", Globals.EMPLOYER);
-
         ArrayAdapter arrayAdapter = new JobHistoryAdapter(JobHistoryActivity.this, R.layout.item_job_history, jobDetailsList, new JobHistoryAdapter.OnItemClickListener() {
             @Override
             public void onResult(int position) {

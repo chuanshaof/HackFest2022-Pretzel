@@ -35,7 +35,7 @@
         </activity>
 
         <activity
-            android:name=".employeractivities.ScrollApplicationActivity"
+            android:name=".commonactivities.FeedbackActivity"
             android:exported="true">
         </activity>
 
@@ -46,6 +46,11 @@
 
         <activity
             android:name=".commonactivities.ViewJobActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".commonactivities.ForgetPasswordActivity"
             android:exported="true">
         </activity>
 
@@ -75,6 +80,11 @@
         </activity>
 
         <activity
+            android:name=".employeractivities.ScrollApplicationActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
             android:name=".employeractivities.ProfileActivity"
             android:exported="true">
         </activity>
@@ -91,11 +101,6 @@
 
         <activity
             android:name=".employeractivities.JobHistoryActivity"
-            android:exported="true">
-        </activity>
-
-        <activity
-            android:name=".commonactivities.FeedbackActivity"
             android:exported="true">
         </activity>
 
