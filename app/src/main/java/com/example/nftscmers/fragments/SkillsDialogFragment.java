@@ -59,7 +59,7 @@ public class SkillsDialogFragment extends DialogFragment {
         ArrayAdapter arrayAdapter = new SkillsAdapter(getContext(), R.layout.dialog_item_skills, skillsList);
         listView.setAdapter(arrayAdapter);
 
-        ((SkillsAdapter) arrayAdaipter).setOnDeleteListener(new SkillsAdapter.OnDeleteListener() {
+        ((SkillsAdapter) arrayAdapter).setOnDeleteListener(new SkillsAdapter.OnDeleteListener() {
             @Override
             public void onDelete(int position) {
                 skillsList.remove(position);
