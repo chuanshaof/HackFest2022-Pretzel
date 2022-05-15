@@ -20,7 +20,7 @@ import javax.xml.validation.Validator;
  * Firebase Firestore Document Object Model for the ApplicationsModel Collection
  * @ID documentId: string
  *
- * @field applicant: DocumentReference from Applicants Collection
+ * @field application: DocumentReference from Applications Collection
  * @field feedback: String
  * @field job: DocumentReference from Jobs Collection
  * @field status: String
@@ -28,9 +28,11 @@ import javax.xml.validation.Validator;
 
 public class ApplicationModel implements ObjectModel {
     public static final String TAG = "Application Model";
-    public static final String COLLECTION_ID = "Application";
+    public static final String COLLECTION_ID = "Applications";
 
-    public static final String[] statuses = new String[]{"Accepted, Rejected, Applied, Pending"};
+    public static final String ACCEPTED = "Accepted";
+    public static final String REJECTED = "Rejected";
+    public static final String PENDING = "Pending";
 
     @DocumentId
     private String documentId;
@@ -39,12 +41,14 @@ public class ApplicationModel implements ObjectModel {
     private String feedback;
     private DocumentReference job;
     private String status;
+    private ArrayList<DocumentReference> feedbackSkills;
 
-    public ApplicationModel(DocumentReference applicant, String feedback, DocumentReference job, String status) {
+    public ApplicationModel(DocumentReference applicant, DocumentReference job, String feedback, ArrayList<DocumentReference> feedbackSkills, String status) {
         this.applicant = applicant;
         this.feedback = feedback;
         this.job = job;
-        this.status = statuses[2];
+        this.status = status;
+        this.feedbackSkills = feedbackSkills;
     }
 
     public static String getCollectionId() {
@@ -77,11 +81,15 @@ public class ApplicationModel implements ObjectModel {
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     public void setStatus(String status) {
-        if (Arrays.stream(statuses).anyMatch(status::equals)){
-            this.status = status;
-        } else {
-            Log.d(TAG, "setStatus: Invalid Status");
-        }
+        this.status = status;
+    }
+
+    public ArrayList<DocumentReference> getFeedbackSkills() {
+        return feedbackSkills;
+    }
+
+    public void setFeedbackSkills(ArrayList<DocumentReference> feedbackSkills) {
+        this.feedbackSkills = feedbackSkills;
     }
 
     @Override

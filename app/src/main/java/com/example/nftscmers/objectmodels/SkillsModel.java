@@ -16,11 +16,11 @@ public class SkillsModel implements ObjectModel {
     @DocumentId
     private String documentId;
     private String skill;
-    private ArrayList<DocumentReference> courses;
+    private ArrayList<String> courses;
 
     private SkillsModel() {}
 
-    public SkillsModel(@NonNull String skill, ArrayList<DocumentReference> courses) {
+    public SkillsModel(@NonNull String skill, ArrayList<String> courses) {
         this.skill = skill;
         this.courses = courses;
         this.documentId = skill;
@@ -38,15 +38,15 @@ public class SkillsModel implements ObjectModel {
         return skill;
     }
 
-    public ArrayList<DocumentReference> getCourses() {
+    public ArrayList<String> getCourses() {
         return courses;
     }
 
-    public void setCourses(ArrayList<DocumentReference> courses) {
+    public void setCourses(ArrayList<String> courses) {
         this.courses = courses;
     }
 
-    public void addCourses(DocumentReference course) {
+    public void addCourses(String course) {
         this.courses.add(course);
     }
 

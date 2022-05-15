@@ -76,7 +76,6 @@ public class LoginActivity extends AppCompatActivity {
             title.setText(getString(R.string.applicant_login));
         }
 
-        // TODO: Make this real
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

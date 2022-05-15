@@ -59,7 +59,8 @@
     <string name="job_deadline">Job Deadline</string>
 
 <!--    Feedback Strings -->
-    <string name="feedback">Give feedback</string>
+    <string name="feedback_view">View feedback</string>
+    <string name="feedback_set">Give feedback</string>
     <string name="input_feedback">Input feedback</string>
     <string name="submit_feedback">Submit feedback</string>
 

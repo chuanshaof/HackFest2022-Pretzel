@@ -10,13 +10,16 @@ import androidx.annotation.NonNull;
 
 import com.example.nftscmers.R;
 import com.example.nftscmers.objectmodels.ApplicantModel;
+import com.example.nftscmers.objectmodels.EmployerModel;
 import com.example.nftscmers.utils.FirebaseStorageReference;
 import com.example.nftscmers.utils.Utils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -53,7 +56,7 @@ public class ApplicantDb extends Db{
 
     /**
      * Get ApplicationModel from an email address
-     * @param email an EditText object containing an email address
+     * @param email an String object containing an email address
      */
     public void getApplicantModel(String email) {
         if (!Utils.isNetworkAvailable(context)) {
@@ -144,6 +147,29 @@ public class ApplicantDb extends Db{
         }
 
         getDocument(applicantModel.getEmail()).set(applicantModel).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                onApplicantUploadSuccess.onResult();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                onApplicantUploadFailure.onResult();
+            }
+        });
+    }
+
+    /**
+     * Update applications field in FireStore
+     * @param application a DocumentReference object indicating the application
+     */
+    public void updateApplications(DocumentReference application, DocumentReference applicant) {
+        if (!Utils.isNetworkAvailable(context)) {
+            onApplicantUploadFailure.onResult();
+            return;
+        }
+
+        applicant.update(ApplicantModel.APPLICATIONS, FieldValue.arrayUnion(application)).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
                 onApplicantUploadSuccess.onResult();

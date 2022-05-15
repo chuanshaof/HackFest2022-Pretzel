@@ -10,6 +10,8 @@ public class JobModel implements ObjectModel {
     public static final String TAG = "Job Model";
     public static final String COLLECTION_ID = "Jobs";
 
+    public static final String PENDING = "pending";
+
     @DocumentId
     private String documentId;
 

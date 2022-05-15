@@ -75,7 +75,7 @@ public class EditProfileActivity extends AppCompatActivity {
             }
         }).getApplicantModel(LoggedInUser.getInstance().getEmail());
 
-        // when user clicks on skills
+        // When user clicks on skills
         skills.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

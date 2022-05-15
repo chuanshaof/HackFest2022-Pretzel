@@ -39,6 +39,8 @@ public class ScrollApplicationActivity extends AppCompatActivity {
 
     SwipeFlingAdapterView flingAdapterView;
 
+
+    // TODO: Change the TAG
     public static final String TAG = "YOUR-TAG-NAME";
 
 

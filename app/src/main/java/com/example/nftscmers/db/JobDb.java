@@ -4,14 +4,19 @@ import android.content.Context;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import com.example.nftscmers.R;
 import com.example.nftscmers.employeractivities.EditJobActivity;
+import com.example.nftscmers.objectmodels.ApplicantModel;
 import com.example.nftscmers.objectmodels.EmployerModel;
 import com.example.nftscmers.objectmodels.JobModel;
 import com.example.nftscmers.utils.Utils;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 
 import java.util.UUID;
 
@@ -114,6 +119,53 @@ public class JobDb extends Db {
                         }).updateJob(job, jobModel.getEmployer());
                     }
                 });
+            }
+        });
+    }
+
+    /**
+     * Add into pending field in FireStore
+     * @param application a DocumentReference object indicating the application
+     */
+    public void addPending(DocumentReference application, DocumentReference job) {
+        if (!Utils.isNetworkAvailable(context)) {
+            onJobUploadFailure.onResult();
+            return;
+        }
+
+        job.update(JobModel.PENDING, FieldValue.arrayUnion(application)).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                onJobUploadSuccess.onResult();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                onJobUploadFailure.onResult();
+            }
+        });
+    }
+
+    /**
+     * Update pending field in FireStore
+     * @param application a DocumentReference object indicating the application
+     */
+    // TODO: CHANGE
+    public void deletePending(DocumentReference application, DocumentReference job) {
+        if (!Utils.isNetworkAvailable(context)) {
+            onJobUploadFailure.onResult();
+            return;
+        }
+
+        job.update(JobModel.PENDING, FieldValue.arrayUnion(application)).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                onJobUploadSuccess.onResult();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                onJobUploadFailure.onResult();
             }
         });
     }

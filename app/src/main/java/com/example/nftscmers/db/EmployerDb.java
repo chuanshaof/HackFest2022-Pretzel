@@ -195,7 +195,7 @@ public class EmployerDb extends Db {
      * @param employer a DocumentReference object indicating the employer to be edited
      */
     public void updateJob(DocumentReference job, DocumentReference employer) {
-        employer.update(EmployerModel.JOBS,  FieldValue.arrayUnion(job)).addOnSuccessListener(new OnSuccessListener<Void>() {
+        employer.update(EmployerModel.JOBS, FieldValue.arrayUnion(job)).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
                 onEmployerUploadSuccess.onResult();

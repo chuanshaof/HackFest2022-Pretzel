@@ -50,7 +50,7 @@
         </activity>
 
         <activity
-            android:name=".applicantactivities.ViewHistoryActivity"
+            android:name=".commonactivities.ViewHistoryActivity"
             android:exported="true">
         </activity>
 
@@ -90,18 +90,13 @@
         </activity>
 
         <activity
-            android:name=".employeractivities.FeedbackActivity"
+            android:name=".commonactivities.FeedbackActivity"
             android:exported="true">
         </activity>
 
         <activity
             android:name="com.canhub.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat">
-        </activity>
-
-        <activity
-            android:name=".employeractivities.ViewApplicantData"
-            android:exported="true">
         </activity>
 
     </application>

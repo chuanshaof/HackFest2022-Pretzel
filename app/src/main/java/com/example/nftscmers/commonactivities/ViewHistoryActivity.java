@@ -1,4 +1,4 @@
-package com.example.nftscmers.applicantactivities;
+package com.example.nftscmers.commonactivities;
 
 import android.os.Bundle;
 

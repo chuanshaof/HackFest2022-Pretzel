@@ -168,7 +168,7 @@ public class Utils {
     }
 
     /**
-     * Showing Toast and
+     * Showing Toast and Log together
      * @param context a Context object
      * @param TAG a String object
      * @param message a String object
@@ -176,5 +176,15 @@ public class Utils {
     public static void toastLog(Context context, String TAG, String message){
         Log.i(TAG, message);
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * Disabling of button
+     * @param view a View object, likely of ImageView/TextView/Button
+     */
+    public static void disableButton(View view) {
+        view.setEnabled(false);
+        view.setClickable(false);
+        view.setVisibility(View.GONE);
     }
 }
