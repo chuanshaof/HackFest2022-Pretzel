@@ -74,7 +74,12 @@ public class ProfileActivity extends AppCompatActivity {
                 Utils.setValid(linkedIn, employer.getWebsite());
                 Utils.setValid(email, employer.getEmail());
             }
-        }).getEmployerModel(LoggedInUser.getInstance().getEmail());
+        }).getEmployerModel(getIntent().getStringExtra(ProfileActivity.TAG));
+
+        if (!getIntent().getStringExtra(ProfileActivity.TAG).equals(LoggedInUser.getInstance().getEmail())){
+            Utils.disableButton(editProfile);
+            Utils.disableButton(logout);
+        }
 
         editProfile.setOnClickListener(new View.OnClickListener() {
             @Override

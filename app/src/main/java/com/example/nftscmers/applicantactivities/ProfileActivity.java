@@ -77,7 +77,12 @@ public class ProfileActivity extends AppCompatActivity {
                 SkillsFragment skillsFragment = new SkillsFragment(applicant.getSkills());
                 getSupportFragmentManager().beginTransaction().replace(R.id.applicant_skills, skillsFragment).commit();
             }
-        }).getApplicantModel(LoggedInUser.getInstance().getEmail());
+        }).getApplicantModel(getIntent().getStringExtra(ProfileActivity.TAG));
+
+        if (!getIntent().getStringExtra(ProfileActivity.TAG).equals(LoggedInUser.getInstance().getEmail())){
+            Utils.disableButton(editProfile);
+            Utils.disableButton(logout);
+        }
 
         editProfile.setOnClickListener(new View.OnClickListener() {
             @Override
