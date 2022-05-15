@@ -3,6 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/65818/AndroidStudioProjects/HackFest-nftscmers/app/src/main/res/drawable-v24/ic_baseline_library_books_24.xml" value="0.127" />
+        <entry key="..\:/Users/65818/AndroidStudioProjects/HackFest-nftscmers/app/src/main/res/drawable/login_bar.xml" value="0.127" />
+        <entry key="..\:/Users/65818/AndroidStudioProjects/HackFest-nftscmers/app/src/main/res/layout/activity_applicant_checks_job_profile.xml" value="0.35054347826086957" />
+        <entry key="..\:/Users/65818/AndroidStudioProjects/HackFest-nftscmers/app/src/main/res/layout/activity_employer_checks_applicant_profile.xml" value="0.35054347826086957" />
+        <entry key="..\:/Users/65818/AndroidStudioProjects/HackFest-nftscmers/app/src/main/res/layout/item_in_cardview.xml" value="0.17831813576494426" />
+        <entry key="..\:/Users/65818/AndroidStudioProjects/HackFest-nftscmers/app/src/main/res/layout/like_dislike_button_bottom.xml" value="0.17831813576494426" />
+        <entry key="..\:/Users/65818/AndroidStudioProjects/HackFest-nftscmers/app/src/main/res/layouts/applicantlayouts/layout/activity_applicant_profile.xml" value="0.17831813576494426" />
+        <entry key="..\:/Users/65818/AndroidStudioProjects/HackFest-nftscmers/app/src/main/res/layouts/employerlayouts/layout/activity_employer_create_job.xml" value="0.35054347826086957" />
+        <entry key="..\:/Users/65818/AndroidStudioProjects/HackFest-nftscmers/app/src/main/res/layouts/employerlayouts/layout/activity_employer_view_application.xml" value="0.17831813576494426" />
         <entry key="..\:/Users/chuanshaof/GitHub/50.001-StudyBuddy/app/src/main/res/drawable/ic_baseline_add_location_24.xml" value="0.1125" />
         <entry key="..\:/Users/chuanshaof/GitHub/50.001-StudyBuddy/app/src/main/res/drawable/ic_baseline_email_24.xml" value="0.1" />
         <entry key="..\:/Users/chuanshaof/GitHub/HackFest-nftscmers/app/src/main/res/drawable-v24/ic_baseline_add_24.xml" value="0.1" />
