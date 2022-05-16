@@ -2,6 +2,7 @@ package com.example.nftscmers.applicantactivities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -60,19 +61,24 @@ public class ScrollJobActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                        Log.d(TAG, "onComplete: " + documentSnapshot);
                         new JobDb(ScrollJobActivity.this, new JobDb.OnJobModel() {
                             @Override
                             public void onResult(JobModel jobModel) {
                                 new ApplicantDb(ScrollJobActivity.this, new ApplicantDb.OnApplicantModel() {
                                     @Override
                                     public void onResult(ApplicantModel applicantModel) {
-                                        for (DocumentReference applications : applicantModel.getApplications()) {
-                                            if (!jobModel.getPending().contains(applications)){
-                                                data.add(jobModel);
-                                                arrayAdapter.notifyDataSetChanged();
+                                        boolean applied = false;
 
-                                                jobTracker.put(jobModel, documentSnapshot.getReference());
-                                            }
+                                        for (DocumentReference application : applicantModel.getApplications()) {
+                                            applied = applied | jobModel.getPending().contains(application);
+                                        }
+
+                                        if (applied == false) {
+                                            data.add(jobModel);
+                                            arrayAdapter.notifyDataSetChanged();
+
+                                            jobTracker.put(jobModel, documentSnapshot.getReference());
                                         }
                                     }
                                 }).getApplicantModel(LoggedInUser.getInstance().getEmail());
