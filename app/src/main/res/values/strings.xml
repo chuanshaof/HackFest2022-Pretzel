@@ -45,6 +45,7 @@
     <string name="my_profile">My Profile</string>
     <string name="logout">Log Out</string>
     <string name="company_profile">Company Profile</string>
+    <string name="applicant_profile">Applicant Profile</string>
 
 <!--    CreateJobActivity Strings-->
     <string name="job_details">Job Details</string>

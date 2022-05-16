@@ -16,7 +16,7 @@
         android:src="@drawable/ic_baseline_arrow_back_24" />
 
     <TextView
-        android:id="@+id/applicant_my_profile"
+        android:id="@+id/applicant_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
