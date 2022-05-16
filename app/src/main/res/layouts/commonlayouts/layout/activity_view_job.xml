@@ -50,6 +50,7 @@
             android:background="@drawable/login_bar"
             android:drawableStart="@drawable/ic_baseline_person_pin_24"
             android:drawablePadding="20dp"
+            android:gravity="center_vertical"
             android:ems="10"
             android:hint="@string/job_available"
             android:inputType="text"
@@ -73,6 +74,7 @@
             android:hint="@string/job_description"
             android:inputType="text"
             android:paddingStart="20dp"
+            android:paddingTop="10dp"
             android:paddingEnd="20dp"
             app:layout_constraintEnd_toEndOf="@+id/job_position"
             app:layout_constraintHorizontal_bias="0.0"
@@ -90,6 +92,7 @@
             android:drawablePadding="20dp"
             android:ems="10"
             android:focusable="false"
+            android:gravity="center_vertical"
             android:hint="@string/job_deadline"
             android:inputType="text"
             android:paddingStart="20dp"
@@ -111,6 +114,7 @@
             android:ems="10"
             android:hint="@string/location"
             android:inputType="text"
+            android:gravity="center_vertical"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
             app:layout_constraintEnd_toEndOf="@+id/job_deadline"
@@ -154,31 +158,39 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_alignParentRight="true"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
             android:src="@drawable/ic_baseline_edit_24"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="351dp"
-            tools:layout_editor_absoluteY="16dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
 
         <ImageView
             android:id="@+id/job_picture"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="52dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.491"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_baseline_person_24"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="148dp"
-            tools:layout_editor_absoluteY="52dp" />
+            tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/job_employer"
             android:layout_width="119dp"
             android:layout_height="26dp"
             android:layout_centerHorizontal="true"
+            android:gravity="center"
             android:text="@string/employer_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@+id/job_picture"
             app:srcCompat="@drawable/ic_baseline_person_24"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="146dp"
-            tools:layout_editor_absoluteY="170dp" />
+            tools:ignore="MissingConstraints" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
