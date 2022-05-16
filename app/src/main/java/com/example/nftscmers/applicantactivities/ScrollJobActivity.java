@@ -14,8 +14,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.nftscmers.R;
 
 import com.example.nftscmers.adapters.JobAdapter;
+import com.example.nftscmers.db.ApplicantDb;
 import com.example.nftscmers.db.ApplicationDb;
 import com.example.nftscmers.db.JobDb;
+import com.example.nftscmers.objectmodels.ApplicantModel;
 import com.example.nftscmers.objectmodels.JobModel;
 import com.example.nftscmers.utils.LoggedInUser;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -59,12 +61,19 @@ public class ScrollJobActivity extends AppCompatActivity {
                         new JobDb(ScrollJobActivity.this, new JobDb.OnJobModel() {
                             @Override
                             public void onResult(JobModel jobModel) {
-                                if (!jobModel.getPending().contains(LoggedInUser.getInstance().getUserDocRef())){
-                                    data.add(jobModel);
-                                    arrayAdapter.notifyDataSetChanged();
+                                new ApplicantDb(ScrollJobActivity.this, new ApplicantDb.OnApplicantModel() {
+                                    @Override
+                                    public void onResult(ApplicantModel applicantModel) {
+                                        for (DocumentReference applications : applicantModel.getApplications()) {
+                                            if (!jobModel.getPending().contains(applications)){
+                                                data.add(jobModel);
+                                                arrayAdapter.notifyDataSetChanged();
 
-                                    jobTracker.put(jobModel, documentSnapshot.getReference());
-                                }
+                                                jobTracker.put(jobModel, documentSnapshot.getReference());
+                                            }
+                                        }
+                                    }
+                                }).getApplicantModel(LoggedInUser.getInstance().getEmail());
                             }
                         }).getJobModel(documentSnapshot.getReference());
                     }
