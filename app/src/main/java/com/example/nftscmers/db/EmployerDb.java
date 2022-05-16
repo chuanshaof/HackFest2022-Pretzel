@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -214,7 +215,8 @@ public class EmployerDb extends Db {
      * @param employer a DocumentReference object indicating the employer to be edited
      */
     public void updateJob(DocumentReference job, DocumentReference employer) {
-        employer.update(EmployerModel.JOBS, FieldValue.arrayUnion(job)).addOnSuccessListener(new OnSuccessListener<Void>() {
+
+        getDocument(employer.getId()).update(EmployerModel.JOBS, FieldValue.arrayUnion(job)).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
                 onEmployerUploadSuccess.onResult();

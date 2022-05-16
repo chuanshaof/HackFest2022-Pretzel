@@ -145,7 +145,7 @@ public class JobDb extends Db {
             return;
         }
 
-        createJob(jobModel, getDocument(email));
+        createJob(jobModel, new EmployerDb().getDocument(email));
     }
 
     /**

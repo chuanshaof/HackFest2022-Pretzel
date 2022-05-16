@@ -49,7 +49,7 @@ public class ScrollApplicationActivity extends AppCompatActivity {
         ArrayList<ApplicantModel> item = new ArrayList<>();
         jobTracker = new HashMap<>();
 
-        ApplicantAdapter arrayAdapter =new ApplicantAdapter(ScrollApplicationActivity.this, R.layout.item_in_cardview, item);
+        ApplicantAdapter arrayAdapter = new ApplicantAdapter(ScrollApplicationActivity.this, R.layout.item_in_cardview, item);
         flingAdapterView.setAdapter(arrayAdapter);
 
         new EmployerDb(ScrollApplicationActivity.this, new EmployerDb.OnEmployerModel() {

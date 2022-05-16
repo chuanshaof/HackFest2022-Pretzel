@@ -133,6 +133,11 @@ public class EditJobActivity extends AppCompatActivity {
                     return;
                 }
 
+                job.setDeadline(deadlineCalendar.getTime());
+                job.setLocation(location.getText().toString());
+                job.setDescription(description.getText().toString());
+                job.setPosition(position.getText().toString());
+
                 JobDb jobDb = new JobDb(EditJobActivity.this, new JobDb.OnJobUploadSuccess() {
                     @Override
                     public void onResult() {
@@ -140,11 +145,6 @@ public class EditJobActivity extends AppCompatActivity {
                         startActivity(intent);
                     }
                 });
-
-                job.setDeadline(deadlineCalendar.getTime());
-                job.setLocation(location.getText().toString());
-                job.setDescription(description.getText().toString());
-                job.setPosition(position.getText().toString());
 
                 // Handling if it is an existing job or new job
                 if (job.getDocumentId() == null) {
