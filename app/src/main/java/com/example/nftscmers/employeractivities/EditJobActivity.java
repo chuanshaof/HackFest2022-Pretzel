@@ -61,7 +61,6 @@ public class EditJobActivity extends AppCompatActivity {
         skills = findViewById(R.id.edit_job_skills);
         confirm = findViewById(R.id.edit_job_confirm);
 
-        // TODO: pass the Job UUID into the intent
         if (getIntent().getStringExtra(ViewJobActivity.TAG) != null) {
             // Loading of previous job data
             new JobDb(EditJobActivity.this, new JobDb.OnJobModel() {

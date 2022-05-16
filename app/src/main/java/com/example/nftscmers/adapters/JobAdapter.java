@@ -2,39 +2,28 @@ package com.example.nftscmers.adapters;
 
 import android.app.Activity;
 import android.content.Context;
-import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-
-import androidx.annotation.NonNull;
 
 import com.example.nftscmers.R;
-import com.example.nftscmers.objectmodels.ApplicantModel;
-import com.example.nftscmers.objectmodels.EmployerModel;
 import com.example.nftscmers.objectmodels.JobModel;
-import com.example.nftscmers.objectmodels.TestModel;
 import com.example.nftscmers.utils.Utils;
-import com.google.firebase.firestore.DocumentReference;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class JobAdapter extends ArrayAdapter {
     public static final String TAG = "JobAdapter";
-    ArrayList<Object> jobs_list;
+    ArrayList<JobModel> jobs_list;
     public Activity context;
     public LayoutInflater inflater;
 
-    public JobAdapter(Activity context, int resource, ArrayList<Object> jobs_list) {
+    public JobAdapter(Activity context, int resource, ArrayList<JobModel> jobs_list) {
         super(context, resource, jobs_list);
 
         this.jobs_list = jobs_list;

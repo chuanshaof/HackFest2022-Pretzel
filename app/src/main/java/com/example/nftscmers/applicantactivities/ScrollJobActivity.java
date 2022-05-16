@@ -18,12 +18,18 @@ import com.example.nftscmers.R;
 
 import com.example.nftscmers.adapters.ApplicantAdapter;
 import com.example.nftscmers.adapters.EmployerAdapter;
+import com.example.nftscmers.adapters.JobAdapter;
+import com.example.nftscmers.commonactivities.FeedbackActivity;
 import com.example.nftscmers.commonactivities.ViewJobActivity;
 import com.example.nftscmers.db.ApplicantDb;
+import com.example.nftscmers.db.ApplicationDb;
 import com.example.nftscmers.db.EmployerDb;
+import com.example.nftscmers.db.JobDb;
 import com.example.nftscmers.employeractivities.ScrollApplicationActivity;
 import com.example.nftscmers.objectmodels.ApplicantModel;
+import com.example.nftscmers.objectmodels.ApplicationModel;
 import com.example.nftscmers.objectmodels.EmployerModel;
+import com.example.nftscmers.objectmodels.JobModel;
 import com.example.nftscmers.utils.LoggedInUser;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -31,23 +37,23 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class ScrollJobActivity extends AppCompatActivity {
 
-    private EmployerAdapter arrayAdapter;
+    private JobAdapter arrayAdapter;
     SwipeFlingAdapterView flingAdapterView;
+    HashMap<JobModel, DocumentReference> jobTracker;
 
-    FirebaseAuth auth;
-    FirebaseUser user;
-    DatabaseReference reference;
-    public static final String TAG = "YOUR-TAG-NAME";
+    public static final String TAG = "ScrollJob";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -56,35 +62,32 @@ public class ScrollJobActivity extends AppCompatActivity {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         flingAdapterView = findViewById(R.id.swipe);
-        ArrayList data = new ArrayList<>();
+        ArrayList<JobModel> data = new ArrayList<>();
+        jobTracker = new HashMap<>();
 
-        arrayAdapter = new EmployerAdapter(ScrollJobActivity.this, R.layout.item_in_cardview, data);
+        arrayAdapter = new JobAdapter(ScrollJobActivity.this, R.layout.item_in_cardview, data);
         flingAdapterView.setAdapter(arrayAdapter);
 
-        db.collection("Employers")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
+        db.collection(JobModel.getCollectionId()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                        new JobDb(ScrollJobActivity.this, new JobDb.OnJobModel() {
+                            @Override
+                            public void onResult(JobModel jobModel) {
+                                if (!jobModel.getPending().contains(LoggedInUser.getInstance().getUserDocRef())){
+                                    data.add(jobModel);
+                                    arrayAdapter.notifyDataSetChanged();
 
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                new EmployerDb(ScrollJobActivity.this, new EmployerDb.OnEmployerModel() {
-                                    @Override
-                                    public void onResult(EmployerModel employerModel) {
-                                        Log.d(TAG, "onResult: " + employerModel);
-                                        EmployerModel employer = employerModel;
-
-                                        data.add(employer);
-                                        arrayAdapter.notifyDataSetChanged();
-                                    }
-                                }).getEmployerModel(document.getReference());
+                                    jobTracker.put(jobModel, documentSnapshot.getReference());
+                                }
                             }
-                        } else {
-                            Log.w(TAG, "Error getting documents.", task.getException());
-                        }
+                        }).getJobModel(documentSnapshot.getReference());
                     }
-                });
+                }
+            }
+        });
 
         flingAdapterView.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {
             @Override
@@ -95,14 +98,17 @@ public class ScrollJobActivity extends AppCompatActivity {
 
             @Override
             public void onLeftCardExit(Object o) {
-
-                Toast.makeText(ScrollJobActivity.this,"dislike",Toast.LENGTH_SHORT).show();
+                Toast.makeText(ScrollJobActivity.this,"Skipped Job",Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onRightCardExit(Object o) {
-
-                Toast.makeText(ScrollJobActivity.this,"like",Toast.LENGTH_SHORT).show();
+                new ApplicationDb(ScrollJobActivity.this, new ApplicationDb.OnApplicationUploadSuccess() {
+                    @Override
+                    public void onResult() {
+                        Toast.makeText(ScrollJobActivity.this,"Applied",Toast.LENGTH_SHORT).show();
+                    }
+                }).newApplication(LoggedInUser.getInstance().getUserDocRef(), jobTracker.get(o));
             }
 
             @Override
@@ -119,7 +125,7 @@ public class ScrollJobActivity extends AppCompatActivity {
         flingAdapterView.setOnItemClickListener(new SwipeFlingAdapterView.OnItemClickListener() {
             @Override
             public void onItemClicked(int i, Object o) {
-                Toast.makeText(ScrollJobActivity.this, "data is "+data.get(i),Toast.LENGTH_SHORT).show();
+                Toast.makeText(ScrollJobActivity.this, "data is " + data.get(i),Toast.LENGTH_SHORT).show();
             }
         });
 

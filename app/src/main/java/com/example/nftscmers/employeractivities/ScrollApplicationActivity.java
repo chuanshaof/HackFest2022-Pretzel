@@ -1,12 +1,10 @@
 package com.example.nftscmers.employeractivities;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -22,41 +20,21 @@ import com.example.nftscmers.commonactivities.FeedbackActivity;
 import com.example.nftscmers.db.ApplicationDb;
 import com.example.nftscmers.db.EmployerDb;
 import com.example.nftscmers.db.JobDb;
-import com.example.nftscmers.employeractivities.ProfileActivity;
 import com.example.nftscmers.db.ApplicantDb;
-import com.example.nftscmers.fragments.SkillsFragment;
 import com.example.nftscmers.objectmodels.ApplicantModel;
 import com.example.nftscmers.objectmodels.ApplicationModel;
 import com.example.nftscmers.objectmodels.EmployerModel;
 import com.example.nftscmers.objectmodels.JobModel;
-import com.example.nftscmers.objectmodels.TestModel;
 import com.example.nftscmers.utils.LoggedInUser;
-import com.example.nftscmers.utils.Utils;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
-import com.squareup.picasso.Picasso;
 
-import org.w3c.dom.Document;
-
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ScrollApplicationActivity extends AppCompatActivity {
-    TextView name;
-    TextView email;
-    ImageView image;
     SwipeFlingAdapterView flingAdapterView;
     HashMap<DocumentReference, ArrayList<DocumentReference>> jobTracker;
 
@@ -71,6 +49,7 @@ public class ScrollApplicationActivity extends AppCompatActivity {
         flingAdapterView=findViewById(R.id.swipe);
 
         ArrayList<Object> item = new ArrayList<>();
+        jobTracker = new HashMap<>();
 
         ApplicantAdapter arrayAdapter =new ApplicantAdapter(ScrollApplicationActivity.this, R.layout.item_in_cardview, item);
         flingAdapterView.setAdapter(arrayAdapter);
@@ -83,6 +62,7 @@ public class ScrollApplicationActivity extends AppCompatActivity {
                         @Override
                         public void onResult(JobModel jobModel) {
                             for (DocumentReference application : jobModel.getPending()) {
+                                Log.d(TAG, "onResult: " + application.getId());
                                 new ApplicationDb(ScrollApplicationActivity.this, new ApplicationDb.OnApplicationModel() {
                                     @Override
                                     public void onResult(ApplicationModel applicationModel) {
