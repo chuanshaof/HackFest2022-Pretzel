@@ -18,10 +18,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.nftscmers.R;
 import com.example.nftscmers.adapters.ApplicantAdapter;
+import com.example.nftscmers.db.EmployerDb;
+import com.example.nftscmers.db.JobDb;
 import com.example.nftscmers.employeractivities.ProfileActivity;
 import com.example.nftscmers.db.ApplicantDb;
 import com.example.nftscmers.fragments.SkillsFragment;
 import com.example.nftscmers.objectmodels.ApplicantModel;
+import com.example.nftscmers.objectmodels.EmployerModel;
+import com.example.nftscmers.objectmodels.JobModel;
 import com.example.nftscmers.objectmodels.TestModel;
 import com.example.nftscmers.utils.LoggedInUser;
 import com.example.nftscmers.utils.Utils;
@@ -33,11 +37,14 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 import com.squareup.picasso.Picasso;
+
+import org.w3c.dom.Document;
 
 import java.util.ArrayList;
 
@@ -49,12 +56,9 @@ public class ScrollApplicationActivity extends AppCompatActivity {
     TextView email;
     ImageView image;
     SwipeFlingAdapterView flingAdapterView;
-
-
+    
     // TODO: Change the TAG
     public static final String TAG = "YOUR-TAG-NAME";
-
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -69,40 +73,28 @@ public class ScrollApplicationActivity extends AppCompatActivity {
         ApplicantAdapter arrayAdapter =new ApplicantAdapter(ScrollApplicationActivity.this, R.layout.item_in_cardview, item);
         flingAdapterView.setAdapter(arrayAdapter);
 
-        //Iterating through list of applicant details in firebase and displaying on card swipe
-        db.collection("Applicants")
-                .get()
-        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        new EmployerDb(ScrollApplicationActivity.this, new EmployerDb.OnEmployerModel() {
             @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        // Loading of previous applicant data
-                        new ApplicantDb(ScrollApplicationActivity.this, new ApplicantDb.OnApplicantModel() {
-                            @Override
-                            public void onResult(ApplicantModel applicantModel) {
-                                Log.d(TAG, "onResult: " + applicantModel);
-                                ApplicantModel applicant = applicantModel;
-
-                                item.add(applicant);
-                                arrayAdapter.notifyDataSetChanged();
+            public void onResult(EmployerModel employerModel) {
+                for (DocumentReference job : employerModel.getJobs()) {
+                    new JobDb(ScrollApplicationActivity.this, new JobDb.OnJobModel() {
+                        @Override
+                        public void onResult(JobModel jobModel) {
+                            for (DocumentReference applicant : jobModel.getPending()) {
+                                new ApplicantDb(ScrollApplicationActivity.this, new ApplicantDb.OnApplicantModel() {
+                                    @Override
+                                    public void onResult(ApplicantModel applicantModel) {
+                                        Log.d(TAG, "onResult: " + applicantModel);
+                                        item.add(applicantModel);
+                                        arrayAdapter.notifyDataSetChanged();
+                                    }
+                                }).getApplicantModel(applicant);
                             }
-                        }).getApplicantModel(document.getReference());
-
-
-//                        Log.d(TAG, document.getId() + " => " + document.getData());
-//                        item.add(document.getString("email") + "\n" + document.getString("about") + "\n" + document.get("skills"));
-//                        Utils.loadImage(model.getImage(), thisimage);
-                    //arrayAdapter.notifyDataSetChanged();
-                }} else {
-                    Log.w(TAG, "Error getting documents.", task.getException());
+                        }
+                    }).getJobModel(job);
                 }
             }
-        });
-
-
-        //arrayAdapter=new ArrayAdapter<>(ScrollApplicationActivity.this, R.layout.item_in_cardview, item);
+        }).getEmployerModel(LoggedInUser.getInstance().getEmail());
 
         flingAdapterView.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {
             @Override
@@ -119,7 +111,6 @@ public class ScrollApplicationActivity extends AppCompatActivity {
 
             @Override
             public void onRightCardExit(Object o) {
-
                 Toast.makeText(ScrollApplicationActivity.this,"like",Toast.LENGTH_SHORT).show();
             }
 

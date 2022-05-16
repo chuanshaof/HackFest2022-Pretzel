@@ -1,5 +1,6 @@
 package com.example.nftscmers.applicantactivities;
 
+import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,6 +24,7 @@ import com.example.nftscmers.db.EmployerDb;
 import com.example.nftscmers.employeractivities.ScrollApplicationActivity;
 import com.example.nftscmers.objectmodels.ApplicantModel;
 import com.example.nftscmers.objectmodels.EmployerModel;
+import com.example.nftscmers.utils.LoggedInUser;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -53,8 +55,11 @@ public class ScrollJobActivity extends AppCompatActivity {
         setContentView(R.layout.like_dislike_button_bottom);
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        flingAdapterView=findViewById(R.id.swipe);
-        ArrayList data=new ArrayList<>();
+        flingAdapterView = findViewById(R.id.swipe);
+        ArrayList data = new ArrayList<>();
+
+        arrayAdapter = new EmployerAdapter(ScrollJobActivity.this, R.layout.item_in_cardview, data);
+        flingAdapterView.setAdapter(arrayAdapter);
 
         db.collection("Employers")
                 .get()
@@ -64,7 +69,6 @@ public class ScrollJobActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
 
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                // Loading oaf previous applicant data
                                 new EmployerDb(ScrollJobActivity.this, new EmployerDb.OnEmployerModel() {
                                     @Override
                                     public void onResult(EmployerModel employerModel) {
@@ -72,54 +76,52 @@ public class ScrollJobActivity extends AppCompatActivity {
                                         EmployerModel employer = employerModel;
 
                                         data.add(employer);
+                                        arrayAdapter.notifyDataSetChanged();
                                     }
                                 }).getEmployerModel(document.getReference());
                             }
-                            arrayAdapter=new EmployerAdapter(ScrollJobActivity.this, R.layout.item_in_cardview, data);
-                            EmployerAdapter arrayAdapter =new EmployerAdapter(ScrollJobActivity.this, R.layout.item_in_cardview, data);
-                            flingAdapterView.setAdapter(arrayAdapter);
-
-                            flingAdapterView.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {
-                                @Override
-                                public void removeFirstObjectInAdapter() {
-                                    data.remove(0);
-                                    arrayAdapter.notifyDataSetChanged();
-                                }
-
-                                @Override
-                                public void onLeftCardExit(Object o) {
-
-                                    Toast.makeText(ScrollJobActivity.this,"dislike",Toast.LENGTH_SHORT).show();
-                                }
-
-                                @Override
-                                public void onRightCardExit(Object o) {
-
-                                    Toast.makeText(ScrollJobActivity.this,"like",Toast.LENGTH_SHORT).show();
-                                }
-
-                                @Override
-                                public void onAdapterAboutToEmpty(int i) {
-
-                                }
-
-                                @Override
-                                public void onScroll(float v) {
-
-                                }
-                            });
-
-                            flingAdapterView.setOnItemClickListener(new SwipeFlingAdapterView.OnItemClickListener() {
-                                @Override
-                                public void onItemClicked(int i, Object o) {
-                                    Toast.makeText(ScrollJobActivity.this, "data is "+data.get(i),Toast.LENGTH_SHORT).show();
-                                }
-                            });
                         } else {
                             Log.w(TAG, "Error getting documents.", task.getException());
                         }
                     }
                 });
+
+        flingAdapterView.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {
+            @Override
+            public void removeFirstObjectInAdapter() {
+                data.remove(0);
+                arrayAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onLeftCardExit(Object o) {
+
+                Toast.makeText(ScrollJobActivity.this,"dislike",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onRightCardExit(Object o) {
+
+                Toast.makeText(ScrollJobActivity.this,"like",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onAdapterAboutToEmpty(int i) {
+
+            }
+
+            @Override
+            public void onScroll(float v) {
+
+            }
+        });
+
+        flingAdapterView.setOnItemClickListener(new SwipeFlingAdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClicked(int i, Object o) {
+                Toast.makeText(ScrollJobActivity.this, "data is "+data.get(i),Toast.LENGTH_SHORT).show();
+            }
+        });
 
         Button like,dislike;
 
@@ -148,20 +150,22 @@ public class ScrollJobActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Intent intent;
 
                 switch(item.getItemId())
                 {
                     case R.id.history:
-                        startActivity(new Intent(getApplicationContext(), ApplicationHistoryActivity.class));
+                        intent = new Intent(ScrollJobActivity.this, ApplicationHistoryActivity.class);
+                        startActivity(intent);
                         overridePendingTransition(0,0);
-                        Log.i("jon@gma-tings", "go to history");
                         return true;
                     case R.id.home:
                         return true;
                     case R.id.profile:
-                        startActivity(new Intent(getApplicationContext(),ProfileActivity.class));
+                        intent = new Intent(ScrollJobActivity.this, ProfileActivity.class);
+                        intent.putExtra(ProfileActivity.TAG, LoggedInUser.getInstance().getEmail());
+                        startActivity(intent);
                         overridePendingTransition(0,0);
-                        Log.i("navbar-tings", "go to profile");
                         return true;
                 }
                 return false;

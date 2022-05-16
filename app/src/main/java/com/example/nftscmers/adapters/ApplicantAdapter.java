@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ApplicantAdapter extends ArrayAdapter {
-    public static final String TAG = "YOUR-TAG-NAME";
+    public static final String TAG = "ApplicantAdapter";
     ArrayList<Object> applicants_list;
     public Activity context;
     public LayoutInflater inflater;

@@ -38,7 +38,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ProfileActivity extends AppCompatActivity {
-    private static final String TAG = "ApplicantEditProfile";
+    public static final String TAG = "ApplicantEditProfile";
 
     ImageView back;
     ImageView editProfile;

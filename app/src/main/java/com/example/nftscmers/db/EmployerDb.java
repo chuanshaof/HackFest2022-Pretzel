@@ -242,7 +242,7 @@ public class EmployerDb extends Db {
     }
 
     public interface OnEmployerModel {
-        void onResult(EmployerModel EmployerModel);
+        void onResult(EmployerModel employerModel);
     }
 
     public abstract static class OnEmployerUploadSuccess{

@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EmployerAdapter extends ArrayAdapter {
-    public static final String TAG = "YOUR-TAG-NAME";
+    public static final String TAG = "EmployerAdapter";
     ArrayList<Object> employer_list;
     public Activity context;
     public LayoutInflater inflater;
