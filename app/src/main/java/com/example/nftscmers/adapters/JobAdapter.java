@@ -58,7 +58,7 @@ public class JobAdapter extends ArrayAdapter {
 
 
         nameView.setText(job.getPosition());
-        Utils.loadImage(imageView, job.getEmployerPic());
+        Utils.loadSquareImage(imageView, job.getEmployerPic());
         Log.i("applicant data", job.getPosition());
         Log.i("applicant data", job.getEmployerPic());
 

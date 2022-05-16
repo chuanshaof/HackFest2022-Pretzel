@@ -77,6 +77,17 @@ public class Utils {
     }
 
     /**
+     * This method loads an image from an url onto ImageView
+     * @param url a String object that contains the image url
+     * @param imageView an ImageView Object to be set for the picture
+     */
+    public static void loadSquareImage(ImageView imageView, String url) {
+        if (url != null) {
+            Picasso.get().load(url).into(imageView);
+        }
+    }
+
+    /**
      * Showing Toast and
      * @param textView a TextView object
      * @param text a String object to be set

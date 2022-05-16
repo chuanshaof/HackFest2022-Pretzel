@@ -97,14 +97,6 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ProfileActivity.this, ScrollJobActivity.class);
-                startActivity(intent);
-            }
-        });
-
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -121,32 +113,51 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-        // Initialize and assign variable
         BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation);
 
-        // Set Home selected
-        bottomNavigationView.setSelectedItemId(R.id.profile);
-
-        // Perform item selected listener
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-                switch(item.getItemId())
-                {
-                    case R.id.history:
-                        startActivity(new Intent(getApplicationContext(), ApplicationHistoryActivity.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                    case R.id.home:
-                        startActivity(new Intent(getApplicationContext(),ScrollJobActivity.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                    case R.id.profile:
-                        return true;
+        if (LoggedInUser.getInstance().getAccountType() == Globals.APPLICANT) {
+            back.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(ProfileActivity.this, ScrollJobActivity.class);
+                    startActivity(intent);
                 }
-                return false;
-            }
-        });
+            });
+
+            // Set Home selected
+            bottomNavigationView.setSelectedItemId(R.id.profile);
+
+            // Perform item selected listener
+            bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                    switch(item.getItemId())
+                    {
+                        case R.id.history:
+                            startActivity(new Intent(getApplicationContext(), ApplicationHistoryActivity.class));
+                            overridePendingTransition(0,0);
+                            return true;
+                        case R.id.home:
+                            startActivity(new Intent(getApplicationContext(),ScrollJobActivity.class));
+                            overridePendingTransition(0,0);
+                            return true;
+                        case R.id.profile:
+                            return true;
+                    }
+                    return false;
+                }
+            });
+        } else {
+            back.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(ProfileActivity.this, ScrollApplicationActivity.class);
+                    startActivity(intent);
+                }
+            });
+
+            Utils.disableButton(bottomNavigationView);
+        }
     }
 }

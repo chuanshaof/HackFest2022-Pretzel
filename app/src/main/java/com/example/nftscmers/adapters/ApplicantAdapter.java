@@ -20,11 +20,11 @@ import java.util.ArrayList;
 
 public class ApplicantAdapter extends ArrayAdapter {
     public static final String TAG = "ApplicantAdapter";
-    ArrayList<Object> applicants_list;
+    ArrayList<ApplicantModel> applicants_list;
     public Activity context;
     public LayoutInflater inflater;
 
-    public ApplicantAdapter(Activity context, int resource, ArrayList<Object> applicants_list) {
+    public ApplicantAdapter(Activity context, int resource, ArrayList<ApplicantModel> applicants_list) {
         super(context, resource, applicants_list);
 
         this.applicants_list = applicants_list;
@@ -58,7 +58,7 @@ public class ApplicantAdapter extends ArrayAdapter {
 
 
         nameView.setText(applicant.getName());
-        Utils.loadImage(imageView, applicant.getImage());
+        Utils.loadSquareImage(imageView, applicant.getImage());
         Log.i("applicant data", applicant.getName());
         Log.i("applicant data", applicant.getImage());
 

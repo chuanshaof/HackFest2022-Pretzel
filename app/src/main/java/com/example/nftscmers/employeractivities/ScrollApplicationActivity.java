@@ -34,7 +34,7 @@ import java.util.HashMap;
 
 public class ScrollApplicationActivity extends AppCompatActivity {
     SwipeFlingAdapterView flingAdapterView;
-    HashMap<DocumentReference, ArrayList<DocumentReference>> jobTracker;
+    HashMap<ApplicantModel, ArrayList<DocumentReference>> jobTracker;
 
     public static final String TAG = "ScrollApplication";
 
@@ -46,7 +46,7 @@ public class ScrollApplicationActivity extends AppCompatActivity {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         flingAdapterView=findViewById(R.id.swipe);
 
-        ArrayList<Object> item = new ArrayList<>();
+        ArrayList<ApplicantModel> item = new ArrayList<>();
         jobTracker = new HashMap<>();
 
         ApplicantAdapter arrayAdapter =new ApplicantAdapter(ScrollApplicationActivity.this, R.layout.item_in_cardview, item);
@@ -74,7 +74,7 @@ public class ScrollApplicationActivity extends AppCompatActivity {
                                                 tracker.add(application);
                                                 tracker.add(job);
 
-                                                jobTracker.put(applicationModel.getApplicant(), tracker);
+                                                jobTracker.put(applicantModel, tracker);
                                                 arrayAdapter.notifyDataSetChanged();
                                             }
                                         }).getApplicantModel(applicationModel.getApplicant());
@@ -114,6 +114,7 @@ public class ScrollApplicationActivity extends AppCompatActivity {
 
             @Override
             public void onRightCardExit(Object o) {
+                Log.d(TAG, "onRightCardExit: " + o);
                 new JobDb(ScrollApplicationActivity.this, new JobDb.OnJobUploadSuccess() {
                     @Override
                     public void onResult() {
@@ -144,7 +145,9 @@ public class ScrollApplicationActivity extends AppCompatActivity {
         flingAdapterView.setOnItemClickListener(new SwipeFlingAdapterView.OnItemClickListener() {
             @Override
             public void onItemClicked(int i, Object o) {
-                Toast.makeText(ScrollApplicationActivity.this, "data is "+item.get(i),Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(ScrollApplicationActivity.this, com.example.nftscmers.applicantactivities.ProfileActivity.class);
+                intent.putExtra(com.example.nftscmers.applicantactivities.ProfileActivity.TAG, item.get(i).getDocumentId());
+                startActivity(intent);
             }
         });
 
