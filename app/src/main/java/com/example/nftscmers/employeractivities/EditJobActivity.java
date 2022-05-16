@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -11,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -25,6 +27,7 @@ import com.example.nftscmers.objectmodels.JobModel;
 import com.example.nftscmers.utils.Globals;
 import com.example.nftscmers.utils.LoggedInUser;
 import com.example.nftscmers.utils.Utils;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.ktx.Firebase;
 
@@ -149,6 +152,40 @@ public class EditJobActivity extends AppCompatActivity {
                 } else {
                     jobDb.updateJob(job);
                 }
+            }
+        });
+
+        // Initialize and assign variable
+        BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation);
+
+        // Set Home selected
+        bottomNavigationView.setSelectedItemId(R.id.history);
+
+        // Perform item selected listener
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch(item.getItemId())
+                {
+                    case R.id.history:
+                        startActivity(new Intent(getApplicationContext(), JobHistoryActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
+                    case R.id.home:
+                        startActivity(new Intent(getApplicationContext(), ScrollApplicationActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
+                    case R.id.create:
+                        return true;
+                    case R.id.profile:
+                        Intent intent = new Intent(EditJobActivity.this, ProfileActivity.class);
+                        intent.putExtra(ProfileActivity.TAG, LoggedInUser.getInstance().getEmail());
+                        startActivity(intent);
+                        overridePendingTransition(0,0);
+                        return true;
+                }
+                return false;
             }
         });
     }

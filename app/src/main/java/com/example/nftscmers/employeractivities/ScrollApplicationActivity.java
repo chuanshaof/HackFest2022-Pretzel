@@ -189,6 +189,10 @@ public class ScrollApplicationActivity extends AppCompatActivity {
                         return true;
                     case R.id.home:
                         return true;
+                    case R.id.create:
+                        startActivity(new Intent(getApplicationContext(), EditJobActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
                     case R.id.profile:
                         intent = new Intent(ScrollApplicationActivity.this, ProfileActivity.class);
                         intent.putExtra(ProfileActivity.TAG, LoggedInUser.getInstance().getEmail());

@@ -98,8 +98,14 @@ public class JobHistoryActivity extends AppCompatActivity {
                         startActivity(new Intent(getApplicationContext(), ScrollApplicationActivity.class));
                         overridePendingTransition(0,0);
                         return true;
+                    case R.id.create:
+                        startActivity(new Intent(getApplicationContext(), EditJobActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
                     case R.id.profile:
-                        startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                        Intent intent = new Intent(JobHistoryActivity.this, ProfileActivity.class);
+                        intent.putExtra(ProfileActivity.TAG, LoggedInUser.getInstance().getEmail());
+                        startActivity(intent);
                         overridePendingTransition(0,0);
                         return true;
                 }

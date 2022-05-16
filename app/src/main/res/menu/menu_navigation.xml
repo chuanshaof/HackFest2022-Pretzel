@@ -11,8 +11,12 @@
         android:icon="@drawable/ic_baseline_home_24"/>
 
     <item
+        android:id="@+id/create"
+        android:icon="@drawable/ic_baseline_add_24"
+        android:title="Create" />
+    <item
         android:id="@+id/profile"
-        android:title="Profile"
-        android:icon="@drawable/ic_baseline_person_24"/>
+        android:icon="@drawable/ic_baseline_person_24"
+        android:title="Profile" />
 
 </menu>
