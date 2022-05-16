@@ -123,11 +123,11 @@ public class ProfileActivity extends AppCompatActivity {
                 switch(item.getItemId())
                 {
                     case R.id.history:
-                        startActivity(new Intent(getApplicationContext(), ScrollApplicationActivity.class));
+                        startActivity(new Intent(getApplicationContext(), JobHistoryActivity.class));
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.home:
-                        startActivity(new Intent(getApplicationContext(), ScrollJobActivity.class));
+                        startActivity(new Intent(getApplicationContext(), ScrollApplicationActivity.class));
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.profile:
