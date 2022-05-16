@@ -161,14 +161,13 @@ public class JobDb extends Db {
      * Update pending field in FireStore
      * @param application a DocumentReference object indicating the application
      */
-    // TODO: CHANGE
     public void deletePending(DocumentReference application, DocumentReference job) {
         if (!Utils.isNetworkAvailable(context)) {
             onJobUploadFailure.onResult();
             return;
         }
 
-        job.update(JobModel.PENDING, FieldValue.arrayUnion(application)).addOnSuccessListener(new OnSuccessListener<Void>() {
+        job.update(JobModel.PENDING, FieldValue.arrayRemove(application)).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
                 onJobUploadSuccess.onResult();

@@ -18,12 +18,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.nftscmers.R;
 import com.example.nftscmers.adapters.ApplicantAdapter;
+import com.example.nftscmers.commonactivities.FeedbackActivity;
+import com.example.nftscmers.db.ApplicationDb;
 import com.example.nftscmers.db.EmployerDb;
 import com.example.nftscmers.db.JobDb;
 import com.example.nftscmers.employeractivities.ProfileActivity;
 import com.example.nftscmers.db.ApplicantDb;
 import com.example.nftscmers.fragments.SkillsFragment;
 import com.example.nftscmers.objectmodels.ApplicantModel;
+import com.example.nftscmers.objectmodels.ApplicationModel;
 import com.example.nftscmers.objectmodels.EmployerModel;
 import com.example.nftscmers.objectmodels.JobModel;
 import com.example.nftscmers.objectmodels.TestModel;
@@ -46,19 +49,18 @@ import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Document;
 
+import java.sql.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ScrollApplicationActivity extends AppCompatActivity {
-
-//    private ApplicantAdapter arrayAdapter;
-//    ApplicantAdapter arrayAdapter;
     TextView name;
     TextView email;
     ImageView image;
     SwipeFlingAdapterView flingAdapterView;
-    
-    // TODO: Change the TAG
-    public static final String TAG = "YOUR-TAG-NAME";
+    HashMap<DocumentReference, ArrayList<DocumentReference>> jobTracker;
+
+    public static final String TAG = "ScrollApplication";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -80,15 +82,26 @@ public class ScrollApplicationActivity extends AppCompatActivity {
                     new JobDb(ScrollApplicationActivity.this, new JobDb.OnJobModel() {
                         @Override
                         public void onResult(JobModel jobModel) {
-                            for (DocumentReference applicant : jobModel.getPending()) {
-                                new ApplicantDb(ScrollApplicationActivity.this, new ApplicantDb.OnApplicantModel() {
+                            for (DocumentReference application : jobModel.getPending()) {
+                                new ApplicationDb(ScrollApplicationActivity.this, new ApplicationDb.OnApplicationModel() {
                                     @Override
-                                    public void onResult(ApplicantModel applicantModel) {
-                                        Log.d(TAG, "onResult: " + applicantModel);
-                                        item.add(applicantModel);
-                                        arrayAdapter.notifyDataSetChanged();
+                                    public void onResult(ApplicationModel applicationModel) {
+                                        new ApplicantDb(ScrollApplicationActivity.this, new ApplicantDb.OnApplicantModel() {
+                                            @Override
+                                            public void onResult(ApplicantModel applicantModel) {
+                                                Log.d(TAG, "onResult: " + applicantModel);
+                                                item.add(applicantModel);
+
+                                                ArrayList<DocumentReference> tracker = new ArrayList<>();
+                                                tracker.add(application);
+                                                tracker.add(job);
+
+                                                jobTracker.put(applicationModel.getApplicant(), tracker);
+                                                arrayAdapter.notifyDataSetChanged();
+                                            }
+                                        }).getApplicantModel(applicationModel.getApplicant());
                                     }
-                                }).getApplicantModel(applicant);
+                                }).getApplicationModel(application);
                             }
                         }
                     }).getJobModel(job);
@@ -105,13 +118,38 @@ public class ScrollApplicationActivity extends AppCompatActivity {
 
             @Override
             public void onLeftCardExit(Object o) {
-
-                Toast.makeText(ScrollApplicationActivity.this,"dislike",Toast.LENGTH_SHORT).show();
+                new JobDb(ScrollApplicationActivity.this, new JobDb.OnJobUploadSuccess() {
+                    @Override
+                    public void onResult() {
+                        new ApplicationDb(ScrollApplicationActivity.this, new ApplicationDb.OnApplicationUploadSuccess() {
+                            @Override
+                            public void onResult() {
+                                Toast.makeText(ScrollApplicationActivity.this,"Rejected",Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(ScrollApplicationActivity.this, FeedbackActivity.class);
+                                intent.putExtra(FeedbackActivity.TAG, jobTracker.get(o).get(0).getId());
+                                startActivityForResult(intent, 0);
+                            }
+                        }).updateApplicationStatus(ApplicationModel.REJECTED, jobTracker.get(o).get(0));
+                    }
+                }).deletePending(jobTracker.get(o).get(0), jobTracker.get(o).get(1));
             }
 
             @Override
             public void onRightCardExit(Object o) {
-                Toast.makeText(ScrollApplicationActivity.this,"like",Toast.LENGTH_SHORT).show();
+                new JobDb(ScrollApplicationActivity.this, new JobDb.OnJobUploadSuccess() {
+                    @Override
+                    public void onResult() {
+                        new ApplicationDb(ScrollApplicationActivity.this, new ApplicationDb.OnApplicationUploadSuccess() {
+                            @Override
+                            public void onResult() {
+                                Toast.makeText(ScrollApplicationActivity.this,"Accepted",Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(ScrollApplicationActivity.this, FeedbackActivity.class);
+                                intent.putExtra(FeedbackActivity.TAG, jobTracker.get(o).get(0).getId());
+                                startActivityForResult(intent, 0);
+                            }
+                        }).updateApplicationStatus(ApplicationModel.ACCEPTED, jobTracker.get(o).get(0));
+                    }
+                }).deletePending(jobTracker.get(o).get(0), jobTracker.get(o).get(1));
             }
 
             @Override

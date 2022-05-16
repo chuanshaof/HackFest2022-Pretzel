@@ -25,7 +25,6 @@ public class JobModel implements ObjectModel {
     private String description;
     private Date deadline;
     private String location;
-    private ArrayList<DocumentReference> accepted;
     private ArrayList<DocumentReference> pending;
     private ArrayList<DocumentReference> skills;
     private ArrayList<DocumentReference> tags;
@@ -38,8 +37,7 @@ public class JobModel implements ObjectModel {
 
     public JobModel(DocumentReference employer, String employerName, String employerPic, String position,
                     String description, Date deadline, String location, ArrayList<DocumentReference> skills,
-                    ArrayList<DocumentReference> tags, ArrayList<DocumentReference> accepted,
-                    ArrayList<DocumentReference> pending) {
+                    ArrayList<DocumentReference> tags, ArrayList<DocumentReference> pending) {
         this.employer = employer;
         this.employerName = employerName;
         this.employerPic = employerPic;
@@ -49,7 +47,6 @@ public class JobModel implements ObjectModel {
         this.location = location;
         this.skills = skills;
         this.tags = tags;
-        this.accepted = accepted;
         this.pending = pending;
     }
 
@@ -127,14 +124,6 @@ public class JobModel implements ObjectModel {
 
     public void setTags(ArrayList<DocumentReference> tags) {
         this.tags = tags;
-    }
-
-    public ArrayList<DocumentReference> getAccepted() {
-        return accepted;
-    }
-
-    public void setAccepted(ArrayList<DocumentReference> accepted) {
-        this.accepted = accepted;
     }
 
     public ArrayList<DocumentReference> getPending() {
