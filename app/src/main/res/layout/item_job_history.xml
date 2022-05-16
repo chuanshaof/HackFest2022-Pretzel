@@ -6,28 +6,55 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/job_position"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="4dp"
-        android:layout_marginRight="15dp"
-        android:padding="4dp"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        android:text="position"/>
+    <RelativeLayout
+        android:id="@+id/rl_1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/applicant_name"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/login_bar"
+        android:backgroundTint="#6DBED0FF"
+        android:padding="15dp">
 
-    <TextView
-        android:id="@+id/job_deadline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="4dp"
-        android:layout_marginRight="15dp"
-        android:padding="4dp"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        android:text="company"/>
+        <TextView
+            android:id="@+id/job_position"
+            android:layout_width="125dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="center"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="42dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="4dp"
+            android:padding="4dp"
+            android:text="position"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/job_deadline"
+            android:layout_width="171dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="center"
+            android:layout_marginStart="35dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="190dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="4dp"
+            android:padding="4dp"
+            android:text="company"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </RelativeLayout>
 
 </LinearLayout>
