@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.nftscmers.R;
 
 import com.example.nftscmers.adapters.JobAdapter;
+import com.example.nftscmers.commonactivities.ViewJobActivity;
 import com.example.nftscmers.db.ApplicantDb;
 import com.example.nftscmers.db.ApplicationDb;
 import com.example.nftscmers.db.JobDb;
@@ -118,9 +119,9 @@ public class ScrollJobActivity extends AppCompatActivity {
         flingAdapterView.setOnItemClickListener(new SwipeFlingAdapterView.OnItemClickListener() {
             @Override
             public void onItemClicked(int i, Object o) {
-                Intent intent = new Intent(ScrollJobActivity.this, com.example.nftscmers.employeractivities.ProfileActivity.class);
-                intent.putExtra(com.example.nftscmers.employeractivities.ProfileActivity.TAG, data.get(i).getDocumentId());
-                startActivity(intent);
+                Intent intent = new Intent(ScrollJobActivity.this, ViewJobActivity.class);
+                intent.putExtra(ViewJobActivity.TAG, data.get(i).getDocumentId());
+                startActivityForResult(intent, 0);
             }
         });
 
