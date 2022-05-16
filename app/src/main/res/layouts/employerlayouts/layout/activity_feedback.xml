@@ -1,84 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg">
 
-    <ImageView
-        android:id="@+id/back_button"
-        android:layout_width="36dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="12dp"
-        android:contentDescription="@string/back_button"
-        android:src="@drawable/back_button" />
-
-    <TextView
-        android:id="@+id/feedback_title"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:text="@string/feedback_set"
-        android:textColor="@color/white"
-        android:textSize="24sp"
-        android:textStyle="bold" />
+        android:paddingTop="10dp"
+        android:paddingBottom="30dp"
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/feedback"
-        android:layout_width="338dp"
-        android:layout_height="400dp"
-        android:layout_below="@+id/feedback_title"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/login_bar"
-        android:ems="10"
-        android:hint="@string/input_feedback"
-        android:inputType="textMultiLine"
-        android:paddingStart="20dp"
-        android:paddingTop="5dp"
-        android:paddingEnd="20dp"
-        android:paddingBottom="5dp" />
+        <ImageView
+            android:id="@+id/back_button"
+            android:layout_width="36dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="12dp"
+            android:contentDescription="@string/back_button"
+            android:src="@drawable/back_button" />
 
-    <TextView
-        android:id="@+id/feedback_skills"
-        android:layout_width="338dp"
-        android:layout_height="65dp"
-        android:layout_below="@id/feedback"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="37dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="37dp"
-        android:background="@drawable/login_bar"
-        android:drawablePadding="20dp"
-        android:ems="10"
-        android:gravity="center_vertical"
-        android:hint="@string/skills_required"
-        android:paddingStart="20dp"
-        android:paddingEnd="20dp"
-        android:textSize="18sp" />
+        <TextView
+            android:id="@+id/feedback_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:text="@string/feedback_set"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
-    <FrameLayout
-        android:id="@+id/feedback_skills_list"
-        android:layout_width="338dp"
-        android:layout_height="220dp"
-        android:layout_below="@+id/feedback_skills"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="20dp"
-        android:background="@drawable/white_bg" />
+        <EditText
+            android:id="@+id/feedback"
+            android:layout_width="338dp"
+            android:layout_height="400dp"
+            android:layout_below="@+id/feedback_title"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/login_bar"
+            android:ems="10"
+            android:hint="@string/input_feedback"
+            android:inputType="textMultiLine"
+            android:paddingStart="20dp"
+            android:paddingTop="5dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="5dp" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/feedback_submit"
-        android:layout_width="225dp"
-        android:layout_height="50dp"
-        android:layout_below="@+id/feedback_skills_list"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/white_bg"
-        android:text="@string/submit_feedback"
-        android:textSize="20sp" />
+        <TextView
+            android:id="@+id/feedback_skills"
+            android:layout_width="338dp"
+            android:layout_height="65dp"
+            android:layout_below="@id/feedback"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="37dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="37dp"
+            android:background="@drawable/login_bar"
+            android:drawablePadding="20dp"
+            android:ems="10"
+            android:gravity="center_vertical"
+            android:hint="@string/skills_required"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:textSize="18sp" />
 
-</RelativeLayout>
+        <FrameLayout
+            android:id="@+id/feedback_skills_list"
+            android:layout_width="338dp"
+            android:layout_height="220dp"
+            android:layout_below="@+id/feedback_skills"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/white_bg" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/feedback_submit"
+            android:layout_width="225dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/feedback_skills_list"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/white_bg"
+            android:text="@string/submit_feedback"
+            android:textSize="20sp" />
+    </RelativeLayout>
+</ScrollView>

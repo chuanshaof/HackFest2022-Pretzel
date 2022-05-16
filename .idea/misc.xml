@@ -68,6 +68,8 @@
         <entry key="..\:/Users/chuanshaof/GitHub/HackFest-nftscmers/app/src/main/res/menu/login_menu.xml" value="0.278125" />
         <entry key="app/src/main/res/layouts/commonlayouts/layout/activity_login.xml" value="0.17119565217391305" />
         <entry key="app/src/main/res/layouts/commonlayouts/layout/activity_sign_up.xml" value="0.17119565217391305" />
+        <entry key="app/src/main/res/layouts/employerlayouts/layout/activity_employer_edit_job.xml" value="0.24048913043478262" />
+        <entry key="app/src/main/res/layouts/employerlayouts/layout/activity_feedback.xml" value="0.1" />
       </map>
     </option>
   </component>
