@@ -83,6 +83,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
         }).getApplicantModel(getIntent().getStringExtra(ProfileActivity.TAG));
 
+
         if (!getIntent().getStringExtra(ProfileActivity.TAG).equals(LoggedInUser.getInstance().getEmail())){
             Utils.disableButton(editProfile);
             Utils.disableButton(logout);
@@ -134,7 +135,7 @@ public class ProfileActivity extends AppCompatActivity {
                 switch(item.getItemId())
                 {
                     case R.id.history:
-                        startActivity(new Intent(getApplicationContext(), ScrollApplicationActivity.class));
+                        startActivity(new Intent(getApplicationContext(), ApplicationHistoryActivity.class));
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.home:
