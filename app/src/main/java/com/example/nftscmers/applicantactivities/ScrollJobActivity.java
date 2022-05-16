@@ -14,9 +14,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.nftscmers.R;
 
 import com.example.nftscmers.adapters.JobAdapter;
+import com.example.nftscmers.commonactivities.ViewJobActivity;
 import com.example.nftscmers.db.ApplicantDb;
 import com.example.nftscmers.db.ApplicationDb;
 import com.example.nftscmers.db.JobDb;
+import com.example.nftscmers.employeractivities.ScrollApplicationActivity;
 import com.example.nftscmers.objectmodels.ApplicantModel;
 import com.example.nftscmers.objectmodels.JobModel;
 import com.example.nftscmers.utils.LoggedInUser;
@@ -117,7 +119,9 @@ public class ScrollJobActivity extends AppCompatActivity {
         flingAdapterView.setOnItemClickListener(new SwipeFlingAdapterView.OnItemClickListener() {
             @Override
             public void onItemClicked(int i, Object o) {
-                Toast.makeText(ScrollJobActivity.this, "data is " + data.get(i),Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(ScrollJobActivity.this, ViewJobActivity.class);
+                intent.putExtra(ViewJobActivity.TAG, data.get(i).getDocumentId());
+                startActivityForResult(intent, 0);
             }
         });
 

@@ -17,6 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.nftscmers.R;
+import com.example.nftscmers.applicantactivities.ApplicationHistoryActivity;
 import com.example.nftscmers.applicantactivities.ScrollJobActivity;
 import com.example.nftscmers.commonactivities.LoginActivity;
 import com.example.nftscmers.db.EmployerDb;
@@ -109,35 +110,54 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-        // Initialize and assign variable
         BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation);
 
-        // Set Home selected
-        bottomNavigationView.setSelectedItemId(R.id.profile);
-
-        // Perform item selected listener
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch(item.getItemId())
-                {
-                    case R.id.history:
-                        startActivity(new Intent(getApplicationContext(), JobHistoryActivity.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                    case R.id.home:
-                        startActivity(new Intent(getApplicationContext(), ScrollApplicationActivity.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                    case R.id.create:
-                        startActivity(new Intent(getApplicationContext(), EditJobActivity.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                    case R.id.profile:
-                        return true;
+        if (LoggedInUser.getInstance().getAccountType() == Globals.EMPLOYER) {
+            back.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(com.example.nftscmers.employeractivities.ProfileActivity.this, ScrollApplicationActivity.class);
+                    startActivity(intent);
                 }
-                return false;
-            }
-        });
+            });
+
+            // Set Home selected
+            bottomNavigationView.setSelectedItemId(R.id.profile);
+
+            // Perform item selected listener
+            bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    switch(item.getItemId())
+                    {
+                        case R.id.history:
+                            startActivity(new Intent(getApplicationContext(), JobHistoryActivity.class));
+                            overridePendingTransition(0,0);
+                            return true;
+                        case R.id.home:
+                            startActivity(new Intent(getApplicationContext(), ScrollApplicationActivity.class));
+                            overridePendingTransition(0,0);
+                            return true;
+                        case R.id.create:
+                            startActivity(new Intent(getApplicationContext(), EditJobActivity.class));
+                            overridePendingTransition(0,0);
+                            return true;
+                        case R.id.profile:
+                            return true;
+                    }
+                    return false;
+                }
+            });
+        } else {
+            back.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(com.example.nftscmers.employeractivities.ProfileActivity.this, ScrollJobActivity.class);
+                    startActivity(intent);
+                }
+            });
+
+            Utils.disableButton(bottomNavigationView);
+        }
     }
 }

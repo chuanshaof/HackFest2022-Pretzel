@@ -40,6 +40,7 @@ import java.util.Map;
 public class ProfileActivity extends AppCompatActivity {
     public static final String TAG = "ApplicantEditProfile";
 
+    TextView title;
     ImageView back;
     ImageView editProfile;
     ImageView profilePic;
@@ -56,6 +57,7 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_applicant_profile);
 
+        title = findViewById(R.id.applicant_title);
         back = findViewById(R.id.applicant_back_arrow);
         editProfile = findViewById(R.id.applicant_edit_profile);
         profilePic = findViewById(R.id.applicant_profile_pic);
@@ -149,6 +151,8 @@ public class ProfileActivity extends AppCompatActivity {
                 }
             });
         } else {
+            title.setText(getString(R.string.applicant_profile));
+
             back.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
