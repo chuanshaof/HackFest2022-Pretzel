@@ -63,7 +63,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         if (signUpType == null){
             signUpType = Globals.APPLICANT;
-            title.setText(getString(R.string.applicant_login));
+            title.setText(getString(R.string.applicant_sign_up));
         } else if (signUpType.equals(Globals.APPLICANT)) {
             title.setText(getString(R.string.applicant_sign_up));
         } else if (signUpType.equals(Globals.EMPLOYER)) {

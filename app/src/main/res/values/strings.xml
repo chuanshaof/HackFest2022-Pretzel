@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">nftscmers</string>
+    <string name="app_name">Pretzel</string>
 
 <!--    Common Strings -->
     <string name="network_missing">Network Connection Required!</string>
