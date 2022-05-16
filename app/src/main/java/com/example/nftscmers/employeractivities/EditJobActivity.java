@@ -136,7 +136,7 @@ public class EditJobActivity extends AppCompatActivity {
                 JobDb jobDb = new JobDb(EditJobActivity.this, new JobDb.OnJobUploadSuccess() {
                     @Override
                     public void onResult() {
-                        Intent intent = new Intent(EditJobActivity.this, ViewJobActivity.class);
+                        Intent intent = new Intent(EditJobActivity.this, ScrollApplicationActivity.class);
                         startActivity(intent);
                     }
                 });
@@ -148,7 +148,7 @@ public class EditJobActivity extends AppCompatActivity {
 
                 // Handling if it is an existing job or new job
                 if (job.getDocumentId() == null) {
-                    jobDb.createJob(job, LoggedInUser.getInstance().getUserDocRef());
+                    jobDb.createJob(job, LoggedInUser.getInstance().getEmail());
                 } else {
                     jobDb.updateJob(job);
                 }

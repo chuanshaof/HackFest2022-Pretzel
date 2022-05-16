@@ -1,6 +1,7 @@
 package com.example.nftscmers.db;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -111,10 +112,9 @@ public class JobDb extends Db {
             return;
         }
 
-        employer.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+        new EmployerDb(context, new EmployerDb.OnEmployerModel() {
             @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                EmployerModel employerModel = documentSnapshot.toObject(EmployerModel.class);
+            public void onResult(EmployerModel employerModel) {
                 jobModel.setEmployerName(employerModel.getName());
                 jobModel.setEmployerPic(employerModel.getImage());
 
@@ -131,7 +131,21 @@ public class JobDb extends Db {
                     }
                 });
             }
-        });
+        }).getEmployerModel(employer);
+    }
+
+    /**
+     * Push a job onto FireStore
+     * @param jobModel a JobModel object containing the details of the job
+     */
+    public void createJob(JobModel jobModel, String email) {
+        if (!Utils.isNetworkAvailable(context)) {
+            Toast.makeText(context, R.string.network_missing, Toast.LENGTH_SHORT).show();
+            onJobModel.onResult(null);
+            return;
+        }
+
+        createJob(jobModel, getDocument(email));
     }
 
     /**

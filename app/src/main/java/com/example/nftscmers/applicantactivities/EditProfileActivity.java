@@ -127,6 +127,7 @@ public class EditProfileActivity extends AppCompatActivity {
                     @Override
                     protected void onResult() {
                         Intent intent = new Intent(EditProfileActivity.this, ProfileActivity.class);
+                        intent.putExtra(ProfileActivity.TAG, LoggedInUser.getInstance().getEmail());
                         startActivity(intent);
                     }
                 }, new ApplicantDb.OnApplicantUploadFailure() {

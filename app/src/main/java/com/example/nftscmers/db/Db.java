@@ -45,23 +45,4 @@ abstract class Db {
     public DocumentReference getDocument(String documentName){
         return collection.document(documentName);
     }
-
-//    public ArrayList<DocumentReference> getDocuments(String collectionName) {
-//        ArrayList<DocumentReference> docs = new ArrayList<DocumentReference>();
-//        collection.document(collectionName).get()
-//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                        if (task.isSuccessful()) {
-//                            for (QueryDocumentSnapshot document : task.getResult()) {
-//                                docs.add(document.getReference());
-//                            }
-//                        }
-//                        else {
-//                            Log.w("Firebase", "Error getting documents.", task.getException());
-//                        }
-//                    }
-//                });
-//        return docs;
-//    }
 }
