@@ -92,7 +92,7 @@ public class EditJobActivity extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(EditJobActivity.this, ViewJobActivity.class);
+                Intent intent = new Intent(EditJobActivity.this, ScrollApplicationActivity.class);
                 startActivity(intent);
             }
         });
@@ -152,40 +152,6 @@ public class EditJobActivity extends AppCompatActivity {
                 } else {
                     jobDb.updateJob(job);
                 }
-            }
-        });
-
-        // Initialize and assign variable
-        BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation);
-
-        // Set Home selected
-        bottomNavigationView.setSelectedItemId(R.id.history);
-
-        // Perform item selected listener
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-                switch(item.getItemId())
-                {
-                    case R.id.history:
-                        startActivity(new Intent(getApplicationContext(), JobHistoryActivity.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                    case R.id.home:
-                        startActivity(new Intent(getApplicationContext(), ScrollApplicationActivity.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                    case R.id.create:
-                        return true;
-                    case R.id.profile:
-                        Intent intent = new Intent(EditJobActivity.this, ProfileActivity.class);
-                        intent.putExtra(ProfileActivity.TAG, LoggedInUser.getInstance().getEmail());
-                        startActivity(intent);
-                        overridePendingTransition(0,0);
-                        return true;
-                }
-                return false;
             }
         });
     }

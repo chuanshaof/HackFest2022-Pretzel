@@ -6,16 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".applicantactivities.ScrollJobActivity">
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_alignParentBottom="true"
-        app:itemBackground="@color/white"
-        app:itemIconTint="@drawable/selector"
-        app:itemTextColor="@drawable/selector"
-        app:menu="@menu/menu_navigation" />
-
     <LinearLayout
         android:id="@+id/line1"
         android:layout_width="match_parent"
@@ -51,5 +41,14 @@
 
     </com.lorentzos.flingswipe.SwipeFlingAdapterView>
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        app:itemBackground="@color/white"
+        app:itemIconTint="@drawable/selector"
+        app:itemTextColor="@drawable/selector"
+        app:menu="@menu/employer_navigation" />
 
 </RelativeLayout>

@@ -1,12 +1,9 @@
 package com.example.nftscmers.applicantactivities;
 
-import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -16,27 +13,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.nftscmers.R;
 
-import com.example.nftscmers.adapters.ApplicantAdapter;
-import com.example.nftscmers.adapters.EmployerAdapter;
 import com.example.nftscmers.adapters.JobAdapter;
-import com.example.nftscmers.commonactivities.FeedbackActivity;
-import com.example.nftscmers.commonactivities.ViewJobActivity;
-import com.example.nftscmers.db.ApplicantDb;
 import com.example.nftscmers.db.ApplicationDb;
-import com.example.nftscmers.db.EmployerDb;
 import com.example.nftscmers.db.JobDb;
-import com.example.nftscmers.employeractivities.ScrollApplicationActivity;
-import com.example.nftscmers.objectmodels.ApplicantModel;
-import com.example.nftscmers.objectmodels.ApplicationModel;
-import com.example.nftscmers.objectmodels.EmployerModel;
 import com.example.nftscmers.objectmodels.JobModel;
 import com.example.nftscmers.utils.LoggedInUser;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -45,7 +29,6 @@ import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class ScrollJobActivity extends AppCompatActivity {
 
@@ -58,7 +41,7 @@ public class ScrollJobActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.like_dislike_button_bottom);
+        setContentView(R.layout.activity_scroll_job);
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         flingAdapterView = findViewById(R.id.swipe);

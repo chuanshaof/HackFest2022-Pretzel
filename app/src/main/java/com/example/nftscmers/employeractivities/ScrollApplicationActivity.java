@@ -6,8 +6,6 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -43,7 +41,7 @@ public class ScrollApplicationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.like_dislike_button_bottom);
+        setContentView(R.layout.activity_scroll_application);
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         flingAdapterView=findViewById(R.id.swipe);

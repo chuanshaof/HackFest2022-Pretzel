@@ -119,7 +119,6 @@ public class ProfileActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
                 switch(item.getItemId())
                 {
                     case R.id.history:
@@ -128,6 +127,10 @@ public class ProfileActivity extends AppCompatActivity {
                         return true;
                     case R.id.home:
                         startActivity(new Intent(getApplicationContext(), ScrollApplicationActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
+                    case R.id.create:
+                        startActivity(new Intent(getApplicationContext(), EditJobActivity.class));
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.profile:
