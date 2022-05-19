@@ -1,4 +1,5 @@
 # HackFest2022-Pretzel
+https://devpost.com/software/hackfest-nftscmers
 
 ## Inspiration 
 The pandemic have disrupted millions of jobs around the world. Some got retrenched while others just can't seem to find a job in this bear job market. It is thereby increasingly important for employees and employers alike to adopt effective technological solutions for effective job seeking and recruitment. However, excessive use of artificial intelligence have done more harm than good for job seeking and recruitment process. These are some of the problems identified: 
